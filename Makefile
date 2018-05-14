@@ -14,7 +14,7 @@ MEMFLAGS=--leak-check=full
 	@$(CXX) $(CXXFLAGS) -c -o $@ -c $< $(LDFLAGS)
 	@$(CXX) $(CXXFLAGS) -MM -MT $*.o $*.cpp $(LDFLAGS) > $*.d
 
-all: compile doc
+all: compile
 
 run: compile
 	./$(EXECUTABLE)
