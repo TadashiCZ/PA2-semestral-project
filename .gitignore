@@ -1,0 +1,10 @@
+
+cmake-build-debug/
+
+*.d
+
+*.o
+
+\.idea/workspace\.xml
+
+valentad
