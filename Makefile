@@ -34,6 +34,3 @@ clean:
 check: CXXFLAGS =-std=c++14 -Wall -pedantic -Wno-long-long -g -O2
 check: clean compile
 	$(MEMCHECK) ./$(EXECUTABLE) $(MEMFLAGS)	 	
-
-
--include $(SOURCES:.cpp=.d)
