@@ -2,8 +2,7 @@
 .DEFAULT_GOAL := all
 
 CXX=g++
-CXXFLAGS=-std=c++14 -Wall -pedantic -Wno-long-long -O0 -ggdb
-LDFLAGS=-lncurses
+CXXFLAGS=-std=c++14 -Wall -pedantic -Wno-long-long -g
 SOURCES=$(wildcard src/*.cpp )
 EXECUTABLE=valentad
 MEMCHECK=valgrind
@@ -11,8 +10,8 @@ MEMFLAGS=--leak-check=full
 
 
 %.o: %.cpp
-	@$(CXX) $(CXXFLAGS) -c -o $@ -c $< $(LDFLAGS)
-	@$(CXX) $(CXXFLAGS) -MM -MT $*.o $*.cpp $(LDFLAGS) > $*.d
+	@$(CXX) $(CXXFLAGS) -c -o $@ -c $<
+	@$(CXX) $(CXXFLAGS) -MM -MT $*.o $*.cpp > $*.d
 
 all: compile
 
@@ -20,7 +19,7 @@ run: compile
 	./$(EXECUTABLE)
 
 compile: $(SOURCES:.cpp=.o)
-	@$(CXX) $(CXXFLAGS) $(SOURCES:.cpp=.o) -o $(EXECUTABLE) $(LDFLAGS)
+	@$(CXX) $(CXXFLAGS) $(SOURCES:.cpp=.o) -o $(EXECUTABLE)
 
 doc:
 	doxygen Doxyfile
