@@ -2,22 +2,31 @@
 #include <fstream>
 #include "UI/Menu.h"
 #include "Game/Quiz.h"
+#include "Game.h"
+
+void showQuizList();
 
 void welcomeUser() {
-	printf( "\\ \\        / /  ____| |    / ____/ __ \\|  \\/  |  ____|\n"
+	printf( " \\ \\        / /  ____| |    / ____/ __ \\|  \\/  |  ____|\n"
 	        "  \\ \\  /\\  / /| |__  | |   | |   | |  | | \\  / | |__   \n"
 	        "   \\ \\/  \\/ / |  __| | |   | |   | |  | | |\\/| |  __|  \n"
 	        "    \\  /\\  /  | |____| |___| |___| |__| | |  | | |____ \n"
 	        "     \\/  \\/   |______|______\\_____\\____/|_|  |_|______|\n"
-	        "                                                       " );
+	        "                                                       \n" );
 }
 
 inline bool checkExistence(const char * name) {
 	std::ifstream f( name );
-	return f.good();
+	if (f.good()){
+		f.close();
+		return true;
+	} else {
+		f.close();
+		return false;
+	}
 }
 
-void loadQuizes(std::vector<Quiz> & quizes, const char * name) {
+void loadQuizes(std::vector<Quiz> & quizzes, const char * name) {
 	if ( !checkExistence( name ) ) {
 		return;
 	}
@@ -25,14 +34,18 @@ void loadQuizes(std::vector<Quiz> & quizes, const char * name) {
 	//todo load from file
 }
 
-void playGame(std::vector<Quiz> & quizes){
+void playGame(std::vector<Quiz> & quizzes){
 
 }
 
-int main() {
-	std::vector<Quiz> quizes;
 
-	loadQuizes( quizes, "quizes.dat" );
+
+int main() {
+	std::vector<Quiz> quizzes;
+
+	quizzes.push_back(Quiz("hard", "frank")  );
+	quizzes.push_back(Quiz("easy", "John")  );
+	loadQuizes( quizzes, "quizzes.dat" );
 
 	welcomeUser();
 
@@ -41,7 +54,7 @@ int main() {
 	while ( looping ) {
 		switch ( Menu().promptMainMenu() ) {
 			case 1: // Play
-				playGame( quizes );
+				Game(quizzes).play();
 				looping = false;
 				break;
 			case 2: // Add
@@ -59,7 +72,7 @@ int main() {
 			case 5: //End
 				// saveIntoFile();
 				return 0;
-			default: printf( "Wrong choice, try again\n" );
+			default: std::cout << "Wrong choice, try again" << std::endl;
 		}
 
 	}

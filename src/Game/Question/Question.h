@@ -11,6 +11,7 @@
 class Question {
 public:
 	Question();
+	virtual ~Question(){}
 	Question(size_t id, std::string author, std::string questionText);
 	virtual std::string& printQuestion();
 	virtual std::string& printAnswers();
