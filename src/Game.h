@@ -5,6 +5,9 @@
 #ifndef SEMESTRAL_PROJECT_GAME_H
 #define SEMESTRAL_PROJECT_GAME_H
 
+#include <iostream>
+#include "Game/Quiz.h"
+
 unsigned long showQuizListPrompt(const unsigned long size) {
 	unsigned long input;
 	std::cout << "Choose quiz by writing the quiz number." << std::endl;
@@ -26,7 +29,7 @@ unsigned long showQuizListPrompt(const unsigned long size) {
 
 class Game {
 public:
-	Game(std::vector<Quiz> & quizzes) : mQuizzes( quizzes ) {}
+	explicit Game(std::vector<Quiz> & quizzes) : mQuizzes( quizzes ) {}
 
 	int showQuizList() {
 		std::cout << std::endl << "Quiz list:" << std::endl;

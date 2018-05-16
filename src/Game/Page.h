@@ -11,29 +11,52 @@
 
 class Page {
 public:
-	Page(const Page & page){
-		for (Question * question : mQuestions){
+	Page(std::vector<Question *> & questionList) : mQuestions( questionList ), mBranches( std::vector<Page *>{nullptr} ) {}
+
+	Page(std::vector<Question *> & questionList, std::vector<Page *> & branches)
+			: mQuestions( questionList ), mBranches( branches ) {}
+
+	Page(const Page & page) {
+		for ( Question * question : mQuestions ) {
 			delete question;
 		}
 
-		for (Page * branch : mBranches){
+		for ( Page * branch : mBranches ) {
 			delete branch;
 		}
 		mBranches.clear();
 		mQuestions.clear();
 
-		for (Question * question : page.mQuestions){
-			mQuestions.push_back(question);
+		for ( Question * question : page.mQuestions ) {
+			mQuestions.push_back( question );
 		}
-		for (Page * branch : page.mBranches){
-			mBranches.push_back(branch);
+		for ( Page * branch : page.mBranches ) {
+			mBranches.push_back( branch );
 		}
 	}
 
+	Page * play(int & score, int & scorePossible) {
+
+
+		for ( Question * question : mQuestions ) {
+			std::cout << question->printQuestion() << std::endl;
+			std::cout << question->printHint() << std::endl;
+			std::cout << question->printAnswers() << std::endl;
+			if (question->evaluate()){
+				std::cout << "Correct!" << std::endl;
+			} else {
+				std::cout << "Wrong, good luck with the next one." << std::endl;
+			}
+		}
+
+		// write out current score, prompt to go to next page
+
+		return mBranches[0]; // return branch which one should go to
+	}
 
 protected:
-	std::vector<Question*> mQuestions;
-	std::vector<Page*> mBranches;
+	std::vector<Question *> mQuestions;
+	std::vector<Page *> mBranches;
 };
 
 

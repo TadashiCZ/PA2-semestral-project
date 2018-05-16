@@ -3,6 +3,7 @@
 #include "UI/Menu.h"
 #include "Game/Quiz.h"
 #include "Game.h"
+#include "Game/Question/TrueFalseQuestion.h"
 
 void showQuizList();
 
@@ -17,7 +18,7 @@ void welcomeUser() {
 
 inline bool checkExistence(const char * name) {
 	std::ifstream f( name );
-	if (f.good()){
+	if ( f.good() ) {
 		f.close();
 		return true;
 	} else {
@@ -34,17 +35,25 @@ void loadQuizes(std::vector<Quiz> & quizzes, const char * name) {
 	//todo load from file
 }
 
-void playGame(std::vector<Quiz> & quizzes){
+void playGame(std::vector<Quiz> & quizzes) {
 
 }
 
-
-
 int main() {
 	std::vector<Quiz> quizzes;
+	TrueFalseQuestion * question1 = new TrueFalseQuestion( 0, "Is 5+5=10?", true );
+	TrueFalseQuestion * question2 = new TrueFalseQuestion( 0, "Is 1+5=10?", false );
+	std::cout << question1->exportIntoFileFormat();
+	std::vector<Question *> questions;
+	questions.push_back( question1 );
+	questions.push_back( question2 );
+	std::vector<Page *> pages;
+	Page * paging = new Page( questions );
+	pages.push_back( paging );
 
-	quizzes.push_back(Quiz("hard", "frank")  );
-	quizzes.push_back(Quiz("easy", "John")  );
+	quizzes.push_back( Quiz( "Medicine", "Anna", pages ) );
+	quizzes.push_back( Quiz( "C++", "Frank", pages ) );
+	quizzes.push_back( Quiz( "Physiology", "Anna", pages ) );
 	loadQuizes( quizzes, "quizzes.dat" );
 
 	welcomeUser();
@@ -54,7 +63,7 @@ int main() {
 	while ( looping ) {
 		switch ( Menu().promptMainMenu() ) {
 			case 1: // Play
-				Game(quizzes).play();
+				Game( quizzes ).play();
 				looping = false;
 				break;
 			case 2: // Add
@@ -72,10 +81,14 @@ int main() {
 			case 5: //End
 				// saveIntoFile();
 				return 0;
-			default: std::cout << "Wrong choice, try again" << std::endl;
+			default: std::cout << "Wrong choice, try again." << std::endl;
 		}
 
 	}
+
+	delete paging;
+	delete question1;
+	delete question2;
 	return 0;
 }
 

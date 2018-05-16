@@ -8,21 +8,34 @@
 #include <iostream>
 #include <cstddef>
 
+inline const char * const BoolToString(bool b) {
+	return b ? "true" : "false";
+}
+
 class Question {
 public:
-	Question();
-	virtual ~Question(){}
-	Question(size_t id, std::string author, std::string questionText);
-	virtual std::string& printQuestion();
-	virtual std::string& printAnswers();
-	virtual std::string& printCorrectAnswer();
-	virtual std::string& exportIntoFileFormat();
-	virtual bool evaluate();
+	Question() : mId( 0 ) {}
+
+	Question(const size_t id, const std::string & questionText) : mId( id ), mQuestionText( questionText ) {}
+
+	virtual ~Question() {}
+
+	virtual std::string printQuestion() { return mQuestionText; }
+
+	virtual std::string printAnswers()=0;
+
+	virtual std::string printCorrectAnswer()=0;
+
+	virtual std::string printHint()=0;
+
+	virtual std::string exportIntoFileFormat()=0;
+
+	virtual bool evaluate()=0;
 
 protected:
 	size_t mId;
-	std::string mAuthor;
 	std::string mQuestionText;
+	bool isBranching = false;
 };
 
 
