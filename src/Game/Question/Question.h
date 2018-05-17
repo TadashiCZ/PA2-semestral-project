@@ -32,10 +32,14 @@ public:
 
 	virtual bool evaluate()=0;
 
+	void setBranching(bool branch) { mIsBranching = branch; }
+
+	bool isBranching() { return mIsBranching; }
+
 protected:
 	size_t mId;
 	std::string mQuestionText;
-	bool isBranching = false;
+	bool mIsBranching = false;
 };
 
 

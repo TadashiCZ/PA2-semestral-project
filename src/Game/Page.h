@@ -43,13 +43,25 @@ public:
 			std::cout << question->printHint() << std::endl;
 			std::cout << question->printAnswers() << std::endl;
 			if (question->evaluate()){
+				score++;
+				scorePossible++;
 				std::cout << "Correct!" << std::endl;
+				if ( question->isBranching() ){
+					return mBranches[0];
+				}
 			} else {
+				scorePossible++;
 				std::cout << "Wrong, good luck with the next one." << std::endl;
+				if ( question->isBranching() ){
+					return mBranches[1];
+				}
 			}
 		}
 
-		// write out current score, prompt to go to next page
+		std::cout << "Current score: " << score << "/" << scorePossible << std::endl;
+		std::cout << "End of page. Press Enter to continue..." << std::endl;
+		std::cin.get();
+		std::cin.get();
 
 		return mBranches[0]; // return branch which one should go to
 	}

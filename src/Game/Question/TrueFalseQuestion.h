@@ -35,7 +35,8 @@ public:
 
 	virtual std::string exportIntoFileFormat() {
 		std::string output;
-		output.append( "-\n" ).append( "TrueFalseQuestion\n" ).append( "Branching:" ).append( BoolToString(isBranching) ).append(
+
+	output.append( "-\n" ).append( "TrueFalseQuestion\n" ).append( "Branching:" ).append( BoolToString(isBranching()) ).append(
 						"\nID:" ).append( std::to_string( mId ) )
 				.append( "\n" ).append( "QuestionText:" ).append( mQuestionText ).append( "\n" ).append( "Answer:" );
 		( mAnswer ) ? output.append( "True\n" ) : output.append( "False\n" );

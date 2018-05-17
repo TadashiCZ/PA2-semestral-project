@@ -25,8 +25,6 @@ unsigned long showQuizListPrompt(const unsigned long size) {
 	}
 }
 
-
-
 class Game {
 public:
 	explicit Game(std::vector<Quiz> & quizzes) : mQuizzes( quizzes ) {}
@@ -41,8 +39,8 @@ public:
 	}
 
 	void play() {
-		int score, possibleScore;
-		if ( mQuizzes[showQuizList()].play( score, possibleScore) ){
+		int score = 0, possibleScore = 0;
+		if ( mQuizzes[showQuizList()].play( score, possibleScore ) ) {
 			// success, show score/possibleScore
 		} else {
 			// you failed, you die
