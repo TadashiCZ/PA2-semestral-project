@@ -20,7 +20,7 @@ public:
 
 	virtual ~Question() {}
 
-	virtual std::string printQuestion() { return mQuestionText; }
+	virtual const std::string printQuestion() { return mQuestionText; }
 
 	virtual std::string printAnswers()=0;
 

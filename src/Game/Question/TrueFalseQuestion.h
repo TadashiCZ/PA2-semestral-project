@@ -14,7 +14,7 @@ public:
 	TrueFalseQuestion(const size_t id, const std::string & questionText, bool answer)
 			: Question( id, questionText ), mAnswer( answer ) {}
 
-	virtual std::string printQuestion() override {
+	virtual const std::string printQuestion() override {
 		return mQuestionText;
 	}
 

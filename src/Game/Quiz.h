@@ -10,7 +10,7 @@
 
 class Quiz {
 public:
-	Quiz(const std::string & quizName, const std::string & authorName, std::vector<std::unique_ptr<Page>> pages)
+	Quiz(const std::string & quizName, const std::string & authorName, std::vector<std::shared_ptr<Page>> & pages)
 			: mQuizName( quizName ), mAuthor( authorName ), mPages( pages ) {}
 
 	Quiz(const Quiz & quiz) {
@@ -30,7 +30,7 @@ public:
 			nextPage = nextPage->play(score, scorePossible);
 		} while (nullptr != nextPage);
 
-		std::cout << "You finnished the quiz with score " << score << " from " << scorePossible << " possible." << std::endl;
+		std::cout << "You finished the quiz with score " << score << " from " << scorePossible << " possible." << std::endl;
 
 		return true;
 	}
@@ -48,7 +48,7 @@ public:
 protected:
 	std::string mQuizName;
 	std::string mAuthor;
-	std::vector<std::unique_ptr<Page>> mPages;
+	std::vector<std::shared_ptr<Page>> mPages;
 
 
 };

@@ -43,33 +43,33 @@ void playGame(std::vector<Quiz> & quizzes) {
 int main() {
 	std::vector<Quiz> quizzes;
 
-	std::unique_ptr<Question> q1 = std::make_unique<Question>( TrueFalseQuestion( 0, "Is 5+5=10?", true ) );
-	auto q2 = std::make_unique<Question>( TrueFalseQuestion( 0, "Is 1+5=10?", false ) );
-	auto q3 = std::make_unique<Question>( TrueFalseQuestion( 0, "This quiz is cool.", true ) );
-	auto q4 = std::make_unique<Question>( TrueFalseQuestion( 0, "Eiffel tower is 300 m tall.", true ) );
-	auto q5 = std::make_unique<Question>( TrueFalseQuestion( 0, "Mariana trench is 10 994 m deep.", true ) );
+	auto q1 = std::make_shared<TrueFalseQuestion>( TrueFalseQuestion( 0, "Is 5+5=10?", true ) );
+	auto q2 = std::make_shared<TrueFalseQuestion>( TrueFalseQuestion( 0, "Is 1+5=10?", false ) );
+	auto q3 = std::make_shared<TrueFalseQuestion>( TrueFalseQuestion( 0, "This quiz is cool.", true ) );
+	auto q4 = std::make_shared<TrueFalseQuestion>( TrueFalseQuestion( 0, "Eiffel tower is 300 m tall.", true ) );
+	auto q5 = std::make_shared<TrueFalseQuestion>( TrueFalseQuestion( 0, "Mariana trench is 10 994 m deep.", true ) );
 	std::cout << q1->exportIntoFileFormat();
-	std::vector<std::unique_ptr<Question>> questions;
-	std::vector<std::unique_ptr<Question>> questions2;
-	questions.push_back( std::move( q1 ) );
-	questions.push_back( std::move( q2 ) );
+	std::vector<std::shared_ptr<Question>> questions;
+	std::vector<std::shared_ptr<Question>> questions2;
+	questions.push_back( q1 );
+	questions.push_back( q2 );
 
-	questions2.push_back( std::move( q3 ) );
-	questions2.push_back( std::move( q4 ) );
-	questions2.push_back( std::move( q5 ) );
+	questions2.push_back( q3 );
+	questions2.push_back( q4 );
+	questions2.push_back( q5 );
 
-	std::vector<std::unique_ptr<Page>> pages;
+	std::vector<std::shared_ptr<Page>> pages;
 
-	auto page2 = std::make_unique<Page>( questions2 );
-	std::vector<std::unique_ptr<Page>> branches;
-	branches.push_back( std::move( page2 ) );
-	auto page1 = std::make_unique<Page>( questions, branches );
-	pages.push_back( std::move( page1 ) );
-	pages.push_back( std::move( page2 ) );
+	auto page2 = std::make_shared<Page>( questions2 );
+	std::vector<std::shared_ptr<Page>> branches;
+	branches.push_back( page2 );
+	auto page1 = std::make_shared<Page>( questions, branches );
+	pages.push_back( page1 );
+	pages.push_back( page2 );
 
-	quizzes.emplace_back( "Medicine", "Anna", pages );
-	quizzes.emplace_back( "C++", "Frank", pages );
-	quizzes.emplace_back( "Physiology", "Anna", pages );
+	quizzes.emplace_back( Quiz("Medicine", "Anna", pages) );
+	quizzes.emplace_back( Quiz("C++", "Frank", pages) );
+	quizzes.emplace_back( Quiz("Physiology", "Anna", pages) );
 	loadQuizes( quizzes, "quizzes.dat" );
 
 	welcomeUser();

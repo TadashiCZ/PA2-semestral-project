@@ -11,10 +11,9 @@
 
 class Page {
 public:
-	Page(std::vector<std::unique_ptr<Question>> questionList) : mQuestions( questionList ),
-	                                                            mBranches( std::vector<std::unique_ptr<Page>>{nullptr} ) {}
+	Page(std::vector<std::shared_ptr<Question>> & questionList) : mQuestions( questionList ), mBranches( std::vector<std::shared_ptr<Page>>{nullptr} ) {}
 
-	Page(std::vector<std::unique_ptr<Question>> & questionList, std::vector<std::unique_ptr<Page>> & branches)
+	Page(std::vector<std::shared_ptr<Question>> & questionList, std::vector<std::shared_ptr<Page>> & branches)
 			: mQuestions( questionList ), mBranches( branches ) {}
 
 	Page(const Page & page) {
@@ -70,8 +69,8 @@ public:
 	}
 
 protected:
-	std::vector<std::unique_ptr<Question>> mQuestions;
-	std::vector<std::unique_ptr<Page>> mBranches;
+	std::vector<std::shared_ptr<Question>> mQuestions;
+	std::vector<std::shared_ptr<Page>> mBranches;
 };
 
 
