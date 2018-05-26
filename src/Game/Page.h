@@ -11,64 +11,67 @@
 
 class Page {
 public:
-	Page(std::vector<Question *> & questionList) : mQuestions( questionList ), mBranches( std::vector<Page *>{nullptr} ) {}
+	Page(std::vector<std::unique_ptr<Question>> questionList) : mQuestions( questionList ),
+	                                                            mBranches( std::vector<std::unique_ptr<Page>>{nullptr} ) {}
 
-	Page(std::vector<Question *> & questionList, std::vector<Page *> & branches)
+	Page(std::vector<std::unique_ptr<Question>> & questionList, std::vector<std::unique_ptr<Page>> & branches)
 			: mQuestions( questionList ), mBranches( branches ) {}
 
 	Page(const Page & page) {
-		for ( Question * question : mQuestions ) {
-			delete question;
-		}
 
-		for ( Page * branch : mBranches ) {
-			delete branch;
-		}
+
 		mBranches.clear();
 		mQuestions.clear();
 
-		for ( Question * question : page.mQuestions ) {
-			mQuestions.push_back( question );
+		for ( auto it = page.mQuestions.begin() ; it != page.mQuestions.end() ; ++it ) {
+			mQuestions.push_back( *it );
 		}
-		for ( Page * branch : page.mBranches ) {
-			mBranches.push_back( branch );
+		for ( auto it = page.mBranches.begin() ; it != page.mBranches.end() ; ++it ) {
+			mBranches.push_back( *it );
 		}
 	}
 
 	Page * play(int & score, int & scorePossible) {
+		for ( auto it = mQuestions.begin() ; it != mQuestions.end() ; ++it ) {
 
-
-		for ( Question * question : mQuestions ) {
-			std::cout << question->printQuestion() << std::endl;
-			std::cout << question->printHint() << std::endl;
-			std::cout << question->printAnswers() << std::endl;
-			if (question->evaluate()){
+			std::cout << ( **it ).printQuestion() << std::endl;
+			std::cout << ( **it ).printHint() << std::endl;
+			std::cout << ( **it ).printAnswers() << std::endl;
+			if ( ( **it ).evaluate() ) {
 				score++;
 				scorePossible++;
 				std::cout << "Correct!" << std::endl;
-				if ( question->isBranching() ){
-					return mBranches[0];
+				if ( ( **it ).isBranching() ) {
+					std::cout << "Current score: " << score << "/" << scorePossible << std::endl;
+					std::cout << "End of page. Press Enter to continue..." << std::endl;
+					std::cin.get();
+					std::cin.get();
+					return mBranches[0].get();
 				}
 			} else {
 				scorePossible++;
 				std::cout << "Wrong, good luck with the next one." << std::endl;
-				if ( question->isBranching() ){
-					return mBranches[1];
+				if ( ( **it ).isBranching() ) {
+					std::cout << "Current score: " << score << "/" << scorePossible << std::endl;
+					std::cout << "End of page. Press Enter to continue..." << std::endl;
+					std::cin.get();
+					std::cin.get();
+					return mBranches[1].get();
+				} else {
+					std::cout << "Current score: " << score << "/" << scorePossible << std::endl;
+					std::cout << "End of page. Press Enter to continue..." << std::endl;
+					std::cin.get();
+					std::cin.get();
+					return mBranches[0].get(); // return branch which one should go to
 				}
 			}
 		}
-
-		std::cout << "Current score: " << score << "/" << scorePossible << std::endl;
-		std::cout << "End of page. Press Enter to continue..." << std::endl;
-		std::cin.get();
-		std::cin.get();
-
-		return mBranches[0]; // return branch which one should go to
+		return mBranches[0].get(); // return default branch
 	}
 
 protected:
-	std::vector<Question *> mQuestions;
-	std::vector<Page *> mBranches;
+	std::vector<std::unique_ptr<Question>> mQuestions;
+	std::vector<std::unique_ptr<Page>> mBranches;
 };
 
 

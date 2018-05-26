@@ -29,11 +29,11 @@ public:
 		return ( mAnswer ) ? trueStr : falseStr;
 	}
 
-	virtual std::string printHint() {
+	virtual std::string printHint() override {
 		return mHowToAnswer;
 	}
 
-	virtual std::string exportIntoFileFormat() {
+	virtual std::string exportIntoFileFormat() override {
 		std::string output;
 
 	output.append( "-\n" ).append( "TrueFalseQuestion\n" ).append( "Branching:" ).append( BoolToString(isBranching()) ).append(
