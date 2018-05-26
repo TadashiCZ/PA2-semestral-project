@@ -10,30 +10,27 @@
 
 class Quiz {
 public:
-	Quiz(const std::string & quizName, const std::string & authorName, std::vector<Page *> pages)
+	Quiz(const std::string & quizName, const std::string & authorName, std::vector<std::shared_ptr<Page>> & pages)
 			: mQuizName( quizName ), mAuthor( authorName ), mPages( pages ) {}
 
 	Quiz(const Quiz & quiz) {
 		mAuthor = quiz.mAuthor;
 		mQuizName = quiz.mQuizName;
-		for ( Page * page : mPages ) {
-			delete page;
-		}
 		mPages.clear();
 
-		for ( Page * page : quiz.mPages ) {
-			mPages.push_back( page );
+		for ( auto it = quiz.mPages.begin() ; it != quiz.mPages.end() ; ++it ) {
+			mPages.push_back( *it );
 		}
 	}
 
 	bool play(int & score, int & scorePossible) {
 		std::cout << std::endl << "You are playing quiz " << mQuizName << " from " << mAuthor << "." << std::endl;
-		Page * nextPage = mPages[0];
+		Page* nextPage = mPages[0].get();
 		do {
 			nextPage = nextPage->play(score, scorePossible);
 		} while (nullptr != nextPage);
 
-		//todo gameplay
+		std::cout << "You finished the quiz with score " << score << " from " << scorePossible << " possible." << std::endl;
 
 		return true;
 	}
@@ -51,7 +48,7 @@ public:
 protected:
 	std::string mQuizName;
 	std::string mAuthor;
-	std::vector<Page *> mPages;
+	std::vector<std::shared_ptr<Page>> mPages;
 
 
 };

@@ -14,7 +14,7 @@ public:
 	TrueFalseQuestion(const size_t id, const std::string & questionText, bool answer)
 			: Question( id, questionText ), mAnswer( answer ) {}
 
-	virtual std::string printQuestion() override {
+	virtual const std::string printQuestion() override {
 		return mQuestionText;
 	}
 
@@ -29,11 +29,11 @@ public:
 		return ( mAnswer ) ? trueStr : falseStr;
 	}
 
-	virtual std::string printHint() {
+	virtual std::string printHint() override {
 		return mHowToAnswer;
 	}
 
-	virtual std::string exportIntoFileFormat() {
+	virtual std::string exportIntoFileFormat() override {
 		std::string output;
 
 	output.append( "-\n" ).append( "TrueFalseQuestion\n" ).append( "Branching:" ).append( BoolToString(isBranching()) ).append(

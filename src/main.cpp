@@ -43,34 +43,33 @@ void playGame(std::vector<Quiz> & quizzes) {
 int main() {
 	std::vector<Quiz> quizzes;
 
-	TrueFalseQuestion * question1 = new TrueFalseQuestion( 0, "Is 5+5=10?", true );
-	TrueFalseQuestion * question2 = new TrueFalseQuestion( 0, "Is 1+5=10?", false );
-	TrueFalseQuestion * question3 = new TrueFalseQuestion(0, "This quiz is cool.", true);
-	TrueFalseQuestion * question4 = new TrueFalseQuestion(0, "Eiffel tower is 300 m tall.", true);
-	TrueFalseQuestion * question5 = new TrueFalseQuestion(0, "Mariana trench is 10 994 m deep.", true);
-	std::cout << question1->exportIntoFileFormat();
-	std::vector<Question *> questions;
-	std::vector<Question*> questions2;
-	questions.push_back( question1 );
-	questions.push_back( question2 );
+	auto q1 = std::make_shared<TrueFalseQuestion>( TrueFalseQuestion( 0, "Is 5+5=10?", true ) );
+	auto q2 = std::make_shared<TrueFalseQuestion>( TrueFalseQuestion( 0, "Is 1+5=10?", false ) );
+	auto q3 = std::make_shared<TrueFalseQuestion>( TrueFalseQuestion( 0, "This quiz is cool.", true ) );
+	auto q4 = std::make_shared<TrueFalseQuestion>( TrueFalseQuestion( 0, "Eiffel tower is 300 m tall.", true ) );
+	auto q5 = std::make_shared<TrueFalseQuestion>( TrueFalseQuestion( 0, "Mariana trench is 10 994 m deep.", true ) );
+	std::cout << q1->exportIntoFileFormat();
+	std::vector<std::shared_ptr<Question>> questions;
+	std::vector<std::shared_ptr<Question>> questions2;
+	questions.push_back( q1 );
+	questions.push_back( q2 );
 
-	questions2.push_back( question3 );
-	questions2.push_back( question4 );
-	questions2.push_back( question5 );
+	questions2.push_back( q3 );
+	questions2.push_back( q4 );
+	questions2.push_back( q5 );
 
-	std::vector<Page *> pages;
+	std::vector<std::shared_ptr<Page>> pages;
 
-
-
-	Page * page2 = new Page( questions2 );
-	std::vector<Page*> branches; branches.push_back(page2);
-	Page * page1 = new Page( questions, branches  );
+	auto page2 = std::make_shared<Page>( questions2 );
+	std::vector<std::shared_ptr<Page>> branches;
+	branches.push_back( page2 );
+	auto page1 = std::make_shared<Page>( questions, branches );
 	pages.push_back( page1 );
 	pages.push_back( page2 );
 
-	quizzes.push_back( Quiz( "Medicine", "Anna", pages ) );
-	quizzes.push_back( Quiz( "C++", "Frank", pages ) );
-	quizzes.push_back( Quiz( "Physiology", "Anna", pages ) );
+	quizzes.emplace_back( Quiz("Medicine", "Anna", pages) );
+	quizzes.emplace_back( Quiz("C++", "Frank", pages) );
+	quizzes.emplace_back( Quiz("Physiology", "Anna", pages) );
 	loadQuizes( quizzes, "quizzes.dat" );
 
 	welcomeUser();
@@ -102,14 +101,6 @@ int main() {
 		}
 
 	}
-
-	delete page1;
-	delete page2;
-	delete question1;
-	delete question2;
-	delete question3;
-	delete question4;
-	delete question5;
 	return 0;
 }
 
