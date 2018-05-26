@@ -5,6 +5,7 @@
 #include "Game/Quiz.h"
 #include "Game.h"
 #include "Game/Question/TrueFalseQuestion.h"
+#include "Game/Question/TextQuestion.h"
 
 void showQuizList();
 
@@ -45,7 +46,8 @@ int main() {
 
 	auto q1 = std::make_shared<TrueFalseQuestion>( TrueFalseQuestion( 0, "Is 5+5=10?", true ) );
 	auto q2 = std::make_shared<TrueFalseQuestion>( TrueFalseQuestion( 0, "Is 1+5=10?", false ) );
-	auto q3 = std::make_shared<TrueFalseQuestion>( TrueFalseQuestion( 0, "This quiz is cool.", true ) );
+	//q2->setBranching(true);
+	auto q3 = std::make_shared<TextQuestion>( TextQuestion( 0, "This quiz is cool.", "Yes" ) );
 	auto q4 = std::make_shared<TrueFalseQuestion>( TrueFalseQuestion( 0, "Eiffel tower is 300 m tall.", true ) );
 	auto q5 = std::make_shared<TrueFalseQuestion>( TrueFalseQuestion( 0, "Mariana trench is 10 994 m deep.", true ) );
 	std::cout << q1->exportIntoFileFormat();

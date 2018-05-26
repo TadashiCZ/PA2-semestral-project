@@ -6,34 +6,61 @@
 #define SEMESTRAL_PROJECT_TEXTQUESTION_H
 
 
+#include <algorithm>
 #include "Question.h"
 
 class TextQuestion : public Question {
 public:
 	TextQuestion(const size_t id, const std::string & questionText, const std::string & answer)
-			: Question( id, questionText ), mAnswer( answer ) {}
+			: Question( id, questionText ), mAnswer( answer ) {
+		mLowerCapsAnswer = mAnswer;
+		std::transform( mLowerCapsAnswer.begin(), mLowerCapsAnswer.end(), mLowerCapsAnswer.begin(), ::tolower );
+	}
 
-	virtual std::string printQuestion() override;
+	virtual const std::string printQuestion() override {
+		return mQuestionText;
+	}
 
-	virtual std::string printAnswers() override;
-
-	virtual std::string printCorrectAnswer() override;
+	virtual std::string printCorrectAnswer() override {
+		return mAnswer;
+	}
 
 	virtual std::string printHint() {
 		return mHowToAnswer;
 	}
 
-	virtual std::string exportIntoFileFormat() override;
+	virtual std::string exportIntoFileFormat() override {
+		std::string output;
 
-	virtual bool evaluate() override;
+		output.append( "-\n" ).append( "TextQuestion\n" ).append( "Branching:" ).append( BoolToString( isBranching() ) ).append(
+						"\nID:" ).append( std::to_string( mId ) )
+				.append( "\n" ).append( "QuestionText:" ).append( mQuestionText ).append( "\n" ).append( "Answer:" )
+				.append( mAnswer ).append( "-\n" );
+		return output;
+	}
+
+	virtual bool evaluate() override {
+		std::string answer;
+		while ( true ) {
+			std::cin >> answer;
+			if ( answer.empty() ) {
+				std::cout << "Not like this. Try again. " << mHowToAnswer << std::endl;
+				continue;
+			} else {
+				break;
+			}
+		}
+		std::transform( answer.begin(), answer.end(), answer.begin(), ::tolower );
+		return answer == mLowerCapsAnswer;
+
+	}
 
 protected:
 	std::string mAnswer;
-	static constexpr std::string mHowToAnswer;
+	std::string mLowerCapsAnswer;
+	const std::string mHowToAnswer = "Write correct answer. No typos allowed!";
 
 };
-
-static const std::string TextQuestion::mHowToAnswer = "Write correct answer. No typos allowed!";
 
 
 #endif //SEMESTRAL_PROJECT_TEXTQUESTION_H

@@ -22,8 +22,6 @@ public:
 
 	virtual const std::string printQuestion() { return mQuestionText; }
 
-	virtual std::string printAnswers()=0;
-
 	virtual std::string printCorrectAnswer()=0;
 
 	virtual std::string printHint()=0;

@@ -11,7 +11,8 @@
 
 class Page {
 public:
-	Page(std::vector<std::shared_ptr<Question>> & questionList) : mQuestions( questionList ), mBranches( std::vector<std::shared_ptr<Page>>{nullptr} ) {}
+	Page(std::vector<std::shared_ptr<Question>> & questionList) : mQuestions( questionList ),
+	                                                              mBranches( std::vector<std::shared_ptr<Page>>{nullptr} ) {}
 
 	Page(std::vector<std::shared_ptr<Question>> & questionList, std::vector<std::shared_ptr<Page>> & branches)
 			: mQuestions( questionList ), mBranches( branches ) {}
@@ -32,14 +33,12 @@ public:
 
 	Page * play(int & score, int & scorePossible) {
 		for ( auto it = mQuestions.begin() ; it != mQuestions.end() ; ++it ) {
-
 			std::cout << ( **it ).printQuestion() << std::endl;
 			std::cout << ( **it ).printHint() << std::endl;
-			std::cout << ( **it ).printAnswers() << std::endl;
 			if ( ( **it ).evaluate() ) {
 				score++;
 				scorePossible++;
-				std::cout << "Correct!" << std::endl;
+				std::cout << "Correct!" << std::endl << std::endl;
 				if ( ( **it ).isBranching() ) {
 					std::cout << "Current score: " << score << "/" << scorePossible << std::endl;
 					std::cout << "End of page. Press Enter to continue..." << std::endl;
@@ -49,23 +48,23 @@ public:
 				}
 			} else {
 				scorePossible++;
-				std::cout << "Wrong, good luck with the next one." << std::endl;
+				std::cout << "Wrong, good luck with the next one." << std::endl << std::endl;
 				if ( ( **it ).isBranching() ) {
 					std::cout << "Current score: " << score << "/" << scorePossible << std::endl;
 					std::cout << "End of page. Press Enter to continue..." << std::endl;
 					std::cin.get();
 					std::cin.get();
 					return mBranches[1].get();
-				} else {
-					std::cout << "Current score: " << score << "/" << scorePossible << std::endl;
-					std::cout << "End of page. Press Enter to continue..." << std::endl;
-					std::cin.get();
-					std::cin.get();
-					return mBranches[0].get(); // return branch which one should go to
 				}
 			}
 		}
-		return mBranches[0].get(); // return default branch
+
+
+		std::cout << "Current score: " << score << "/" << scorePossible << std::endl;
+		std::cout << "End of page. Press Enter to continue..." << std::endl;
+		std::cin.get();
+		std::cin.get();
+		return mBranches[0].get(); // return branch which one should go to
 	}
 
 protected:

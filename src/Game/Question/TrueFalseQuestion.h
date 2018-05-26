@@ -15,12 +15,8 @@ public:
 			: Question( id, questionText ), mAnswer( answer ) {}
 
 	virtual const std::string printQuestion() override {
-		return mQuestionText;
-	}
 
-	virtual std::string printAnswers() override {
-		std::string answer = "True or false";
-		return answer;
+		return mQuestionText;
 	}
 
 	virtual std::string printCorrectAnswer() override {
@@ -42,7 +38,6 @@ public:
 		( mAnswer ) ? output.append( "True\n" ) : output.append( "False\n" );
 		output.append( "-\n" );
 		return output;
-
 	}
 
 	virtual bool evaluate() override {
