@@ -67,6 +67,23 @@ public:
 		return mBranches[0].get(); // return branch which one should go to
 	}
 
+	std::string exportPage(){
+		std::string output;
+		std::stringstream ss;
+
+		ss << mQuestions.size();
+		output.append("-\nPage\nQuestionCount:").append( ss.str() );
+		ss.clear();
+		ss.str("");
+		ss << mBranches.size();
+		output.append(";BranchCount:").append(ss.str()).append("\n");
+		for ( std::shared_ptr<Question> quest : mQuestions ){
+			output.append(quest->exportIntoFileFormat());
+		}
+		output.append("-\n");
+		return output;
+	}
+
 protected:
 	std::vector<std::shared_ptr<Question>> mQuestions;
 	std::vector<std::shared_ptr<Page>> mBranches;

@@ -52,12 +52,11 @@ int main() {
 	auto q4 = std::make_shared<TrueFalseQuestion>( 0, "Eiffel tower is 300 m tall.", true );
 	auto q5 = std::make_shared<TrueFalseQuestion>( 0, "Mariana trench is 10 994 m deep.", true );
 	q2->setBranching( true );
-	std::cout << q5->isBranching() << std::endl;
 	std::vector<std::pair<std::string, bool>> choices6 = {std::make_pair( "Green", false ), std::make_pair( "White", false ),
 	                                                      std::make_pair( "Blue", true ), std::make_pair( "Yellow", true )};
 	std::vector<std::pair<std::string, bool>> choices7 = {std::make_pair( "Green", false ), std::make_pair( "White", true ),
 	                                                      std::make_pair( "Blue", true ), std::make_pair( "Yellow", false )};
-	auto q6 = std::make_shared<MultiChoiceQuestion>( 0, "What colors are on Columbian flag?", choices6 );
+	auto q6 = std::make_shared<MultiChoiceQuestion>( 0, "What colors are on Colombian flag?", choices6 );
 	auto q7 = std::make_shared<MultiChoiceQuestion>( 0, "What colors are on Czech flag?", choices7 );
 
 	std::vector<std::shared_ptr<Question>> questions;
@@ -88,6 +87,8 @@ int main() {
 	quizzes.emplace_back( Quiz( "Physiology", "Anna", pages ) );
 	loadQuizes( quizzes, "quizzes.dat" );
 
+	std::cout << page1->exportPage() << page2->exportPage() << page3->exportPage();
+
 	welcomeUser();
 
 	bool looping = true;
@@ -96,19 +97,15 @@ int main() {
 		switch ( Menu().promptMainMenu() ) {
 			case 1: // Play
 				Game( quizzes ).play();
-
 				break;
 			case 2: // Add
 				//startAdd();
-				looping = false;
 				break;
 			case 3: //Edit
 				//startEdit();
-				looping = false;
 				break;
 			case 4: //Export
 				ExpoImpo(quizzes).run();
-				looping = false;
 				break;
 			case 5: //End
 				// saveIntoFile();
