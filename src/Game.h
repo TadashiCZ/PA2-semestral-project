@@ -15,6 +15,9 @@ unsigned long showQuizListPrompt(const unsigned long size) {
 		std::string dummy;
 		std::cin.clear();
 		std::cin >> dummy;
+		if (dummy == "exit"){
+			//todo
+		}
 		input = atoi( dummy.c_str() );
 		if ( input > 0 && input <= size ) {
 			std::cout << "Okay, you choose quiz no. " << input << "." << std::endl;

@@ -7,6 +7,7 @@
 #include "Game/Question/TrueFalseQuestion.h"
 #include "Game/Question/TextQuestion.h"
 #include "Game/Question/MultiChoiceQuestion.h"
+#include "ExpoImpo.h"
 
 void showQuizList();
 
@@ -95,7 +96,7 @@ int main() {
 		switch ( Menu().promptMainMenu() ) {
 			case 1: // Play
 				Game( quizzes ).play();
-				Menu().showMainMenu();
+
 				break;
 			case 2: // Add
 				//startAdd();
@@ -106,7 +107,7 @@ int main() {
 				looping = false;
 				break;
 			case 4: //Export
-				//startExport();
+				ExpoImpo(quizzes).run();
 				looping = false;
 				break;
 			case 5: //End
