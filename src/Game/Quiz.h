@@ -30,7 +30,7 @@ public:
 			nextPage = nextPage->play(score, scorePossible);
 		} while (nullptr != nextPage);
 
-		std::cout << "You finished the quiz with score " << score << " from " << scorePossible << " possible." << std::endl;
+		std::cout << "You finished the quiz with score " << score << " from " << scorePossible << " possible." << std::endl << std::endl;
 
 		return true;
 	}
