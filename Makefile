@@ -1,8 +1,7 @@
-
 .DEFAULT_GOAL := all
 
 CXX=g++
-CXXFLAGS=-std=c++14 -Wall -pedantic -Wno-long-long -g
+CXXFLAGS=-std=c++14 -Wall -pedantic -Wno-long-long -O0 -ggdb
 SOURCES=$(wildcard src/*.cpp )
 EXECUTABLE=valentad
 MEMCHECK=valgrind
@@ -25,7 +24,7 @@ doc:
 	doxygen Doxyfile
 
 clean:
-	@rm -f -- src/*.o src/*/*.o src/*/*/*.o
+	@rm -f -- $(wildcard src/*.o) $(wildcard src/*.d)
 	@rm -f -- src/*.d src/*/*.d src/*/*/*.d
 	@rm -f $(EXECUTABLE)
 	@rm -rf doc/

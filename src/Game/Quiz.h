@@ -25,12 +25,13 @@ public:
 
 	bool play(int & score, int & scorePossible) {
 		std::cout << std::endl << "You are playing quiz " << mQuizName << " from " << mAuthor << "." << std::endl;
-		Page* nextPage = mPages[0].get();
+		Page * nextPage = mPages[0].get();
 		do {
-			nextPage = nextPage->play(score, scorePossible);
-		} while (nullptr != nextPage);
+			nextPage = nextPage->play( score, scorePossible );
+		} while ( nullptr != nextPage );
 
-		std::cout << "You finished the quiz with score " << score << " from " << scorePossible << " possible." << std::endl << std::endl;
+		std::cout << "You finished the quiz with score " << score << " from " << scorePossible << " possible." << std::endl
+		          << std::endl;
 
 		return true;
 	}
@@ -39,6 +40,14 @@ public:
 		std::ostringstream os;
 		os << mQuizName << " (by " << mAuthor << ")";
 		std::string output = os.str();
+		return output;
+	}
+
+	std::string exportQuiz() {
+		std::string output;
+		for ( std::shared_ptr<Page> page : mPages ) {
+			output.append( page->exportPage() );
+		}
 		return output;
 	}
 

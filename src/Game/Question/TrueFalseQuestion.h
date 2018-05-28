@@ -32,7 +32,8 @@ public:
 	virtual std::string exportIntoFileFormat() override {
 		std::string output;
 
-	output.append( "-\n" ).append( "TrueFalseQuestion\n" ).append( "Branching:" ).append( BoolToString(isBranching()) ).append(
+		output.append( "-\n" ).append( "TrueFalseQuestion\n" ).append( "Branching:" ).append(
+						BoolToString( isBranching() ) ).append(
 						"\nID:" ).append( std::to_string( mId ) )
 				.append( "\n" ).append( "QuestionText:" ).append( mQuestionText ).append( "\n" ).append( "Answer:" );
 		( mAnswer ) ? output.append( "True\n" ) : output.append( "False\n" );
@@ -45,8 +46,8 @@ public:
 		bool boolAnswer;
 		while ( true ) {
 			std::cin >> answer;
-			std::transform(answer.begin(), answer.end(), answer.begin(), ::tolower);
-			if (answer == "true" || answer == "false" ){
+			std::transform( answer.begin(), answer.end(), answer.begin(), ::tolower );
+			if ( answer == "true" || answer == "false" ) {
 				break;
 			} else {
 				std::cout << "Not like this. Try again. " << mHowToAnswer << std::endl;
@@ -54,7 +55,7 @@ public:
 			}
 		}
 
-		boolAnswer = (answer == "true") ? true : false;
+		boolAnswer = ( answer == "true" ) ? true : false;
 		return boolAnswer == mAnswer;
 	}
 

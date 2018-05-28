@@ -18,9 +18,9 @@ public:
 			: Question( id, questionText ), mChoices( choices ) {
 		char c = 'a';
 		mLowerCapsAnswer.clear();
-		for ( std::pair<std::string,bool> choice : mChoices ){
-			if (choice.second){
-				mLowerCapsAnswer.push_back(c);
+		for ( std::pair<std::string, bool> choice : mChoices ) {
+			if ( choice.second ) {
+				mLowerCapsAnswer.push_back( c );
 			}
 			c++;
 		}
@@ -28,22 +28,22 @@ public:
 
 	virtual const std::string printQuestion() override {
 		std::string output;
-		output.append(mQuestionText).append("\n");
+		output.append( mQuestionText ).append( "\n" );
 		char c = 'a';
-		for ( std::pair<std::string,bool> choice : mChoices ){
-			output.push_back(c);
-			output.append(") ").append(choice.first).append("; ");
+		for ( std::pair<std::string, bool> choice : mChoices ) {
+			output.push_back( c );
+			output.append( ") " ).append( choice.first ).append( "; " );
 			c++;
 		}
-		output.append("\n");
+		output.append( "\n" );
 
 		return output;
 	}
 
 	virtual std::string printCorrectAnswer() override {
 		std::string output;
-		for (std::pair<std::string, bool> choice : mChoices){
-			output.append(choice.first).append(": ").append( BoolToString(choice.second)).append("\n");
+		for ( std::pair<std::string, bool> choice : mChoices ) {
+			output.append( choice.first ).append( ": " ).append( BoolToString( choice.second ) ).append( "\n" );
 		}
 		return output;
 	}
@@ -54,15 +54,17 @@ public:
 
 	virtual std::string exportIntoFileFormat() override {
 		std::string output;
-		output.append( "-\n" ).append( "MultiChoiceQuestion\n" ).append( "Branching:" ).append( BoolToString(isBranching()) ).append(
+		output.append( "-\n" ).append( "MultiChoiceQuestion\n" ).append( "Branching:" ).append(
+						BoolToString( isBranching() ) ).append(
 						"\nID:" ).append( std::to_string( mId ) )
 				.append( "\n" ).append( "QuestionText:" ).append( mQuestionText ).append( "\n" ).append( "Answer:" );
-		for (std::pair<std::string, bool> choice : mChoices){
-			output.append(choice.first).append("::").append(BoolToString(choice.second)).append(";");
+		for ( std::pair<std::string, bool> choice : mChoices ) {
+			output.append( choice.first ).append( "::" ).append( BoolToString( choice.second ) ).append( ";" );
 		}
 		output.append( "\n-\n" );
 		return output;
 	}
+
 	virtual bool evaluate() override {
 		std::string answer;
 		while ( true ) {

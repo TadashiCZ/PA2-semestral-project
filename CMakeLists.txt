@@ -4,4 +4,4 @@ project(semestral_project)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_FLAGS "-Wall -pedantic -Wno-long-long -O0 -ggdb")
 
-add_executable(semestral_project src/main.cpp src/UI/Menu.h src/Game/Quiz.h src/Game.h src/Game/Page.h src/Game/Question/Question.h src/Game/Question/TrueFalseQuestion.h src/Game/Question/TextQuestion.h src/Game/Question/MultiChoiceQuestion.h src/ExpoImpo.h)
+add_executable(semestral_project src/main.cpp src/UI/Menu.h src/Game/Quiz.h src/Game.h src/Game/Page.h src/Game/Question/Question.h src/Game/Question/TrueFalseQuestion.h src/Game/Question/TextQuestion.h src/Game/Question/MultiChoiceQuestion.h src/ExpoImpo.h src/ExpoImpo.cpp src/Game/Question/TextQuestion.cpp src/Game/Question/Question.cpp)

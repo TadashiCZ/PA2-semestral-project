@@ -11,49 +11,17 @@
 
 class TextQuestion : public Question {
 public:
-	TextQuestion(const size_t id, const std::string & questionText, const std::string & answer)
-			: Question( id, questionText ), mAnswer( answer ) {
-		mLowerCapsAnswer = mAnswer;
-		std::transform( mLowerCapsAnswer.begin(), mLowerCapsAnswer.end(), mLowerCapsAnswer.begin(), ::tolower );
-	}
+	TextQuestion(const size_t id, const std::string & questionText, const std::string & answer);
 
-	virtual const std::string printQuestion() override {
-		return mQuestionText;
-	}
+	virtual const std::string printQuestion() override;
 
-	virtual std::string printCorrectAnswer() override {
-		return mAnswer;
-	}
+	virtual std::string printCorrectAnswer() override;
 
-	virtual std::string printHint() {
-		return mHowToAnswer;
-	}
+	virtual std::string printHint();
 
-	virtual std::string exportIntoFileFormat() override {
-		std::string output;
+	virtual std::string exportIntoFileFormat() override;
 
-		output.append( "-\n" ).append( "TextQuestion\n" ).append( "Branching:" ).append( BoolToString( isBranching() ) ).append(
-						"\nID:" ).append( std::to_string( mId ) )
-				.append( "\n" ).append( "QuestionText:" ).append( mQuestionText ).append( "\n" ).append( "Answer:" )
-				.append( mAnswer ).append( "-\n" );
-		return output;
-	}
-
-	virtual bool evaluate() override {
-		std::string answer;
-		while ( true ) {
-			std::cin >> answer;
-			if ( answer.empty() ) {
-				std::cout << "Not like this. Try again. " << mHowToAnswer << std::endl;
-				continue;
-			} else {
-				break;
-			}
-		}
-		std::transform( answer.begin(), answer.end(), answer.begin(), ::tolower );
-		return answer == mLowerCapsAnswer;
-
-	}
+	virtual bool evaluate() override;
 
 protected:
 	std::string mAnswer;
@@ -61,6 +29,5 @@ protected:
 	const std::string mHowToAnswer = "Write correct answer. No typos allowed!";
 
 };
-
 
 #endif //SEMESTRAL_PROJECT_TEXTQUESTION_H

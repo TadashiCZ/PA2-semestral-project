@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <vector>
+#include <memory>
 #include "Question/Question.h"
 
 class Page {
@@ -18,8 +19,6 @@ public:
 			: mQuestions( questionList ), mBranches( branches ) {}
 
 	Page(const Page & page) {
-
-
 		mBranches.clear();
 		mQuestions.clear();
 
@@ -67,20 +66,17 @@ public:
 		return mBranches[0].get(); // return branch which one should go to
 	}
 
-	std::string exportPage(){
+	std::string exportPage() {
 		std::string output;
 		std::stringstream ss;
 
 		ss << mQuestions.size();
-		output.append("-\nPage\nQuestionCount:").append( ss.str() );
-		ss.clear();
-		ss.str("");
-		ss << mBranches.size();
-		output.append(";BranchCount:").append(ss.str()).append("\n");
-		for ( std::shared_ptr<Question> quest : mQuestions ){
-			output.append(quest->exportIntoFileFormat());
+		output.append( "-\nPage\nQuestionCount:" ).append( ss.str() );
+		output.append( ";BranchCount:" ).append( BoolToString( mBranches.size() == 2 ) ).append( "\n" );
+		for ( std::shared_ptr<Question> quest : mQuestions ) {
+			output.append( quest->exportIntoFileFormat() );
 		}
-		output.append("-\n");
+		output.append( "-\n" );
 		return output;
 	}
 

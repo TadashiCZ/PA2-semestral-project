@@ -87,30 +87,41 @@ int main() {
 	quizzes.emplace_back( Quiz( "Physiology", "Anna", pages ) );
 	loadQuizes( quizzes, "quizzes.dat" );
 
-	std::cout << page1->exportPage() << page2->exportPage() << page3->exportPage();
+	std::cout << quizzes[0].exportQuiz();
 
 	welcomeUser();
 
 	bool looping = true;
+	bool showMenu = true;
 	Menu().showMainMenu();
 	while ( looping ) {
 		switch ( Menu().promptMainMenu() ) {
 			case 1: // Play
+				if (showMenu) Menu().promptMainMenu();
+				showMenu = true;
 				Game( quizzes ).play();
 				break;
 			case 2: // Add
+				if (showMenu) Menu().promptMainMenu();
+				showMenu = true;
 				//startAdd();
 				break;
 			case 3: //Edit
+				if (showMenu) Menu().promptMainMenu();
+				showMenu = true;
 				//startEdit();
 				break;
 			case 4: //Export
-				ExpoImpo(quizzes).run();
+				if (showMenu) Menu().promptMainMenu();
+				showMenu = true;
+				ExpoImpo( quizzes ).run();
 				break;
 			case 5: //End
 				// saveIntoFile();
 				return 0;
-			default: std::cout << "Wrong choice, try again." << std::endl;
+			default:
+				showMenu = false;
+			std::cout << "Wrong choice, try again." << std::endl;
 		}
 
 	}
