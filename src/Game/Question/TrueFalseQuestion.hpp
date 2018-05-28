@@ -7,29 +7,29 @@
 
 
 #include <algorithm>
-#include "Question.h"
+#include "Question.hpp"
 
 class TrueFalseQuestion : public Question {
 public:
 	TrueFalseQuestion(const size_t id, const std::string & questionText, bool answer)
 			: Question( id, questionText ), mAnswer( answer ) {}
 
-	virtual const std::string printQuestion() override {
+	virtual const std::string printQuestion() {
 
 		return mQuestionText;
 	}
 
-	virtual std::string printCorrectAnswer() override {
+	virtual std::string printCorrectAnswer() {
 		std::string trueStr = "True";
 		std::string falseStr = "False";
 		return ( mAnswer ) ? trueStr : falseStr;
 	}
 
-	virtual std::string printHint() override {
+	virtual std::string printHint() {
 		return mHowToAnswer;
 	}
 
-	virtual std::string exportIntoFileFormat() override {
+	virtual std::string exportIntoFileFormat() {
 		std::string output;
 
 		output.append( "-\n" ).append( "TrueFalseQuestion\n" ).append( "Branching:" ).append(
@@ -41,7 +41,7 @@ public:
 		return output;
 	}
 
-	virtual bool evaluate() override {
+	virtual bool evaluate() {
 		std::string answer;
 		bool boolAnswer;
 		while ( true ) {

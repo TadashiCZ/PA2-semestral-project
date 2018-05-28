@@ -6,7 +6,7 @@
 #define SEMESTRAL_PROJECT_GAME_H
 
 #include <iostream>
-#include "Game/Quiz.h"
+#include "Game/Quiz.hpp"
 
 unsigned long showQuizListPrompt(const unsigned long size) {
 	unsigned long input;

@@ -7,21 +7,21 @@
 
 
 #include <algorithm>
-#include "Question.h"
+#include "Question.hpp"
 
 class TextQuestion : public Question {
 public:
-	TextQuestion(const size_t id, const std::string & questionText, const std::string & answer);
+	TextQuestion(size_t id, const std::string & questionText, const std::string & answer);
 
-	virtual const std::string printQuestion() override;
+	virtual const std::string printQuestion();
 
-	virtual std::string printCorrectAnswer() override;
+	virtual std::string printCorrectAnswer();
 
 	virtual std::string printHint();
 
-	virtual std::string exportIntoFileFormat() override;
+	virtual std::string exportIntoFileFormat();
 
-	virtual bool evaluate() override;
+	virtual bool evaluate();
 
 protected:
 	std::string mAnswer;
