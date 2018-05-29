@@ -1,16 +1,17 @@
+2
 Quiz
 OSP
 Anna Roskotova
 5
 Tree:
-1,x
-2,1
+0,x
+1,0
+2,0
 3,1
-4,2
+4,1
 5,2
-6,3
 Page
-1
+0
 2
 1
 Question
@@ -22,7 +23,7 @@ TextQuestion
 What is the surname of the dean of 1. faculty of medicine?
 Sedo
 Page
-2
+1
 1
 1
 Question
@@ -30,7 +31,7 @@ TrueFalseQuestion
 Is this fun?
 1
 Page
-3
+2
 1
 0
 Question
@@ -38,7 +39,7 @@ TextQuestion
 What color is grass?
 Green
 Page
-4
+3
 1
 0
 Question
@@ -46,7 +47,7 @@ TextQuestion
 Capital of CZ
 Prague
 Page
-5
+4
 1
 0
 Question
@@ -61,7 +62,7 @@ Your
 Yor
 0
 Page
-6
+5
 1
 0
 Question
@@ -74,10 +75,10 @@ ShortQuiz
 Tadeas Valenta
 2
 Tree:
-1,x
-2,1
+0,x
+1,0
 Page
-1
+0
 1
 0
 Question
@@ -85,7 +86,7 @@ TrueFalseQuestion
 Mariana trench is 10 994 m deep.
 1
 Page
-2
+1
 1
 0
 Question
