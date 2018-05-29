@@ -10,27 +10,36 @@
 #include "../Game/Question/Question.hpp"
 
 /**
- * Namespace with functions to import
+ * Namespace with import
  */
 namespace Importer {
 	/**
-	 * Loads quizzes from given file
+	 * Loads quizzes from given file.
 	 * @param filename	filename to read from
 	 * @param quizzes	vector of quiz files to save the quizzes loaded from the file to
 	 * @return			true if reading the whole file was successful, false otherwise
 	 */
-bool loadFromFile(std::string filename, std::vector<Quiz> quizzes);
+	bool loadFromFile(std::string filename, std::vector<Quiz> quizzes);
 
 /**
- * Loads one quiz from filestream
- * @param inputString filestream to read from
- * @return quiz
+ * Loads one quiz from file stream.
+ * @param 	inputString file stream to read from
+ * @return 	quiz read from file stream
  */
-Quiz loadQuiz(std::ifstream & inputString);
-Page loadPage(std::ifstream & inputString);
-std::shared_ptr<Question> loadQuestion(std::ifstream & inputString);
+	Quiz loadQuiz(std::ifstream & inputFile);
+/**
+ * Loads one page from file stream.
+ * @param 	inputFile file stream to read from
+ * @return 	page read from file stream
+ */
+	Page loadPage(std::ifstream & inputFile);
 
-
+/**
+ * Loads one question from file stream.
+ * @param 	inputFile file stream to read from
+ * @return 	shared pointer to Question read from file stream (if nullptr returned, read failed)
+ */
+	std::shared_ptr<Question> loadQuestion(std::ifstream & inputFile);
 };
 
 
