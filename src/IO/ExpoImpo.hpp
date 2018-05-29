@@ -7,7 +7,7 @@
 
 
 
-#include "../Game/Quiz.h"
+#include "../Game/Quiz.hpp"
 
 class ExpoImpo {
 public:

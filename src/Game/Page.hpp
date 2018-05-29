@@ -8,10 +8,12 @@
 #include <iostream>
 #include <vector>
 #include <memory>
-#include "Question/Question.h"
+#include "Question/Question.hpp"
 
 class Page {
 public:
+	Page(){}
+
 	Page(std::vector<std::shared_ptr<Question>> & questionList) : mQuestions( questionList ),
 	                                                              mBranches( std::vector<std::shared_ptr<Page>>{nullptr} ) {}
 
@@ -80,7 +82,7 @@ public:
 		return output;
 	}
 
-protected:
+
 	std::vector<std::shared_ptr<Question>> mQuestions;
 	std::vector<std::shared_ptr<Page>> mBranches;
 };

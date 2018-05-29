@@ -3,7 +3,7 @@
 //
 
 
-#include "TextQuestion.h"
+#include "TextQuestion.hpp"
 
 
 TextQuestion::TextQuestion(const size_t id, const std::string & questionText, const std::string & answer)

@@ -1,18 +1,21 @@
 .DEFAULT_GOAL := all
 
+#promene pro kompilator
 CXX=g++
-CXXFLAGS=-std=c++14 -Wall -pedantic -Wno-long-long -O0 -ggdb
+CXXFLAGS=-std=c++11 -Wall -pedantic -Wno-long-long -O0 -ggdb
 SOURCES=$(wildcard src/*.cpp )
 EXECUTABLE=valentad
 MEMCHECK=valgrind
 MEMFLAGS=--leak-check=full
 
+# $< značí první parametr závislosti (v našem případě vždy .cpp soubor)
+# $@ značí cíl pravidla (tedy část před dvojtečkou)
 
 %.o: %.cpp
 	@$(CXX) $(CXXFLAGS) -c -o $@ -c $<
-	@$(CXX) $(CXXFLAGS) -MM -MT $*.o $*.cpp > $*.d
 
-all: compile
+
+all: clean compile
 
 run: compile
 	./$(EXECUTABLE)
@@ -25,7 +28,6 @@ doc:
 
 clean:
 	@rm -f -- $(wildcard src/*.o) $(wildcard src/*.d)
-	@rm -f -- src/*.d src/*/*.d src/*/*/*.d
 	@rm -f $(EXECUTABLE)
 	@rm -rf doc/
 

@@ -6,16 +6,19 @@
 #define SEMESTRAL_PROJECT_QUIZ_H
 
 #include <sstream>
-#include "Page.h"
+#include "Page.hpp"
 
 class Quiz {
 public:
+
+	Quiz(std::string name = ""):mName(name){}
+
 	Quiz(const std::string & quizName, const std::string & authorName, std::vector<std::shared_ptr<Page>> & pages)
-			: mQuizName( quizName ), mAuthor( authorName ), mPages( pages ) {}
+			: mName( quizName ), mAuthor( authorName ), mPages( pages ) {}
 
 	Quiz(const Quiz & quiz) {
 		mAuthor = quiz.mAuthor;
-		mQuizName = quiz.mQuizName;
+		mName = quiz.mName;
 		mPages.clear();
 
 		for ( auto it = quiz.mPages.begin() ; it != quiz.mPages.end() ; ++it ) {
@@ -24,7 +27,7 @@ public:
 	}
 
 	bool play(int & score, int & scorePossible) {
-		std::cout << std::endl << "You are playing quiz " << mQuizName << " from " << mAuthor << "." << std::endl;
+		std::cout << std::endl << "You are playing quiz " << mName << " from " << mAuthor << "." << std::endl;
 		Page * nextPage = mPages[0].get();
 		do {
 			nextPage = nextPage->play( score, scorePossible );
@@ -38,7 +41,7 @@ public:
 
 	std::string printQuizListInfo() {
 		std::ostringstream os;
-		os << mQuizName << " (by " << mAuthor << ")";
+		os << mName << " (by " << mAuthor << ")";
 		std::string output = os.str();
 		return output;
 	}
@@ -54,8 +57,7 @@ public:
 	std::string & print();
 
 
-protected:
-	std::string mQuizName;
+	std::string mName;
 	std::string mAuthor;
 	std::vector<std::shared_ptr<Page>> mPages;
 

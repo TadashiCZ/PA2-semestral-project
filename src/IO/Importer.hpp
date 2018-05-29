@@ -8,6 +8,7 @@
 #include <iostream>
 #include "../Game/Quiz.hpp"
 #include "../Game/Question/Question.hpp"
+#include "../Game/Page.hpp"
 
 /**
  * Namespace with import
@@ -24,7 +25,7 @@ namespace Importer {
 /**
  * Loads one quiz from file stream.
  * @param 	inputString file stream to read from
- * @return 	quiz read from file stream
+ * @return 	quiz read from file stream (returns quiz with empty name if read failed)
  */
 	Quiz loadQuiz(std::ifstream & inputFile);
 /**
@@ -32,7 +33,7 @@ namespace Importer {
  * @param 	inputFile file stream to read from
  * @return 	page read from file stream
  */
-	Page loadPage(std::ifstream & inputFile);
+	std::vector<std::shared_ptr<Question>> loadPageQuestions(std::ifstream & inputFile);
 
 /**
  * Loads one question from file stream.
@@ -40,7 +41,9 @@ namespace Importer {
  * @return 	shared pointer to Question read from file stream (if nullptr returned, read failed)
  */
 	std::shared_ptr<Question> loadQuestion(std::ifstream & inputFile);
-};
+
+	bool loadTree(std::ifstream & ifstream, Quiz & quiz, int pageCount);
+}
 
 
 #endif //SEMESTRAL_PROJECT_IMPORTER_HPP

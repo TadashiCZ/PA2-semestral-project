@@ -1,13 +1,13 @@
 #include <iostream>
 #include <fstream>
 #include <memory>
-#include "UI/Menu.h"
-#include "Game/Quiz.h"
-#include "Game.h"
-#include "Game/Question/TrueFalseQuestion.h"
-#include "Game/Question/TextQuestion.h"
-#include "Game/Question/MultiChoiceQuestion.h"
-#include "ExpoImpo.h"
+#include "UI/Menu.hpp"
+#include "Game/Quiz.hpp"
+#include "Game.hpp"
+#include "Game/Question/TrueFalseQuestion.hpp"
+#include "Game/Question/TextQuestion.hpp"
+#include "Game/Question/MultiChoiceQuestion.hpp"
+#include "IO/ExpoImpo.hpp"
 
 void showQuizList();
 
@@ -90,7 +90,7 @@ int main() {
 	std::cout << quizzes[0].exportQuiz();
 
 	welcomeUser();
-
+	system("clear");
 	bool looping = true;
 	bool showMenu = true;
 	Menu().showMainMenu();
