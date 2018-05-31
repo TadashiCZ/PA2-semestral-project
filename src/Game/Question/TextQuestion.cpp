@@ -27,10 +27,8 @@ std::string TextQuestion::printHint() {
 std::string TextQuestion::exportIntoFileFormat() {
 	std::string output;
 
-	output.append( "-\n" ).append( "TextQuestion\n" ).append( "Branching:" ).append( BoolToString( isBranching() ) ).append(
-					"\nID:" ).append( std::to_string( mId ) )
-			.append( "\n" ).append( "QuestionText:" ).append( mQuestionText ).append( "\n" ).append( "Answer:" )
-			.append( mAnswer ).append( "\n-\n" );
+	output.append("Question\n").append( "TextQuestion\n" ).append( std::to_string(isBranching()) ).append("\n").append( std::to_string( mId ) )
+			.append( "\n" ).append( mQuestionText ).append( "\n" ).append( mAnswer ).append( "\n" );
 	return output;
 }
 

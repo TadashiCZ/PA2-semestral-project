@@ -14,13 +14,13 @@ inline const char * const BoolToString(bool b) {
 
 class Question {
 public:
-	Question() : mId( 0 ) {}
+	Question();
 
-	Question(const size_t id, const std::string & questionText) : mId( id ), mQuestionText( questionText ) {}
+	Question(const size_t id, const std::string & questionText);
 
 	virtual ~Question() {}
 
-	virtual const std::string printQuestion() { return mQuestionText; }
+	virtual const std::string printQuestion();
 
 	virtual std::string printCorrectAnswer()=0;
 
@@ -30,9 +30,9 @@ public:
 
 	virtual bool evaluate()=0;
 
-	void setBranching(bool branch) { mIsBranching = branch; }
+	void setBranching(bool branch);
 
-	bool isBranching() { return mIsBranching; }
+	bool isBranching();
 
 protected:
 	size_t mId;

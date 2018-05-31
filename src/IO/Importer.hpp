@@ -31,9 +31,10 @@ namespace Importer {
 /**
  * Loads one page from file stream.
  * @param 	inputFile file stream to read from
+ * @param 	page to load to
  * @return 	page read from file stream
  */
-	std::vector<std::shared_ptr<Question>> loadPageQuestions(std::ifstream & inputFile);
+	std::vector<std::shared_ptr<Question>> loadPageWithQuestions(std::ifstream & inputFile, Page & page);
 
 /**
  * Loads one question from file stream.

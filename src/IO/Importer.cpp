@@ -48,7 +48,10 @@ Quiz Importer::loadQuiz(std::ifstream & inputFile) {
 	getline( inputFile, dummy );
 	pageCount = atoi( dummy.c_str() );
 
-	loadTree( inputFile, quiz, pageCount );
+	if ( !loadTree( inputFile, quiz, pageCount ) ) {
+		quiz.mName = "";
+		return quiz;
+	}
 
 	for ( int i = 0 ; i < pageCount ; ++i ) {
 		//quiz.mPages[i].get()->mQuestions = Importer::loadPageQuestions( inputFile );
@@ -63,20 +66,20 @@ bool Importer::loadTree(ifstream & inputFile, Quiz & quiz, int pageCount) {
 	string dummy;
 	int num1, num2;
 	cout << "Loading tree, page count: " << pageCount << endl;
-	getline(inputFile, dummy);
-	if ( dummy != "Tree:"){
+	getline( inputFile, dummy );
+	if ( dummy != "Tree:" ) {
 		return false;
 	}
 
 	quiz.mPages.clear();
 
-	getline(inputFile, dummy);
+	getline( inputFile, dummy );
 	cout << dummy << endl;
-	num1 = atoi(dummy.c_str());
-	if (num1 != 0){
+	num1 = atoi( dummy.c_str() );
+	if ( num1 != 0 ) {
 		return false;
 	}
-	auto pt = make_shared<Page>( );
+	auto pt = make_shared<Page>();
 	quiz.mPages.push_back( pt );
 	for ( int i = 1 ; i <= pageCount ; ++i ) {
 		inputFile >> num1;
@@ -89,18 +92,51 @@ bool Importer::loadTree(ifstream & inputFile, Quiz & quiz, int pageCount) {
 			cout << "Vracim == num1: " << num1 << ", dummy1: " << dummy1 << ", num2: " << num2 << endl;
 			return false;
 		}
-		auto ptr = make_shared<Page>( );
+		auto ptr = make_shared<Page>();
 		quiz.mPages.emplace_back( ptr );
-		quiz.mPages[num2]->mBranches.push_back(quiz.mPages[i]);
+		quiz.mPages[num2]->mBranches.push_back( quiz.mPages[i] );
 	}
 	return true;
 }
 
-std::vector<shared_ptr<Question>> Importer::loadPageQuestions(ifstream & inputFile) {
-	//todo
+std::vector<shared_ptr<Question>> Importer::loadPageWithQuestions(ifstream & inputFile, Page & page) {
+	int questionCount;
+	string dummy;
+	bool branching = false;
+	getline( inputFile, dummy );
+	getline( inputFile, dummy );
+	questionCount = atoi( dummy.c_str() );
+	getline( inputFile, dummy );
+	if ( dummy == "1" ) {
+		branching = true;
+	}
+
+	for ( int i = 0 ; i < questionCount ; ++i ) {
+		page.mQuestions.push_back( Importer::loadQuestion( inputFile ) );
+	}
+
+
 	return vector<shared_ptr<Question>>();
 }
 
 shared_ptr<Question> Importer::loadQuestion(ifstream & inputFile) {
-	return shared_ptr<Question>();
+	string dummy;
+	getline(inputFile, dummy);
+	if (dummy != "Question"){
+		return shared_ptr<Question>();
+	}
+
+	getline(inputFile, dummy);
+	// todo determine which question it is
+	if (dummy == "TrueFalseQuestion"){
+			
+	} else if (dummy == "TextQuestion"){
+
+	} else if (dummy == "MultiChoiceQuestion"){
+
+	} else {
+		return shared_ptr<Question>();
+	}
+
+	return question;
 }

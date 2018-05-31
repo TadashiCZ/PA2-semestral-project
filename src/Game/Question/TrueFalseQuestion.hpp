@@ -11,53 +11,17 @@
 
 class TrueFalseQuestion : public Question {
 public:
-	TrueFalseQuestion(const size_t id, const std::string & questionText, bool answer)
-			: Question( id, questionText ), mAnswer( answer ) {}
+	TrueFalseQuestion(const size_t id, const std::string & questionText, bool answer);
 
-	virtual const std::string printQuestion() {
+	virtual const std::string printQuestion();
 
-		return mQuestionText;
-	}
+	virtual std::string printCorrectAnswer();
 
-	virtual std::string printCorrectAnswer() {
-		std::string trueStr = "True";
-		std::string falseStr = "False";
-		return ( mAnswer ) ? trueStr : falseStr;
-	}
+	virtual std::string printHint();
 
-	virtual std::string printHint() {
-		return mHowToAnswer;
-	}
+	virtual std::string exportIntoFileFormat();
 
-	virtual std::string exportIntoFileFormat() {
-		std::string output;
-
-		output.append( "-\n" ).append( "TrueFalseQuestion\n" ).append( "Branching:" ).append(
-						BoolToString( isBranching() ) ).append(
-						"\nID:" ).append( std::to_string( mId ) )
-				.append( "\n" ).append( "QuestionText:" ).append( mQuestionText ).append( "\n" ).append( "Answer:" );
-		( mAnswer ) ? output.append( "True\n" ) : output.append( "False\n" );
-		output.append( "-\n" );
-		return output;
-	}
-
-	virtual bool evaluate() {
-		std::string answer;
-		bool boolAnswer;
-		while ( true ) {
-			std::cin >> answer;
-			std::transform( answer.begin(), answer.end(), answer.begin(), ::tolower );
-			if ( answer == "true" || answer == "false" ) {
-				break;
-			} else {
-				std::cout << "Not like this. Try again. " << mHowToAnswer << std::endl;
-				continue;
-			}
-		}
-
-		boolAnswer = ( answer == "true" ) ? true : false;
-		return boolAnswer == mAnswer;
-	}
+	virtual bool evaluate();
 
 protected:
 	bool mAnswer;
