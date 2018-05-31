@@ -64,6 +64,10 @@ std::string ExpoImpo::promptFilename() {
 	}
 }
 
+bool ExpoImpo::importQuizzes() {
+	return false;
+}
+
 bool importQuizzes() {
 	//todo import from file
 	std::string inputFileName = ExpoImpo::promptFilename();

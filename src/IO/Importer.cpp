@@ -51,7 +51,7 @@ Quiz Importer::loadQuiz(std::ifstream & inputFile) {
 	loadTree( inputFile, quiz, pageCount );
 
 	for ( int i = 0 ; i < pageCount ; ++i ) {
-		quiz.mPages[i].get()->mQuestions = Importer::loadPageQuestions( inputFile );
+		//quiz.mPages[i].get()->mQuestions = Importer::loadPageQuestions( inputFile );
 	}
 
 
@@ -59,25 +59,40 @@ Quiz Importer::loadQuiz(std::ifstream & inputFile) {
 }
 
 bool Importer::loadTree(ifstream & inputFile, Quiz & quiz, int pageCount) {
-	quiz.mPages.clear();
-	int num1, num2;
+	char dummy1;
 	string dummy;
-
-	inputFile >> num1;
-	inputFile >> dummy;
-	auto pt = std::make_shared<Page>( Page() );
-	quiz.mPages.emplace_back( pt );
-	for ( int i = 0 ; i < pageCount ; ++i ) {
-		inputFile >> num1;
-		if ( num1 != i ) {
-			return false;
-		}
-		inputFile >> dummy;
-		inputFile >> num2;
-		inputFile >> dummy;
-		quiz.mPages[num2].get()->mBranches.push_back(quiz.mPages[i]);
+	int num1, num2;
+	cout << "Loading tree, page count: " << pageCount << endl;
+	getline(inputFile, dummy);
+	if ( dummy != "Tree:"){
+		return false;
 	}
 
+	quiz.mPages.clear();
+
+	getline(inputFile, dummy);
+	cout << dummy << endl;
+	num1 = atoi(dummy.c_str());
+	if (num1 != 0){
+		return false;
+	}
+	auto pt = make_shared<Page>( );
+	quiz.mPages.push_back( pt );
+	for ( int i = 1 ; i <= pageCount ; ++i ) {
+		inputFile >> num1;
+		inputFile >> dummy1;
+		inputFile >> num2;
+
+		cout << "num1: " << num1 << ", dummy1: " << dummy1 << ", num2: " << num2 << endl;
+
+		if ( num1 != i ) {
+			cout << "Vracim == num1: " << num1 << ", dummy1: " << dummy1 << ", num2: " << num2 << endl;
+			return false;
+		}
+		auto ptr = make_shared<Page>( );
+		quiz.mPages.emplace_back( ptr );
+		quiz.mPages[num2]->mBranches.push_back(quiz.mPages[i]);
+	}
 	return true;
 }
 

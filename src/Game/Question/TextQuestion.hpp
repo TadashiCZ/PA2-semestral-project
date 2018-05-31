@@ -8,9 +8,17 @@
 
 #include <algorithm>
 #include "Question.hpp"
-
+/**
+ * Class representing question with text answer, derived from Question class.
+ */
 class TextQuestion : public Question {
 public:
+	/**
+	 * Constructor for abstract class
+	 * @param id
+	 * @param questionText
+	 * @param answer
+	 */
 	TextQuestion(size_t id, const std::string & questionText, const std::string & answer);
 
 	virtual const std::string printQuestion();
