@@ -11,48 +11,17 @@
 class Quiz {
 public:
 
-	Quiz(std::string name = ""):mName(name){}
+	Quiz(std::string name = "");
 
-	Quiz(const std::string & quizName, const std::string & authorName, std::vector<std::shared_ptr<Page>> & pages)
-			: mName( quizName ), mAuthor( authorName ), mPages( pages ) {}
+	Quiz(const std::string & quizName, const std::string & authorName, std::vector<std::shared_ptr<Page>> & pages);
 
-	Quiz(const Quiz & quiz) {
-		mAuthor = quiz.mAuthor;
-		mName = quiz.mName;
-		mPages.clear();
+	Quiz(const Quiz & quiz);
 
-		for ( auto it = quiz.mPages.begin() ; it != quiz.mPages.end() ; ++it ) {
-			mPages.push_back( *it );
-		}
-	}
+	bool play(int & score, int & scorePossible);
 
-	bool play(int & score, int & scorePossible) {
-		std::cout << std::endl << "You are playing quiz " << mName << " from " << mAuthor << "." << std::endl;
-		Page * nextPage = mPages[0].get();
-		do {
-			nextPage = nextPage->play( score, scorePossible );
-		} while ( nullptr != nextPage );
+	std::string printQuizListInfo();
 
-		std::cout << "You finished the quiz with score " << score << " from " << scorePossible << " possible." << std::endl
-		          << std::endl;
-
-		return true;
-	}
-
-	std::string printQuizListInfo() {
-		std::ostringstream os;
-		os << mName << " (by " << mAuthor << ")";
-		std::string output = os.str();
-		return output;
-	}
-
-	std::string exportQuiz() {
-		std::string output;
-		for ( std::shared_ptr<Page> page : mPages ) {
-			output.append( page->exportPage() );
-		}
-		return output;
-	}
+	std::string exportQuiz();
 
 	std::string & print();
 

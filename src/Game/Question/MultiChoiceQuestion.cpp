@@ -34,7 +34,7 @@ const std::string MultiChoiceQuestion::printQuestion() {
 std::string MultiChoiceQuestion::printCorrectAnswer() {
 	std::string output;
 	for ( std::pair<std::string, bool> choice : mChoices ) {
-		output.append( choice.first ).append( ": " ).append( BoolToString( choice.second ) ).append( "\n" );
+		output.append( choice.first ).append( ": " ).append( BoolToStringNumber( choice.second ) ).append( "\n" );
 	}
 	return output;
 }
@@ -45,12 +45,13 @@ std::string MultiChoiceQuestion::printHint() {
 
 std::string MultiChoiceQuestion::exportIntoFileFormat() {
 	std::string output;
-	output.append( "-\n" ).append( "MultiChoiceQuestion\n" ).append( "Branching:" ).append(
-					BoolToString( isBranching() ) ).append(
-					"\nID:" ).append( std::to_string( mId ) )
-			.append( "\n" ).append( "QuestionText:" ).append( mQuestionText ).append( "\n" ).append( "Answer:" );
+	output.append( "Question\n" ).
+					append( "MultiChoiceQuestion\n" ).
+					append( mQuestionText ).append( "\n" ).
+					append("\nID:" ).append( std::to_string( mId ) )
+			.append( "\n" ).append( "QuestionText:" ).append( "\n" ).append( "Answer:" );
 	for ( std::pair<std::string, bool> choice : mChoices ) {
-		output.append( choice.first ).append( "::" ).append( BoolToString( choice.second ) ).append( ";" );
+		output.append( choice.first ).append( "::" ).append( BoolToStringNumber( choice.second ) ).append( ";" );
 	}
 	output.append( "\n-\n" );
 	return output;

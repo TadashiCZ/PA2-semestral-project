@@ -8,8 +8,8 @@
 #include <iostream>
 #include <cstddef>
 
-inline const char * const BoolToString(bool b) {
-	return b ? "true" : "false";
+inline const char * const BoolToStringNumber(bool b) {
+	return b ? "1" : "0";
 }
 
 class Question {

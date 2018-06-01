@@ -3,7 +3,7 @@
 #include <memory>
 #include "UI/Menu.hpp"
 #include "Game/Quiz.hpp"
-#include "Game.hpp"
+#include "Game/Game.hpp"
 #include "IO/ExpoImpo.hpp"
 #include "IO/Importer.hpp"
 

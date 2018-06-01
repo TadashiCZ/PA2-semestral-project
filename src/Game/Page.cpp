@@ -5,12 +5,14 @@
 #include <sstream>
 #include "Page.hpp"
 
+using namespace std;
+
 Page::Page() {}
 
-Page::Page(std::vector<std::shared_ptr<Question>> & questionList) : mQuestions( questionList ),
-                                                                    mBranches( std::vector<std::shared_ptr<Page>>{nullptr} ) {}
+Page::Page(vector<shared_ptr<Question>> & questionList) : mQuestions( questionList ),
+                                                                    mBranches( vector<shared_ptr<Page>>{nullptr} ) {}
 
-Page::Page(std::vector<std::shared_ptr<Question>> & questionList, std::vector<std::shared_ptr<Page>> & branches)
+Page::Page(vector<shared_ptr<Question>> & questionList, vector<shared_ptr<Page>> & branches)
 		: mQuestions( questionList ), mBranches( branches ) {}
 
 Page::Page(const Page & page) {
@@ -27,48 +29,48 @@ Page::Page(const Page & page) {
 
 Page * Page::play(int & score, int & scorePossible) {
 	for ( auto it = mQuestions.begin() ; it != mQuestions.end() ; ++it ) {
-		std::cout << ( **it ).printQuestion() << std::endl;
-		std::cout << ( **it ).printHint() << std::endl;
+		cout << ( **it ).printQuestion() << endl;
+		cout << ( **it ).printHint() << endl;
 		if ( ( **it ).evaluate() ) {
 			score++;
 			scorePossible++;
-			std::cout << "Correct!" << std::endl << std::endl;
-			if ( ( **it ).isBranching() ) {
-				std::cout << "Current score: " << score << "/" << scorePossible << std::endl;
-				std::cout << "End of page. Press Enter to continue..." << std::endl;
-				std::cin.get();
-				std::cin.get();
+			cout << "Correct!" << endl << endl;
+			if ( this->isBranching && *it == mQuestions.back() ) {
+				cout << "Current score: " << score << "/" << scorePossible << endl;
+				cout << "End of page. Press Enter to continue..." << endl;
+				cin.get();
+				cin.get();
 				return mBranches[0].get();
 			}
 		} else {
 			scorePossible++;
-			std::cout << "Wrong, good luck with the next one." << std::endl << std::endl;
-			if ( ( **it ).isBranching() ) {
-				std::cout << "Current score: " << score << "/" << scorePossible << std::endl;
-				std::cout << "End of page. Press Enter to continue..." << std::endl;
-				std::cin.get();
-				std::cin.get();
+			cout << "Wrong, good luck with the next one." << endl << endl;
+			if ( this->isBranching && *it == mQuestions.back() ) {
+				cout << "Current score: " << score << "/" << scorePossible << endl;
+				cout << "End of page. Press Enter to continue..." << endl;
+				cin.get();
+				cin.get();
 				return mBranches[1].get();
 			}
 		}
 	}
 
 
-	std::cout << "Current score: " << score << "/" << scorePossible << std::endl;
-	std::cout << "End of page. Press Enter to continue..." << std::endl;
-	std::cin.get();
-	std::cin.get();
+	cout << "Current score: " << score << "/" << scorePossible << endl;
+	cout << "End of page. Press Enter to continue..." << endl;
+	cin.get();
+	cin.get();
 	return mBranches[0].get(); // return branch which one should go to
 }
 
-std::string Page::exportPage() {
-	std::string output;
-	std::stringstream ss;
+string Page::exportPage() {
+	string output;
+	stringstream ss;
 
 	ss << mQuestions.size();
 	output.append( "Page\nQuestionCount:" ).append( ss.str() );
-	output.append( ";BranchCount:" ).append( BoolToString( mBranches.size() == 2 ) ).append( "\n" );
-	for ( std::shared_ptr<Question> quest : mQuestions ) {
+	output.append( ";BranchCount:" ).append( BoolToStringNumber( mBranches.size() == 2 ) ).append( "\n" );
+	for ( shared_ptr<Question> quest : mQuestions ) {
 		output.append( quest->exportIntoFileFormat() );
 	}
 	output.append( "\n" );

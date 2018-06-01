@@ -43,6 +43,13 @@ namespace Importer {
  */
 	std::shared_ptr<Question> loadQuestion(std::ifstream & inputFile);
 
+	/**
+	 * Loads tree structure and prepares empty pages with correct branching
+	 * @param 	ifstream inputFile file stream to read from
+	 * @param 	quiz object to push the page tree in
+	 * @param 	pageCount number of pages
+	 * @return 	true on success, false otherwise
+	 */
 	bool loadTree(std::ifstream & ifstream, Quiz & quiz, int pageCount);
 }
 
