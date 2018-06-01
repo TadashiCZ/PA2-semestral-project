@@ -22,12 +22,9 @@ std::string TrueFalseQuestion::printCorrectAnswer() {
 std::string TrueFalseQuestion::exportIntoFileFormat() {
 	std::string output;
 
-	output.append( "-\n" ).append( "TrueFalseQuestion\n" ).append( "Branching:" ).append(
-					BoolToStringNumber( isBranching() ) ).append(
-					"\nID:" ).append( std::to_string( mId ) )
-			.append( "\n" ).append( "QuestionText:" ).append( mQuestionText ).append( "\n" ).append( "Answer:" );
-	( mAnswer ) ? output.append( "True\n" ) : output.append( "False\n" );
-	output.append( "-\n" );
+	output.append( "Question\nTrueFalseQuestion\n" ).
+					append(mQuestionText).append("\n");
+			        ( mAnswer ) ? output.append( "1\n" ) : output.append( "0\n" );
 	return output;
 }
 

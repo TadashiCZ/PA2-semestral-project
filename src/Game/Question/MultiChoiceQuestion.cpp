@@ -47,13 +47,10 @@ std::string MultiChoiceQuestion::exportIntoFileFormat() {
 	std::string output;
 	output.append( "Question\n" ).
 					append( "MultiChoiceQuestion\n" ).
-					append( mQuestionText ).append( "\n" ).
-					append("\nID:" ).append( std::to_string( mId ) )
-			.append( "\n" ).append( "QuestionText:" ).append( "\n" ).append( "Answer:" );
+					append( mQuestionText ).append( "\n" );
 	for ( std::pair<std::string, bool> choice : mChoices ) {
-		output.append( choice.first ).append( "::" ).append( BoolToStringNumber( choice.second ) ).append( ";" );
+		output.append( choice.first ).append( "\n" ).append( BoolToStringNumber( choice.second ) ).append( "\n" );
 	}
-	output.append( "\n-\n" );
 	return output;
 }
 
