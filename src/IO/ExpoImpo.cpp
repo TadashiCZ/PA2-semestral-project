@@ -3,6 +3,7 @@
 //
 
 #include "ExpoImpo.hpp"
+#include "Importer.hpp"
 #include <iostream>
 #include <fstream>
 
@@ -33,7 +34,7 @@ bool ExpoImpo::checkInputFilename(std::string & input) {
 
 bool ExpoImpo::exportQuizzes() {
 	for ( Quiz & quiz :mQuizzes ) {
-		quiz.exportQuiz();
+		quiz.exportQuizIntoFile();
 	}
 	return true;
 }
@@ -64,11 +65,9 @@ std::string ExpoImpo::promptFilename() {
 	}
 }
 
-bool ExpoImpo::importQuizzes() {
-	return false;
-}
 
-bool importQuizzes() {
+
+bool ExpoImpo::importQuizzes() {
 	//todo import from file
 	std::string inputFileName = ExpoImpo::promptFilename();
 	std::ofstream ofs( inputFileName, std::ios::out );
@@ -76,6 +75,7 @@ bool importQuizzes() {
 		std::cout << "Failed to open file for writing." << std::endl;
 		return false;
 	}
-	return true;
+
+	return Importer::loadFromFile( inputFileName, mQuizzes);
 }
 

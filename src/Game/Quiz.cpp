@@ -35,16 +35,22 @@ bool Quiz::play(int & score, int & scorePossible) {
 }
 
 string Quiz::printQuizListInfo() {
-	ostringstream os;
-	os << mName << " (by " << mAuthor << ")";
-	string output = os.str();
-	return output;
+	string os;
+	os.append(mName).append(" (by ").append(mAuthor).append(")");
+	return os;
 }
 
-string Quiz::exportQuiz() {
+string Quiz::exportQuizIntoFile() {
 	string output;
-	for ( shared_ptr<Page> page : mPages ) {
-		output.append( page->exportPage() );
+	output.append("Quiz\n").append(mName).append("\n").append(mAuthor).append("\n");
+	//printing tree
+	output.append("0,x");
+	for ( int j = 1 ; j < mPages.size() ; ++j ) {
+		// todo loop with print both of them if they're not nullptr
+	}
+
+	for ( int i = 0 ; i <  mPages.size() ; ++i ) {
+		output.append( mPages[i]->exportPageIntoFile(i));
 	}
 	return output;
 }

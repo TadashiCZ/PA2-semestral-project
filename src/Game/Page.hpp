@@ -22,7 +22,7 @@ public:
 
 	Page * play(int & score, int & scorePossible);
 
-	std::string exportPage();
+	std::string exportPageIntoFile(int pageNumber);
 
 	std::vector<std::shared_ptr<Question>> mQuestions;
 	std::vector<std::shared_ptr<Page>> mBranches;

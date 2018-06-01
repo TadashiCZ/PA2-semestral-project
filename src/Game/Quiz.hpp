@@ -11,6 +11,10 @@
 class Quiz {
 public:
 
+	/**
+	 * Basic constructor
+	 * @param name default given is empty
+	 */
 	Quiz(std::string name = "");
 
 	Quiz(const std::string & quizName, const std::string & authorName, std::vector<std::shared_ptr<Page>> & pages);
@@ -21,7 +25,7 @@ public:
 
 	std::string printQuizListInfo();
 
-	std::string exportQuiz();
+	std::string exportQuizIntoFile();
 
 	std::string & print();
 

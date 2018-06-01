@@ -63,16 +63,12 @@ Page * Page::play(int & score, int & scorePossible) {
 	return mBranches[0].get(); // return branch which one should go to
 }
 
-string Page::exportPage() {
+string Page::exportPageIntoFile(int pageNumber) {
 	string output;
-	stringstream ss;
-
-	ss << mQuestions.size();
-	output.append( "Page\nQuestionCount:" ).append( ss.str() );
-	output.append( ";BranchCount:" ).append( BoolToStringNumber( mBranches.size() == 2 ) ).append( "\n" );
-	for ( shared_ptr<Question> quest : mQuestions ) {
+	output.append( "Page\n" ).append( to_string(mQuestions.size()) ).append("\n");
+	output.append( to_string(pageNumber) ).append("\n").append( BoolToStringNumber( isBranching ) ).append( "\n" );
+	for ( const auto & quest : mQuestions ) {
 		output.append( quest->exportIntoFileFormat() );
 	}
-	output.append( "\n" );
 	return output;
 }
