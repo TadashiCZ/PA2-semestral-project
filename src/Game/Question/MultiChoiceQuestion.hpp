@@ -13,8 +13,8 @@
 
 class MultiChoiceQuestion : public Question {
 public:
-	MultiChoiceQuestion(const size_t id, const std::string & questionText,
-	                    std::vector<std::pair<std::string, bool>> & choices);
+	MultiChoiceQuestion(const std::string & questionText,
+	                    std::vector<std::pair<std::string, bool>> choices);
 
 	virtual const std::string printQuestion() override;
 

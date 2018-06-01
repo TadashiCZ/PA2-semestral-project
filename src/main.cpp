@@ -7,6 +7,8 @@
 #include "IO/ExpoImpo.hpp"
 #include "IO/Importer.hpp"
 
+using namespace std;
+
 void showQuizList();
 
 void welcomeUser() {
@@ -19,7 +21,7 @@ void welcomeUser() {
 }
 
 inline bool checkExistence(const char * name) {
-	std::ifstream f( name );
+	ifstream f( name );
 	if ( f.good() ) {
 		f.close();
 		return true;
@@ -29,7 +31,7 @@ inline bool checkExistence(const char * name) {
 	}
 }
 
-void loadQuizes(std::vector<Quiz> & quizzes, const char * name) {
+void loadQuizes(vector<Quiz> & quizzes, const char * name) {
 	if ( !checkExistence( name ) ) {
 		return;
 	}
@@ -37,14 +39,18 @@ void loadQuizes(std::vector<Quiz> & quizzes, const char * name) {
 	//todo load from file
 }
 
-void playGame(std::vector<Quiz> & quizzes) {
+void playGame(vector<Quiz> & quizzes) {
 
 }
 
 int main() {
-	std::vector<Quiz> quizzes;
-	Importer::loadFromFile( "export.dat", quizzes );
-
+	vector<Quiz> quizzes;
+	if ( Importer::loadFromFile( "../examples/export.dat", quizzes )) {
+		cout << "Sample data read successfully." << endl;
+	} else {
+		cout << "Failed to read sample data." << endl;
+	}
+	cout << endl;
 	welcomeUser();
 	bool looping = true;
 	bool showMenu = true;
@@ -55,6 +61,7 @@ int main() {
 				if ( showMenu ) Menu().promptMainMenu();
 				showMenu = true;
 				Game( quizzes ).play();
+				looping = false;
 				break;
 			case 2: // Add
 				if ( showMenu ) Menu().promptMainMenu();
@@ -75,7 +82,7 @@ int main() {
 				// saveIntoFile();
 				return 0;
 			default: showMenu = false;
-				std::cout << "Wrong choice, try again." << std::endl;
+				cout << "Wrong choice, try again." << endl;
 		}
 
 	}

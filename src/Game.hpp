@@ -12,7 +12,7 @@ unsigned long showQuizListPrompt(const unsigned long size);
 
 class Game {
 public:
-	explicit Game(std::vector<Quiz> & quizzes) : mQuizzes( quizzes ) {}
+	Game(std::vector<Quiz> & quizzes);
 
 	int showQuizList();
 

@@ -16,7 +16,7 @@ class Question {
 public:
 	Question();
 
-	Question(const size_t id, const std::string & questionText);
+	Question(const std::string & questionText);
 
 	virtual ~Question() {}
 

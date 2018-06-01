@@ -6,7 +6,7 @@
 
 Question::Question() : mId( 0 ) {}
 
-Question::Question(const size_t id, const std::string & questionText) : mId( id ), mQuestionText( questionText ) {}
+Question::Question(const std::string & questionText) : mQuestionText( questionText ) {}
 
 const std::string Question::printQuestion() { return mQuestionText; }
 

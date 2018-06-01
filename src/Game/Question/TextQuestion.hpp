@@ -19,7 +19,7 @@ public:
 	 * @param questionText
 	 * @param answer
 	 */
-	TextQuestion(size_t id, const std::string & questionText, const std::string & answer);
+	TextQuestion( const std::string & questionText, const std::string & answer);
 
 	virtual const std::string printQuestion();
 

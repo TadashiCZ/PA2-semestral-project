@@ -24,6 +24,8 @@ void Game::play() {
 
 }
 
+Game::Game(std::vector<Quiz> & quizzes) : mQuizzes( quizzes ) {}
+
 unsigned long showQuizListPrompt(const unsigned long size) {
 	unsigned long input;
 	std::cout << "Choose quiz by writing the quiz number." << std::endl;

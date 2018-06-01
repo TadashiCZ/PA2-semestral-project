@@ -11,7 +11,7 @@
 
 class TrueFalseQuestion : public Question {
 public:
-	TrueFalseQuestion(const size_t id, const std::string & questionText, bool answer);
+	TrueFalseQuestion(const std::string &questionText, bool answer);
 
 	virtual const std::string printQuestion();
 

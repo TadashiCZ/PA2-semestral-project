@@ -85,6 +85,7 @@ public:
 
 	std::vector<std::shared_ptr<Question>> mQuestions;
 	std::vector<std::shared_ptr<Page>> mBranches;
+	bool isBranching;
 };
 
 

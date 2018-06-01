@@ -5,8 +5,8 @@
 #include "TrueFalseQuestion.hpp"
 
 
-TrueFalseQuestion::TrueFalseQuestion(const size_t id, const std::string & questionText, bool answer)
-		: Question( id, questionText ), mAnswer( answer ) {}
+TrueFalseQuestion::TrueFalseQuestion( const std::string & questionText, bool answer)
+		: Question( questionText ), mAnswer( answer ) {}
 
 const std::string TrueFalseQuestion::printQuestion() {
 

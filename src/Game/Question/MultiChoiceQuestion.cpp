@@ -4,9 +4,9 @@
 
 #include "MultiChoiceQuestion.hpp"
 
-MultiChoiceQuestion::MultiChoiceQuestion(const size_t id, const std::string & questionText,
-                                         std::vector<std::pair<std::string, bool>> & choices)
-		: Question( id, questionText ), mChoices( choices ) {
+MultiChoiceQuestion::MultiChoiceQuestion(const std::string & questionText,
+                                         std::vector<std::pair<std::string, bool>> choices)
+		: Question( questionText ), mChoices( choices ) {
 	char c = 'a';
 	mLowerCapsAnswer.clear();
 	for ( std::pair<std::string, bool> choice : mChoices ) {

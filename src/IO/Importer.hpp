@@ -20,7 +20,7 @@ namespace Importer {
 	 * @param quizzes	vector of quiz files to save the quizzes loaded from the file to
 	 * @return			true if reading the whole file was successful, false otherwise
 	 */
-	bool loadFromFile(std::string filename, std::vector<Quiz> quizzes);
+	bool loadFromFile(std::string filename, std::vector<Quiz> & quizzes);
 
 /**
  * Loads one quiz from file stream.
@@ -32,9 +32,9 @@ namespace Importer {
  * Loads one page from file stream.
  * @param 	inputFile file stream to read from
  * @param 	page to load to
- * @return 	page read from file stream
+ * @return 	true on success, false otherwise
  */
-	std::vector<std::shared_ptr<Question>> loadPageWithQuestions(std::ifstream & inputFile, Page & page);
+	bool loadPageWithQuestions(std::ifstream & inputFile, Page & page);
 
 /**
  * Loads one question from file stream.

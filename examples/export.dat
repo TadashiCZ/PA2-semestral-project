@@ -2,7 +2,7 @@
 Quiz
 OSP
 Anna Roskotova
-5
+6
 Tree:
 0,x
 1,0
@@ -69,7 +69,6 @@ Question
 TrueFalseQuestion
 Eiffel tower is 300 m tall.
 1
-
 Quiz
 ShortQuiz
 Tadeas Valenta
@@ -87,7 +86,7 @@ Mariana trench is 10 994 m deep.
 1
 Page
 1
-1
+2
 0
 Question
 MultiChoiceQuestion
@@ -99,4 +98,15 @@ white
 blue
 1
 yellow
+1
+Question
+MultiChoiceQuestion
+What colours are on Czech flag?
+white
+1
+yellow
+0
+blue
+1
+red
 1
