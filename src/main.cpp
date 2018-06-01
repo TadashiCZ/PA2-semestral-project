@@ -45,7 +45,7 @@ void playGame(vector<Quiz> & quizzes) {
 
 int main() {
 	vector<Quiz> quizzes;
-	if ( Importer::loadFromFile( "../examples/export.dat", quizzes )) {
+	if ( Importer::loadFromFile( "../examples/export.dat", quizzes ) ) {
 		cout << "Sample data read successfully." << endl;
 	} else {
 		cout << "Failed to read sample data." << endl;
@@ -53,7 +53,7 @@ int main() {
 	cout << endl;
 	welcomeUser();
 	bool looping = true;
-	bool showMenu = true;
+	bool showMenu = false;
 	Menu().showMainMenu();
 	while ( looping ) {
 		switch ( Menu().promptMainMenu() ) {

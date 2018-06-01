@@ -27,7 +27,7 @@ bool Importer::loadFromFile(string filename, vector<Quiz> & quizzes) {
 		}
 		quizzes.push_back( quiz );
 	}
-	if (inputFile.eof()){
+	if ( inputFile.eof() ) {
 		return true;
 	}
 	getline( inputFile, input );
@@ -60,7 +60,7 @@ Quiz Importer::loadQuiz(std::ifstream & inputFile) {
 	}
 
 	for ( int i = 0 ; i < pageCount ; ++i ) {
-		Importer::loadPageWithQuestions(inputFile, *quiz.mPages[i]);
+		Importer::loadPageWithQuestions( inputFile, *quiz.mPages[i] );
 	}
 
 	return quiz;
@@ -84,11 +84,10 @@ bool Importer::loadTree(ifstream & inputFile, Quiz & quiz, int pageCount) {
 	auto pt = make_shared<Page>();
 	quiz.mPages.push_back( pt );
 	for ( int i = 1 ; i < pageCount ; ++i ) {
-		getline(inputFile, dummy);
-		char * toToken = strdup(dummy.c_str());
-		num1 = atoi(toToken);
-		toToken = strtok(toToken, ",");
-		num2 = atoi(toToken);
+		getline( inputFile, dummy );
+		num1 = atoi( dummy.c_str() );
+		size_t pos = dummy.find( ',' );
+		num2 = atoi( dummy.c_str() + pos );
 
 		if ( num1 != i ) {
 			return false;
@@ -96,7 +95,21 @@ bool Importer::loadTree(ifstream & inputFile, Quiz & quiz, int pageCount) {
 		auto ptr = make_shared<Page>();
 		quiz.mPages.emplace_back( ptr );
 		quiz.mPages[num2]->mBranches.push_back( quiz.mPages[i] );
+
 	}
+
+	for ( int i = 1 ; i < pageCount ; ++i ) {
+		switch ( quiz.mPages[i]->mBranches.size() ) {
+			case 0: quiz.mPages[i]->mBranches.push_back( nullptr );
+				quiz.mPages[i]->mBranches.push_back( nullptr );
+				break;
+			case 1: quiz.mPages[i]->mBranches.push_back( nullptr );
+				break;
+			default: break;
+		}
+
+	}
+
 	return true;
 }
 
@@ -121,35 +134,35 @@ bool Importer::loadPageWithQuestions(ifstream & inputFile, Page & page) {
 
 shared_ptr<Question> Importer::loadQuestion(ifstream & inputFile) {
 	string dummy, dummy2;
-	getline(inputFile, dummy);
-	if (dummy != "Question"){
+	getline( inputFile, dummy );
+	if ( dummy != "Question" ) {
 		return shared_ptr<Question>();
 	}
 
-	getline(inputFile, dummy);
+	getline( inputFile, dummy );
 	if ( dummy == "TrueFalseQuestion" ) {
 		string question;
-		getline(inputFile, question);
-		getline(inputFile, dummy);
-		bool answer = static_cast<bool>(atoi( dummy.c_str()));
-		return make_shared<TrueFalseQuestion>(question, answer);
+		getline( inputFile, question );
+		getline( inputFile, dummy );
+		bool answer = static_cast<bool>(atoi( dummy.c_str() ));
+		return make_shared<TrueFalseQuestion>( question, answer );
 	} else if ( dummy == "TextQuestion" ) {
 		string question, answer;
-		getline(inputFile, question);
-		getline(inputFile, answer);
-		return make_shared<TextQuestion>(question, answer);
+		getline( inputFile, question );
+		getline( inputFile, answer );
+		return make_shared<TextQuestion>( question, answer );
 	} else if ( dummy == "MultiChoiceQuestion" ) {
 		string question;
-		getline(inputFile, question);
-		vector<pair<string,bool>> choices;
-		for (int i = 0; i < 4; ++i) {
-			getline(inputFile, dummy);
-			getline(inputFile, dummy2);
-			pair<std::string,bool> choice(dummy, static_cast<bool>(atoi(dummy2.c_str())));
-			choices.push_back(choice);
+		getline( inputFile, question );
+		vector<pair<string, bool>> choices;
+		for ( int i = 0 ; i < 4 ; ++i ) {
+			getline( inputFile, dummy );
+			getline( inputFile, dummy2 );
+			pair<std::string, bool> choice( dummy, static_cast<bool>(atoi( dummy2.c_str() )) );
+			choices.push_back( choice );
 		}
 
-		return make_shared<MultiChoiceQuestion>(question, choices);
+		return make_shared<MultiChoiceQuestion>( question, choices );
 	} else {
 		cout << "Wrong question type: " << dummy << endl;
 		return shared_ptr<Question>();
