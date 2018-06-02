@@ -59,25 +59,21 @@ int main() {
 	bool showMenu = false;
 	Menu().showMainMenu();
 	while ( looping ) {
+		if (showMenu) Menu().showMainMenu();
 		switch ( Menu().promptMainMenu() ) {
 			case 1: // Play
-				if ( showMenu ) Menu().promptMainMenu();
 				showMenu = true;
 				Game( quizzes ).play();
-				looping = false;
 				break;
 			case 2: // Add
-				if ( showMenu ) Menu().promptMainMenu();
 				showMenu = true;
 				//startAdd();
 				break;
 			case 3: //Edit
-				if ( showMenu ) Menu().promptMainMenu();
 				showMenu = true;
 				//startEdit();
 				break;
 			case 4: //Export
-				if ( showMenu ) Menu().promptMainMenu();
 				showMenu = true;
 				ExpoImpo( quizzes ).run();
 				break;
@@ -89,6 +85,7 @@ int main() {
 		}
 
 	}
-	return 0;
+
+	return -1;
 }
 

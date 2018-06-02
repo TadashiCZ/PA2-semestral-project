@@ -3,6 +3,7 @@
 //
 
 #include "MultiChoiceQuestion.hpp"
+#include "../../Constants.hpp"
 
 MultiChoiceQuestion::MultiChoiceQuestion(const std::string & questionText,
                                          std::vector<std::pair<std::string, bool>> choices)
@@ -19,14 +20,13 @@ MultiChoiceQuestion::MultiChoiceQuestion(const std::string & questionText,
 
 const std::string MultiChoiceQuestion::printQuestion() {
 	std::string output;
-	output.append( mQuestionText ).append( "\n" );
+	output.append(COLOR_GREEN).append("Question: ").append(COLOR_RESET).append( mQuestionText ).append( "\n" );
 	char c = 'a';
 	for ( std::pair<std::string, bool> choice : mChoices ) {
 		output.push_back( c );
 		output.append( ") " ).append( choice.first ).append( "; " );
 		c++;
 	}
-	output.append( "\n" );
 
 	return output;
 }

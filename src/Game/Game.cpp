@@ -20,12 +20,11 @@ void Game::play() {
 	} else {
 		// you failed, you die
 	}
-
-
 }
 
 Game::Game(std::vector<Quiz> & quizzes) : mQuizzes( quizzes ) {}
 
+//todo rewrite without cout
 unsigned long showQuizListPrompt(const unsigned long size) {
 	unsigned long input;
 	std::cout << "Choose quiz by writing the quiz number." << std::endl;
