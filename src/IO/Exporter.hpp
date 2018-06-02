@@ -10,10 +10,16 @@
 #include "../Game/Quiz.hpp"
 
 namespace Exporter {
+	/**
+	 * Function to export given quizzes into file
+	 * @param filename path to file where to store the quizzes
+	 * @param quizzes container with quizzes to export
+	 * @return true on success, false otherwise
+	 */
 	bool exportToFile(std::string filename, std::vector<Quiz> & quizzes);
 
 
-};
+}
 
 
 #endif //SEMESTRAL_PROJECT_EXPORTER_HPP
