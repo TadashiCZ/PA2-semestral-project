@@ -65,8 +65,8 @@ Page * Page::play(int & score, int & scorePossible) {
 
 string Page::exportPageIntoFile(int pageNumber) {
 	string output;
-	output.append( "Page\n" ).append( to_string(mQuestions.size()) ).append("\n");
-	output.append( to_string(pageNumber) ).append("\n").append( BoolToStringNumber( isBranching ) ).append( "\n" );
+	output.append( "Page\n" ).append( to_string(pageNumber) ).append("\n");
+	output.append( to_string(mQuestions.size()) ).append("\n").append( BoolToStringNumber( isBranching ) ).append( "\n" );
 	for ( const auto & quest : mQuestions ) {
 		output.append( quest->exportIntoFileFormat() );
 	}

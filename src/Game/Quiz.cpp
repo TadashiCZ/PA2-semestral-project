@@ -43,13 +43,29 @@ string Quiz::printQuizListInfo() {
 string Quiz::exportQuizIntoFile() {
 	string output;
 	output.append("Quiz\n").append(mName).append("\n").append(mAuthor).append("\n");
+	output.append(to_string(mPages.size())).append("\n");
 	//printing tree
-	output.append("0,x");
-	for ( int j = 1 ; j < mPages.size() ; ++j ) {
-		// todo loop with print both of them if they're not nullptr
-	}
+	output.append("Tree:\n0,x\n");
 
-	for ( int i = 0 ; i <  mPages.size() ; ++i ) {
+	for ( unsigned int j = 0 ; j < mPages.size() ; ++j ) {
+		if (mPages[j]->mBranches[0] != nullptr){
+			for ( unsigned int i = 0 ; i <  mPages.size(); ++i ) {
+				if (mPages[j]->mBranches[0].get() == mPages[i].get()){
+					output.append(to_string(i)).append(",").append(to_string(j)).append("\n");
+				}
+			}
+		}
+
+		if (mPages[j]->mBranches[1] != nullptr){
+			for ( unsigned int i = 0 ; i <  mPages.size(); ++i ) {
+				if (mPages[j]->mBranches[1].get() == mPages[i].get()){
+					output.append(to_string(i)).append(",").append(to_string(j)).append("\n");
+				}
+			}
+		}
+	}
+	// done printing tree
+	for ( unsigned int i = 0 ; i <  mPages.size() ; ++i ) {
 		output.append( mPages[i]->exportPageIntoFile(i));
 	}
 	return output;

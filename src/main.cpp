@@ -6,6 +6,7 @@
 #include "Game/Game.hpp"
 #include "IO/ExpoImpo.hpp"
 #include "IO/Importer.hpp"
+#include "IO/Exporter.hpp"
 
 using namespace std;
 
@@ -45,11 +46,13 @@ void playGame(vector<Quiz> & quizzes) {
 
 int main() {
 	vector<Quiz> quizzes;
-	if ( Importer::loadFromFile( "../examples/export.dat", quizzes ) ) {
+	if ( Importer::loadFromFile( "../examples/import.dat", quizzes ) ) {
 		cout << "Sample data read successfully." << endl;
 	} else {
 		cout << "Failed to read sample data." << endl;
 	}
+	cout << Exporter::exportToFile("../examples/export.dat", quizzes) << endl;
+
 	cout << endl;
 	welcomeUser();
 	bool looping = true;
