@@ -46,8 +46,8 @@ std::string MultiChoiceQuestion::printHint() {
 std::string MultiChoiceQuestion::exportIntoFileFormat() {
 	std::string output;
 	output.append( "Question\n" ).
-					append( "MultiChoiceQuestion\n" ).
-					append( mQuestionText ).append( "\n" );
+			append( "MultiChoiceQuestion\n" ).
+			append( mQuestionText ).append( "\n" );
 	for ( std::pair<std::string, bool> choice : mChoices ) {
 		output.append( choice.first ).append( "\n" ).append( BoolToStringNumber( choice.second ) ).append( "\n" );
 	}

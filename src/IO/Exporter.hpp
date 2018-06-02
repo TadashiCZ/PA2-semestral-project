@@ -1,5 +1,5 @@
 //
-// Created by tadashicz on 1.6.18.
+// Created by Tadeáš Valenta on 1.6.18.
 //
 
 #ifndef SEMESTRAL_PROJECT_EXPORTER_HPP
@@ -11,7 +11,6 @@
 
 namespace Exporter {
 	bool exportToFile(std::string filename, std::vector<Quiz> & quizzes);
-	
 
 
 };

@@ -8,6 +8,7 @@
 
 #include <algorithm>
 #include "Question.hpp"
+
 /**
  * Class representing question with text answer, derived from Question class.
  */
@@ -19,7 +20,7 @@ public:
 	 * @param questionText
 	 * @param answer
 	 */
-	TextQuestion( const std::string & questionText, const std::string & answer);
+	TextQuestion(const std::string & questionText, const std::string & answer);
 
 	virtual const std::string printQuestion();
 

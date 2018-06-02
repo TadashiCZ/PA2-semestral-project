@@ -6,7 +6,6 @@
 #define SEMESTRAL_PROJECT_EXPOIMPO_H
 
 
-
 #include "../Game/Quiz.hpp"
 
 class ExpoImpo {

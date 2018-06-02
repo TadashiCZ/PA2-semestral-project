@@ -1,5 +1,5 @@
 //
-// Created by tadashicz on 1.6.18.
+// Created by Tadeáš Valenta on 1.6.18.
 //
 
 #include <sstream>
@@ -10,7 +10,7 @@ using namespace std;
 Page::Page() {}
 
 Page::Page(vector<shared_ptr<Question>> & questionList) : mQuestions( questionList ),
-                                                                    mBranches( vector<shared_ptr<Page>>{nullptr} ) {}
+                                                          mBranches( vector<shared_ptr<Page>>{nullptr} ) {}
 
 Page::Page(vector<shared_ptr<Question>> & questionList, vector<shared_ptr<Page>> & branches)
 		: mQuestions( questionList ), mBranches( branches ) {}
@@ -65,8 +65,8 @@ Page * Page::play(int & score, int & scorePossible) {
 
 string Page::exportPageIntoFile(int pageNumber) {
 	string output;
-	output.append( "Page\n" ).append( to_string(pageNumber) ).append("\n");
-	output.append( to_string(mQuestions.size()) ).append("\n").append( BoolToStringNumber( isBranching ) ).append( "\n" );
+	output.append( "Page\n" ).append( to_string( pageNumber ) ).append( "\n" );
+	output.append( to_string( mQuestions.size() ) ).append( "\n" ).append( BoolToStringNumber( isBranching ) ).append( "\n" );
 	for ( const auto & quest : mQuestions ) {
 		output.append( quest->exportIntoFileFormat() );
 	}

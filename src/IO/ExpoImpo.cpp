@@ -4,7 +4,6 @@
 
 #include "ExpoImpo.hpp"
 #include "Importer.hpp"
-#include <iostream>
 #include <fstream>
 
 ExpoImpo::ExpoImpo(std::vector<Quiz> & quizzes) : mQuizzes( quizzes ) {}
@@ -27,6 +26,7 @@ int ExpoImpo::importOrExport() {
 		}
 	}
 }
+
 bool ExpoImpo::checkInputFilename(std::string & input) {
 	//todo
 	return true;
@@ -65,8 +65,6 @@ std::string ExpoImpo::promptFilename() {
 	}
 }
 
-
-
 bool ExpoImpo::importQuizzes() {
 	//todo import from file
 	std::string inputFileName = ExpoImpo::promptFilename();
@@ -76,6 +74,6 @@ bool ExpoImpo::importQuizzes() {
 		return false;
 	}
 
-	return Importer::loadFromFile( inputFileName, mQuizzes);
+	return Importer::loadFromFile( inputFileName, mQuizzes );
 }
 

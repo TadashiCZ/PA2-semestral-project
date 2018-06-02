@@ -51,7 +51,7 @@ int main() {
 	} else {
 		cout << "Failed to read sample data." << endl;
 	}
-	cout << Exporter::exportToFile("../examples/export.dat", quizzes) << endl;
+	cout << Exporter::exportToFile( "../examples/export.dat", quizzes ) << endl;
 
 	cout << endl;
 	welcomeUser();

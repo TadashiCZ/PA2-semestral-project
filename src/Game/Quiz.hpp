@@ -29,7 +29,6 @@ public:
 
 	std::string & print();
 
-
 	std::string mName;
 	std::string mAuthor;
 	std::vector<std::shared_ptr<Page>> mPages;

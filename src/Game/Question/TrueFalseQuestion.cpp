@@ -5,7 +5,7 @@
 #include "TrueFalseQuestion.hpp"
 
 
-TrueFalseQuestion::TrueFalseQuestion( const std::string & questionText, bool answer)
+TrueFalseQuestion::TrueFalseQuestion(const std::string & questionText, bool answer)
 		: Question( questionText ), mAnswer( answer ) {}
 
 const std::string TrueFalseQuestion::printQuestion() {
@@ -23,8 +23,8 @@ std::string TrueFalseQuestion::exportIntoFileFormat() {
 	std::string output;
 
 	output.append( "Question\nTrueFalseQuestion\n" ).
-					append(mQuestionText).append("\n");
-			        ( mAnswer ) ? output.append( "1\n" ) : output.append( "0\n" );
+			append( mQuestionText ).append( "\n" );
+	( mAnswer ) ? output.append( "1\n" ) : output.append( "0\n" );
 	return output;
 }
 
