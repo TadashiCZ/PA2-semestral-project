@@ -87,8 +87,7 @@ bool Importer::loadTree(ifstream & inputFile, Quiz & quiz, int pageCount) {
 		getline( inputFile, dummy );
 		num1 = atoi( dummy.c_str() );
 		size_t pos = dummy.find( ',' );
-		num2 = atoi( dummy.c_str() + pos );
-
+		num2 = atoi( dummy.c_str() + pos+1 );
 		if ( num1 != i ) {
 			return false;
 		}
