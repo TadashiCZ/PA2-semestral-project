@@ -36,9 +36,9 @@ bool Quiz::play(int & score, int & scorePossible) {
 }
 
 string Quiz::printQuizListInfo() {
-	string os;
-	os.append( mName ).append( " (by " ).append( mAuthor ).append( ")" );
-	return os;
+	string output;
+	output.append( mName ).append( " (by " ).append( mAuthor ).append( ")" );
+	return output;
 }
 
 string Quiz::exportQuizIntoFile() {
