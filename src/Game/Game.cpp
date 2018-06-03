@@ -5,17 +5,20 @@
 #include "Game.hpp"
 #include "../IO/DataHandler.hpp"
 
-int Game::showQuizList() {
+Game::Game(Quiz & quiz) : mQuiz( quiz ) {}
+
+long int Game::showQuizList() {
 	std::cout << std::endl << "Quiz list:" << std::endl;
 	for ( size_t i = 0 ; i < DataHandler::getInstance().mQuizzes.size() ; ++i ) {
 		std::cout << i + 1 << ") " << DataHandler::getInstance().mQuizzes[i].printQuizListInfo() << std::endl;
 	}
-	return showQuizListPrompt( DataHandler::getInstance().mQuizzes.size() );
 
+	return showQuizListPrompt( DataHandler::getInstance().mQuizzes.size() );
 }
 
 void Game::play() {
 	int score = 0, possibleScore = 0;
+	//todo rework play
 	if ( DataHandler::getInstance().mQuizzes[showQuizList()].play( score, possibleScore ) ) {
 		// success, show score/possibleScore
 	} else {
@@ -32,7 +35,8 @@ unsigned long showQuizListPrompt(const unsigned long size) {
 		std::cin.clear();
 		std::cin >> dummy;
 		if ( dummy == "exit" ) {
-			//todo
+			DataHandler::getInstance().exportQuizzes();
+
 		}
 		input = atoi( dummy.c_str() );
 		if ( input > 0 && input <= size ) {

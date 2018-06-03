@@ -16,16 +16,24 @@ unsigned long showQuizListPrompt(const unsigned long size);
 class Game {
 public:
 	/**
+	 * Constructor which also stars the game
+	 * @param quiz
+	 */
+	Game(Quiz & quiz);
+
+	/**
 	 * Prompts the user to choose from quizzes of the Game.
 	 * @return
 	 */
-	int showQuizList();
+	long int showQuizList();
 
 	/**
 	 * Starts game
 	 */
 	void play();
 
+protected:
+	Quiz & mQuiz;
 
 };
 
