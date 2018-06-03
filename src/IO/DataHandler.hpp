@@ -10,10 +10,9 @@
 
 class DataHandler {
 public:
+	std::vector<Quiz> mQuizzes;
 
-	DataHandler();
-
-	DataHandler(std::vector<Quiz> & quizzes);
+	static DataHandler & getInstance();
 
 	int IOMenu();
 
@@ -27,7 +26,15 @@ public:
 
 	void runIO();
 
-	std::vector<Quiz> mQuizzes;
+	DataHandler(DataHandler const &) = delete;
+	void operator=(DataHandler const &) = delete;
+
+
+private:
+	DataHandler(std::vector<Quiz> & quizzes);
+
+	DataHandler() {}
+
 };
 
 

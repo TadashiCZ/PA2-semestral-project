@@ -6,22 +6,20 @@
 #include "IO/Exporter.hpp"
 #include "IO/DataHandler.hpp"
 
-
 using namespace std;
 
+
 int main() {
-	DataHandler data;
 
-
-	if ( Importer::loadFromFile( "../examples/import.dat", data.mQuizzes ) ) {
+	if ( Importer::loadFromFile( "../examples/import.dat", DataHandler::getInstance().mQuizzes ) ) {
 		cout << "Sample data read successfully." << endl;
 	} else {
 		cout << "Failed to read sample data." << endl;
 	}
 
-	Exporter::exportToFile( "../examples/export.dat", data.mQuizzes );
+	Exporter::exportToFile( "../examples/export.dat", DataHandler::getInstance().mQuizzes );
 
-	MainMenu::run( data.mQuizzes );
+	MainMenu::run();
 
 
 	return 0;

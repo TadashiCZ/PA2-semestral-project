@@ -3,26 +3,25 @@
 //
 
 #include "Game.hpp"
+#include "../IO/DataHandler.hpp"
 
 int Game::showQuizList() {
 	std::cout << std::endl << "Quiz list:" << std::endl;
-	for ( size_t i = 0 ; i < mQuizzes.size() ; ++i ) {
-		std::cout << i + 1 << ") " << mQuizzes[i].printQuizListInfo() << std::endl;
+	for ( size_t i = 0 ; i < DataHandler::getInstance().mQuizzes.size() ; ++i ) {
+		std::cout << i + 1 << ") " << DataHandler::getInstance().mQuizzes[i].printQuizListInfo() << std::endl;
 	}
-	return showQuizListPrompt( mQuizzes.size() );
+	return showQuizListPrompt( DataHandler::getInstance().mQuizzes.size() );
 
 }
 
 void Game::play() {
 	int score = 0, possibleScore = 0;
-	if ( mQuizzes[showQuizList()].play( score, possibleScore ) ) {
+	if ( DataHandler::getInstance().mQuizzes[showQuizList()].play( score, possibleScore ) ) {
 		// success, show score/possibleScore
 	} else {
 		// you failed, you die
 	}
 }
-
-Game::Game(std::vector<Quiz> & quizzes) : mQuizzes( quizzes ) {}
 
 //todo rewrite without cout
 unsigned long showQuizListPrompt(const unsigned long size) {

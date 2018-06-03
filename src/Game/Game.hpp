@@ -16,12 +16,6 @@ unsigned long showQuizListPrompt(const unsigned long size);
 class Game {
 public:
 	/**
-	 * Game class constructor
-	 * @param quizzes vector of quizzes
-	 */
-	Game(std::vector<Quiz> & quizzes);
-
-	/**
 	 * Prompts the user to choose from quizzes of the Game.
 	 * @return
 	 */
@@ -31,13 +25,6 @@ public:
 	 * Starts game
 	 */
 	void play();
-
-
-protected:
-	/**
-	 * container to hold the quizzes
-	 */
-	std::vector<Quiz> & mQuizzes;
 
 
 };

@@ -16,14 +16,13 @@ namespace MainMenu {
 
 	void welcomeUser();
 
-	void run(std::vector<Quiz> & quizzes);
+	void run();
 
 	void show();
 
 	int promptMainMenu();
 
 	bool promptContinue();
-	void goodbye();
 
 	void goodbye();
 }

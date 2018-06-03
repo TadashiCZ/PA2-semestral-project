@@ -4,12 +4,9 @@
 
 #include "DataHandler.hpp"
 #include "Importer.hpp"
-#include "Exporter.hpp"
 #include <fstream>
 
-DataHandler::DataHandler(std::vector<Quiz> & quizzes) : mQuizzes( quizzes ) {
-	runIO();
-}
+DataHandler::DataHandler(std::vector<Quiz> & quizzes) : mQuizzes( quizzes ) {}
 
 int DataHandler::IOMenu() {
 	std::cout << "Do you want to import or export quizzes? Write it. (Or write \"exit\" if you want to go back.)"
@@ -38,18 +35,14 @@ bool DataHandler::checkInputFilename(std::string & input) {
 bool DataHandler::exportQuizzes() {
 
 
-
-
 	return true;
 }
 
 void DataHandler::runIO() {
 	switch ( IOMenu() ) {
-		case 1:
-			importQuizzes();
+		case 1: importQuizzes();
 			break;
-		case 2:
-			exportQuizzes();
+		case 2: exportQuizzes();
 			break;
 		case -1: return;
 	}
@@ -72,5 +65,10 @@ std::string DataHandler::promptFilename() {
 bool DataHandler::importQuizzes() {
 	std::string inputFileName = DataHandler::promptFilename();
 	return Importer::loadFromFile( inputFileName, mQuizzes );
+}
+
+DataHandler & DataHandler::getInstance() {
+	static DataHandler instance;
+	return instance;
 }
 

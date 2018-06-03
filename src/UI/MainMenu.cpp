@@ -9,7 +9,8 @@
 
 using namespace std;
 
-void MainMenu::run( DataHandler data ) {
+void MainMenu::run( ) {
+
 	MainMenu::welcomeUser();
 	bool looping = true;
 	bool showMenu = false;
@@ -19,7 +20,7 @@ void MainMenu::run( DataHandler data ) {
 		switch ( MainMenu::promptMainMenu() ) {
 			case 1: // Play
 				showMenu = true;
-				Game( data.mQuizzes ).play();
+				Game( DataHandler::getInstance().mQuizzes ).play();
 				if ( !promptContinue() ) {
 					MainMenu::goodbye();
 					return;
@@ -35,23 +36,17 @@ void MainMenu::run( DataHandler data ) {
 				break;
 			case 4: //Export
 				showMenu = true;
-				DataHandler( data.mQuizzes ).runIO();
+				DataHandler::getInstance().runIO();
 				break;
 			case 5: //End
-				// saveIntoFile();
+				DataHandler::getInstance().exportQuizzes();
+				goodbye();
 				return;
 			default: showMenu = false;
 				cout << "Wrong choice, try again." << endl;
 		}
 
 	}
-}
-
-void goodbye(){
-	cout << COLOR_RED << "Saving quizzes." << COLOR_RESET << endl;
-
-	cout << COLOR_CYAN << "Goodbye and thanks for playing." << COLOR_RESET << endl;
-
 }
 
 bool MainMenu::promptContinue() {
@@ -102,4 +97,8 @@ void MainMenu::welcomeUser() {
 	        "    \\  /\\  /  | |____| |___| |___| |__| | |  | | |____ \n"
 	        "     \\/  \\/   |______|______\\_____\\____/|_|  |_|______|\n"
 	        "                                                       \n" );
+}
+
+void MainMenu::goodbye() {
+	cout << COLOR_CYAN << "Goodbye and thanks for playing." << COLOR_RESET << endl;
 }
