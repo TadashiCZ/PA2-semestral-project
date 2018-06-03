@@ -12,7 +12,7 @@ class ExpoImpo {
 public:
 	ExpoImpo(std::vector<Quiz> & quizzes);
 
-	int importOrExport();
+	int IOMenu();
 
 	bool static checkInputFilename(std::string & input);
 
@@ -23,6 +23,8 @@ public:
 	bool exportQuizzes();
 
 	void run();
+
+
 
 private:
 	std::vector<Quiz> mQuizzes;

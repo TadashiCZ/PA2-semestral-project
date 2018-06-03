@@ -4,11 +4,14 @@
 
 #include "ExpoImpo.hpp"
 #include "Importer.hpp"
+#include "Exporter.hpp"
 #include <fstream>
 
-ExpoImpo::ExpoImpo(std::vector<Quiz> & quizzes) : mQuizzes( quizzes ) {}
+ExpoImpo::ExpoImpo(std::vector<Quiz> & quizzes) : mQuizzes( quizzes ) {
+	run();
+}
 
-int ExpoImpo::importOrExport() {
+int ExpoImpo::IOMenu() {
 	std::cout << "Do you want to import or export quizzes? Write it. (Or write \"exit\" if you want to go back.)"
 	          << std::endl;
 	while ( true ) {
@@ -18,9 +21,9 @@ int ExpoImpo::importOrExport() {
 		if ( dummy == "exit" ) {
 			return -1;
 		} else if ( dummy == "import" ) {
-			return 0;
-		} else if ( dummy == "export" ) {
 			return 1;
+		} else if ( dummy == "export" ) {
+			return 2;
 		} else {
 			std::cout << "Not like this. Write \"import\", \"export\" or \"exit\"." << std::endl;
 		}
@@ -28,24 +31,25 @@ int ExpoImpo::importOrExport() {
 }
 
 bool ExpoImpo::checkInputFilename(std::string & input) {
-	//todo
+	//todo checkInputFilename
 	return true;
 }
 
 bool ExpoImpo::exportQuizzes() {
-	for ( Quiz & quiz :mQuizzes ) {
-		quiz.exportQuizIntoFile();
-	}
+
+
+
+
 	return true;
 }
 
 void ExpoImpo::run() {
-	switch ( importOrExport() ) {
-		case 0:
-			//importQuizzes();
-			break;
+	switch ( IOMenu() ) {
 		case 1:
-			//exportQuizzes();
+			importQuizzes();
+			break;
+		case 2:
+			exportQuizzes();
 			break;
 		case -1: return;
 	}
@@ -66,14 +70,7 @@ std::string ExpoImpo::promptFilename() {
 }
 
 bool ExpoImpo::importQuizzes() {
-	//todo import from file
 	std::string inputFileName = ExpoImpo::promptFilename();
-	std::ofstream ofs( inputFileName, std::ios::out );
-	if ( ofs.fail() ) {
-		std::cout << "Failed to open file for writing." << std::endl;
-		return false;
-	}
-
 	return Importer::loadFromFile( inputFileName, mQuizzes );
 }
 
