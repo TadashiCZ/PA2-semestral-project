@@ -2,16 +2,16 @@
 // Created by Tadeáš Valenta on 28.5.18.
 //
 
-#include "ExpoImpo.hpp"
+#include "DataHandler.hpp"
 #include "Importer.hpp"
 #include "Exporter.hpp"
 #include <fstream>
 
-ExpoImpo::ExpoImpo(std::vector<Quiz> & quizzes) : mQuizzes( quizzes ) {
-	run();
+DataHandler::DataHandler(std::vector<Quiz> & quizzes) : mQuizzes( quizzes ) {
+	runIO();
 }
 
-int ExpoImpo::IOMenu() {
+int DataHandler::IOMenu() {
 	std::cout << "Do you want to import or export quizzes? Write it. (Or write \"exit\" if you want to go back.)"
 	          << std::endl;
 	while ( true ) {
@@ -30,12 +30,12 @@ int ExpoImpo::IOMenu() {
 	}
 }
 
-bool ExpoImpo::checkInputFilename(std::string & input) {
+bool DataHandler::checkInputFilename(std::string & input) {
 	//todo checkInputFilename
 	return true;
 }
 
-bool ExpoImpo::exportQuizzes() {
+bool DataHandler::exportQuizzes() {
 
 
 
@@ -43,7 +43,7 @@ bool ExpoImpo::exportQuizzes() {
 	return true;
 }
 
-void ExpoImpo::run() {
+void DataHandler::runIO() {
 	switch ( IOMenu() ) {
 		case 1:
 			importQuizzes();
@@ -56,7 +56,7 @@ void ExpoImpo::run() {
 
 }
 
-std::string ExpoImpo::promptFilename() {
+std::string DataHandler::promptFilename() {
 	std::cout << "Write complete filepath to file with quizzes you want to import." << std::endl;
 	std::string input;
 	while ( true ) {
@@ -69,8 +69,8 @@ std::string ExpoImpo::promptFilename() {
 	}
 }
 
-bool ExpoImpo::importQuizzes() {
-	std::string inputFileName = ExpoImpo::promptFilename();
+bool DataHandler::importQuizzes() {
+	std::string inputFileName = DataHandler::promptFilename();
 	return Importer::loadFromFile( inputFileName, mQuizzes );
 }
 

@@ -8,9 +8,12 @@
 
 #include "../Game/Quiz.hpp"
 
-class ExpoImpo {
+class DataHandler {
 public:
-	ExpoImpo(std::vector<Quiz> & quizzes);
+
+	DataHandler();
+
+	DataHandler(std::vector<Quiz> & quizzes);
 
 	int IOMenu();
 
@@ -22,11 +25,8 @@ public:
 
 	bool exportQuizzes();
 
-	void run();
+	void runIO();
 
-
-
-private:
 	std::vector<Quiz> mQuizzes;
 };
 

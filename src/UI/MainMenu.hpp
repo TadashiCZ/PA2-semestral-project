@@ -6,16 +6,27 @@
 #define SEMESTRAL_PROJECT_MENU_H
 
 #include <iostream>
-#include <vector>
+#include "Screen.hpp"
+#include "../Game/Quiz.hpp"
+#include "../IO/DataHandler.hpp"
 
 namespace MainMenu {
 
+	void run( DataHandler data );
+
 	void welcomeUser();
+
+	void run(std::vector<Quiz> & quizzes);
 
 	void show();
 
 	int promptMainMenu();
-};
+
+	bool promptContinue();
+	void goodbye();
+
+	void goodbye();
+}
 
 
 #endif //SEMESTRAL_PROJECT_MENU_H

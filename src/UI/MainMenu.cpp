@@ -4,8 +4,70 @@
 
 #include "MainMenu.hpp"
 #include "../Constants.hpp"
+#include "../Game/Game.hpp"
+#include "../IO/DataHandler.hpp"
 
 using namespace std;
+
+void MainMenu::run( DataHandler data ) {
+	MainMenu::welcomeUser();
+	bool looping = true;
+	bool showMenu = false;
+	MainMenu::show();
+	while ( looping ) {
+		if ( showMenu ) MainMenu::show();
+		switch ( MainMenu::promptMainMenu() ) {
+			case 1: // Play
+				showMenu = true;
+				Game( data.mQuizzes ).play();
+				if ( !promptContinue() ) {
+					MainMenu::goodbye();
+					return;
+				}
+				break;
+			case 2: // Add
+				showMenu = true;
+				//startAdd();
+				break;
+			case 3: //Edit
+				showMenu = true;
+				//startEdit();
+				break;
+			case 4: //Export
+				showMenu = true;
+				DataHandler( data.mQuizzes ).runIO();
+				break;
+			case 5: //End
+				// saveIntoFile();
+				return;
+			default: showMenu = false;
+				cout << "Wrong choice, try again." << endl;
+		}
+
+	}
+}
+
+void goodbye(){
+	cout << COLOR_RED << "Saving quizzes." << COLOR_RESET << endl;
+
+	cout << COLOR_CYAN << "Goodbye and thanks for playing." << COLOR_RESET << endl;
+
+}
+
+bool MainMenu::promptContinue() {
+	string dummy = "";
+	cout << COLOR_GREEN << "Do you want to continue?" << COLOR_RESET << endl;
+	while ( dummy != "yes" && dummy != "no" ) {
+		cout << "Write \"yes\" or \"no\"" << endl;
+		cin >> dummy;
+		if ( dummy == "yes" ) {
+			return true;
+		} else if ( dummy == "no" ) {
+			return false;
+		}
+	}
+	return true;
+}
 
 void MainMenu::show() {
 	cout << COLOR_GREEN << "Choose your activity:\n" << COLOR_RESET <<
@@ -32,7 +94,6 @@ int MainMenu::promptMainMenu() {
 		default: return -1;
 	}
 }
-
 
 void MainMenu::welcomeUser() {
 	printf( " \\ \\        / /  ____| |    / ____/ __ \\|  \\/  |  ____|\n"

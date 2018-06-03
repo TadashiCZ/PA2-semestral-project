@@ -29,7 +29,7 @@ Page::Page(const Page & page) {
 
 Page * Page::play(int & score, int & scorePossible) {
 	for ( auto it = mQuestions.begin() ; it != mQuestions.end() ; ++it ) {
-		cout << ( **it ).printQuestion() << endl;
+		cout << ( **it ).printFullQuestion() << endl;
 		cout << ( **it ).printHint() << endl;
 		if ( ( **it ).evaluate() ) {
 			score++;
