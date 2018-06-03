@@ -22,8 +22,6 @@ public:
 	 */
 	TextQuestion(const std::string & questionText, const std::string & answer);
 
-	virtual const std::string printQuestion();
-
 	virtual std::string printCorrectAnswer();
 
 	virtual std::string printHint();
@@ -31,6 +29,7 @@ public:
 	virtual std::string exportIntoFileFormat();
 
 	virtual bool evaluate();
+	const std::string printFullQuestion() override;
 
 protected:
 	std::string mAnswer;

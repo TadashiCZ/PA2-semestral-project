@@ -51,6 +51,10 @@ public:
 	 */
 	std::string exportQuizIntoFile();
 
+	std::string printTree();
+
+	std::string printPageList();
+
 	std::string mName;
 	std::string mAuthor;
 	std::vector<std::shared_ptr<Page>> mPages;

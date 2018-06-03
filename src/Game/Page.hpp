@@ -52,6 +52,8 @@ public:
 	 */
 	std::string exportPageIntoFile(int pageNumber);
 
+	std::string printQuestionList();
+
 	std::vector<std::shared_ptr<Question>> mQuestions;
 	std::vector<std::shared_ptr<Page>> mBranches;
 	bool isBranching;

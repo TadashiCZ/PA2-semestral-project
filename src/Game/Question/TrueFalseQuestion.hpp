@@ -13,7 +13,7 @@ class TrueFalseQuestion : public Question {
 public:
 	TrueFalseQuestion(const std::string & questionText, bool answer);
 
-	virtual const std::string printQuestion();
+	virtual const std::string printFullQuestion();
 
 	virtual std::string printCorrectAnswer();
 

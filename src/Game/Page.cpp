@@ -72,3 +72,12 @@ string Page::exportPageIntoFile(int pageNumber) {
 	}
 	return output;
 }
+
+string Page::printQuestionList() {
+	string output;
+	for ( size_t i = 0 ; i < mQuestions.size() ; ++i ) {
+		output.append(to_string(i+1)).append(") ").append(mQuestions[i]->printQuestion()).append("\n");
+	}
+
+	return output;
+}

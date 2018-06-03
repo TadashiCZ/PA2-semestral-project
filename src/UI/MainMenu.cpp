@@ -2,7 +2,7 @@
 // Created by Tadeáš Valenta on 31.5.18.
 //
 
-#include "Menu.hpp"
+#include "MainMenu.hpp"
 
 void Menu::showMainMenu() {
 	printf( "Choose your activity:\n"

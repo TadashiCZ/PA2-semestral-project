@@ -18,13 +18,14 @@ MultiChoiceQuestion::MultiChoiceQuestion(const std::string & questionText,
 	}
 }
 
-const std::string MultiChoiceQuestion::printQuestion() {
+const std::string MultiChoiceQuestion::printFullQuestion() {
 	std::string output;
-	output.append(COLOR_GREEN).append("Question: ").append(COLOR_RESET).append( mQuestionText ).append( "\n" );
+	output.append( COLOR_GREEN ).append( "Question: " ).append( COLOR_RESET ).append( mQuestionText ).append( "\n" );
 	char c = 'a';
 	for ( std::pair<std::string, bool> choice : mChoices ) {
+		output.append( "\t" );
 		output.push_back( c );
-		output.append( ") " ).append( choice.first ).append( "; " );
+		( c == 'd' ) ? output.append( ") " ).append( choice.first ) : output.append( ") " ).append( choice.first ).append( "\n" );
 		c++;
 	}
 

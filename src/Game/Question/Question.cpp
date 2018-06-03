@@ -13,3 +13,7 @@ const std::string Question::printQuestion() { return mQuestionText; }
 void Question::setBranching(bool branch) { mIsBranching = branch; }
 
 bool Question::isBranching() { return mIsBranching; }
+
+const std::string Question::printFullQuestion() {
+	return mQuestionText;
+}

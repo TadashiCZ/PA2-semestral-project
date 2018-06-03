@@ -16,8 +16,6 @@ public:
 	MultiChoiceQuestion(const std::string & questionText,
 	                    std::vector<std::pair<std::string, bool>> choices);
 
-	virtual const std::string printQuestion() override;
-
 	virtual std::string printCorrectAnswer() override;
 
 	virtual std::string printHint();
@@ -25,6 +23,7 @@ public:
 	virtual std::string exportIntoFileFormat() override;
 
 	virtual bool evaluate() override;
+	const std::string printFullQuestion() override;
 
 
 protected:

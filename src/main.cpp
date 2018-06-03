@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <memory>
-#include "UI/Menu.hpp"
+#include "UI/MainMenu.hpp"
 #include "Game/Quiz.hpp"
 #include "Game/Game.hpp"
 #include "IO/ExpoImpo.hpp"
@@ -51,9 +51,8 @@ int main() {
 	} else {
 		cout << "Failed to read sample data." << endl;
 	}
-	cout << Exporter::exportToFile( "../examples/export.dat", quizzes ) << endl;
+	Exporter::exportToFile( "../examples/export.dat", quizzes );
 
-	cout << endl;
 	welcomeUser();
 	bool looping = true;
 	bool showMenu = false;

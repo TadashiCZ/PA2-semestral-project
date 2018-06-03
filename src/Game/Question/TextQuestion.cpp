@@ -4,45 +4,49 @@
 
 
 #include "TextQuestion.hpp"
+#include "../../Constants.hpp"
 
+using namespace std;
 
-TextQuestion::TextQuestion(const std::string & questionText, const std::string & answer)
+TextQuestion::TextQuestion(const string & questionText, const string & answer)
 		: Question( questionText ), mAnswer( answer ) {
 	mLowerCapsAnswer = mAnswer;
-	std::transform( mLowerCapsAnswer.begin(), mLowerCapsAnswer.end(), mLowerCapsAnswer.begin(), ::tolower );
+	transform( mLowerCapsAnswer.begin(), mLowerCapsAnswer.end(), mLowerCapsAnswer.begin(), ::tolower );
 }
 
-const std::string TextQuestion::printQuestion() {
-	return mQuestionText;
+const string TextQuestion::printFullQuestion() {
+	string output;
+	output.append(COLOR_GREEN).append("Question: ").append(COLOR_RESET).append(mQuestionText);
+	return output;
 }
 
-std::string TextQuestion::printCorrectAnswer() {
+string TextQuestion::printCorrectAnswer() {
 	return mAnswer;
 }
 
-std::string TextQuestion::printHint() {
+string TextQuestion::printHint() {
 	return mHowToAnswer;
 }
 
-std::string TextQuestion::exportIntoFileFormat() {
-	std::string output;
+string TextQuestion::exportIntoFileFormat() {
+	string output;
 	output.append( "Question\n" ).append( "TextQuestion\n" ).
 			append( mQuestionText ).append( "\n" ).append( mAnswer ).append( "\n" );
 	return output;
 }
 
 bool TextQuestion::evaluate() {
-	std::string answer;
+	string answer;
 	while ( true ) {
-		std::cin >> answer;
+		cin >> answer;
 		if ( answer.empty() ) {
-			std::cout << "Not like this. Try again. " << mHowToAnswer << std::endl;
+			cout << "Not like this. Try again. " << mHowToAnswer << endl;
 			continue;
 		} else {
 			break;
 		}
 	}
-	std::transform( answer.begin(), answer.end(), answer.begin(), ::tolower );
+	transform( answer.begin(), answer.end(), answer.begin(), ::tolower );
 	return answer == mLowerCapsAnswer;
 
 }

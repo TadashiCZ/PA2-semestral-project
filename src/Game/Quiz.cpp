@@ -3,6 +3,7 @@
 //
 
 #include "Quiz.hpp"
+#include "../Constants.hpp"
 
 using namespace std;
 
@@ -16,8 +17,8 @@ Quiz::Quiz(const Quiz & quiz) {
 	mName = quiz.mName;
 	mPages.clear();
 
-	for ( auto it = quiz.mPages.begin() ; it != quiz.mPages.end() ; ++it ) {
-		mPages.push_back( *it );
+	for ( const auto & page : quiz.mPages ) {
+		mPages.push_back( page );
 	}
 }
 
@@ -44,12 +45,19 @@ string Quiz::exportQuizIntoFile() {
 	string output;
 	output.append( "Quiz\n" ).append( mName ).append( "\n" ).append( mAuthor ).append( "\n" );
 	output.append( to_string( mPages.size() ) ).append( "\n" );
-	//printing tree
-	output.append( "Tree:\n0,x\n" );
+	output.append( printTree() );
+	for ( size_t i = 0 ; i < mPages.size() ; ++i ) {
+		output.append( mPages[i]->exportPageIntoFile( i ) );
+	}
+	return output;
+}
 
-	for ( unsigned int j = 0 ; j < mPages.size() ; ++j ) {
+std::string Quiz::printTree(){
+	string output;
+	output.append( "Tree:\n0,x\n" );
+	for ( size_t j = 0 ; j < mPages.size() ; ++j ) {
 		if ( mPages[j]->mBranches[0] != nullptr ) {
-			for ( unsigned int i = 0 ; i < mPages.size() ; ++i ) {
+			for ( size_t i = 0 ; i < mPages.size() ; ++i ) {
 				if ( mPages[j]->mBranches[0].get() == mPages[i].get() ) {
 					output.append( to_string( i ) ).append( "," ).append( to_string( j ) ).append( "\n" );
 				}
@@ -57,16 +65,24 @@ string Quiz::exportQuizIntoFile() {
 		}
 
 		if ( mPages[j]->mBranches[1] != nullptr ) {
-			for ( unsigned int i = 0 ; i < mPages.size() ; ++i ) {
+			for ( size_t i = 0 ; i < mPages.size() ; ++i ) {
 				if ( mPages[j]->mBranches[1].get() == mPages[i].get() ) {
 					output.append( to_string( i ) ).append( "," ).append( to_string( j ) ).append( "\n" );
 				}
 			}
 		}
 	}
-	// done printing tree
-	for ( unsigned int i = 0 ; i < mPages.size() ; ++i ) {
-		output.append( mPages[i]->exportPageIntoFile( i ) );
+	return output;
+}
+
+string Quiz::printPageList() {
+	string output;
+	output.append(printTree()).append("\n");
+	for (size_t i = 0 ; i < mPages.size() ; ++i){
+
+		output.append(COLOR_BLUE).append( "Page with ID No. ").append( to_string( i + 1)).append( ": \n").append(COLOR_RESET);
+		output.append(mPages[i]->printQuestionList()).append("\n");
 	}
 	return output;
 }
+

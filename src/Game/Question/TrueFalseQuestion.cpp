@@ -3,24 +3,27 @@
 //
 
 #include "TrueFalseQuestion.hpp"
+#include "../../Constants.hpp"
 
+using namespace std;
 
-TrueFalseQuestion::TrueFalseQuestion(const std::string & questionText, bool answer)
+TrueFalseQuestion::TrueFalseQuestion(const string & questionText, bool answer)
 		: Question( questionText ), mAnswer( answer ) {}
 
-const std::string TrueFalseQuestion::printQuestion() {
-
-	return mQuestionText;
+const string TrueFalseQuestion::printFullQuestion() {
+	string output;
+	output.append(COLOR_GREEN).append("Question: ").append(COLOR_RESET).append(mQuestionText);
+	return output;
 }
 
-std::string TrueFalseQuestion::printCorrectAnswer() {
-	std::string trueStr = "True";
-	std::string falseStr = "False";
+string TrueFalseQuestion::printCorrectAnswer() {
+	string trueStr = "True";
+	string falseStr = "False";
 	return ( mAnswer ) ? trueStr : falseStr;
 }
 
-std::string TrueFalseQuestion::exportIntoFileFormat() {
-	std::string output;
+string TrueFalseQuestion::exportIntoFileFormat() {
+	string output;
 
 	output.append( "Question\nTrueFalseQuestion\n" ).
 			append( mQuestionText ).append( "\n" );
@@ -28,20 +31,20 @@ std::string TrueFalseQuestion::exportIntoFileFormat() {
 	return output;
 }
 
-std::string TrueFalseQuestion::printHint() {
+string TrueFalseQuestion::printHint() {
 	return mHowToAnswer;
 }
 
 bool TrueFalseQuestion::evaluate() {
-	std::string answer;
+	string answer;
 	bool boolAnswer;
 	while ( true ) {
-		std::cin >> answer;
-		std::transform( answer.begin(), answer.end(), answer.begin(), ::tolower );
+		cin >> answer;
+		transform( answer.begin(), answer.end(), answer.begin(), ::tolower );
 		if ( answer == "true" || answer == "false" ) {
 			break;
 		} else {
-			std::cout << "Not like this. Try again. " << mHowToAnswer << std::endl;
+			cout << "Not like this. Try again. " << mHowToAnswer << endl;
 			continue;
 		}
 	}
