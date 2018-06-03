@@ -8,16 +8,13 @@
 #include <iostream>
 #include <vector>
 
-class Menu {
-public:
-	void showMainMenu();
+namespace MainMenu {
+
+	void welcomeUser();
+
+	void show();
 
 	int promptMainMenu();
-
-protected:
-	std::vector<std::string> mMenuChoices;
-
-
 };
 
 

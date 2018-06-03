@@ -10,40 +10,6 @@
 
 using namespace std;
 
-void showQuizList();
-
-void welcomeUser() {
-	printf( " \\ \\        / /  ____| |    / ____/ __ \\|  \\/  |  ____|\n"
-	        "  \\ \\  /\\  / /| |__  | |   | |   | |  | | \\  / | |__   \n"
-	        "   \\ \\/  \\/ / |  __| | |   | |   | |  | | |\\/| |  __|  \n"
-	        "    \\  /\\  /  | |____| |___| |___| |__| | |  | | |____ \n"
-	        "     \\/  \\/   |______|______\\_____\\____/|_|  |_|______|\n"
-	        "                                                       \n" );
-}
-
-inline bool checkExistence(const char * name) {
-	ifstream f( name );
-	if ( f.good() ) {
-		f.close();
-		return true;
-	} else {
-		f.close();
-		return false;
-	}
-}
-
-void loadQuizes(vector<Quiz> & quizzes, const char * name) {
-	if ( !checkExistence( name ) ) {
-		return;
-	}
-
-	//todo load from file
-}
-
-void playGame(vector<Quiz> & quizzes) {
-
-}
-
 int main() {
 	vector<Quiz> quizzes;
 	if ( Importer::loadFromFile( "../examples/import.dat", quizzes ) ) {
@@ -53,13 +19,13 @@ int main() {
 	}
 	Exporter::exportToFile( "../examples/export.dat", quizzes );
 
-	welcomeUser();
+	MainMenu::welcomeUser();
 	bool looping = true;
 	bool showMenu = false;
-	Menu().showMainMenu();
+	MainMenu::show();
 	while ( looping ) {
-		if (showMenu) Menu().showMainMenu();
-		switch ( Menu().promptMainMenu() ) {
+		if (showMenu) MainMenu::show();
+		switch ( MainMenu::promptMainMenu() ) {
 			case 1: // Play
 				showMenu = true;
 				Game( quizzes ).play();
