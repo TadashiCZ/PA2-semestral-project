@@ -8,10 +8,8 @@
 #include <iostream>
 #include "Quiz.hpp"
 
-unsigned long showQuizListPrompt(const unsigned long size);
-
 /**
- * Controls the game play of given quizzes
+ * Controls the game play of given quiz
  */
 class Game {
 public:
@@ -22,18 +20,12 @@ public:
 	Game(Quiz & quiz);
 
 	/**
-	 * Prompts the user to choose from quizzes of the Game.
-	 * @return
-	 */
-	long int showQuizList();
-
-	/**
 	 * Starts game
 	 */
-	void play();
+	void play(std::ostream & os);
 
 protected:
-	Quiz & mQuiz;
+	Quiz mQuiz;
 
 };
 

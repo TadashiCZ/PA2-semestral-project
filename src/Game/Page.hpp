@@ -54,9 +54,12 @@ public:
 
 	std::string printQuestionList();
 
+	bool operator==(Page & page);
+
 	std::vector<std::shared_ptr<Question>> mQuestions;
 	std::vector<std::shared_ptr<Page>> mBranches;
 	bool isBranching;
+	bool compareQuestionSharedPtr(std::shared_ptr<Question> & shared_ptr, std::shared_ptr<Question> & sharedPtr);
 };
 
 

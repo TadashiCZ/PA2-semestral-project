@@ -72,3 +72,7 @@ bool MultiChoiceQuestion::evaluate() {
 
 	return true;
 }
+
+int MultiChoiceQuestion::type() {
+	return MULTI_CHOICE_QUESTION;
+}

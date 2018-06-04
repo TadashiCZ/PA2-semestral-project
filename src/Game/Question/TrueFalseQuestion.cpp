@@ -52,3 +52,7 @@ bool TrueFalseQuestion::evaluate() {
 	boolAnswer = ( answer == "true" ) ? true : false;
 	return boolAnswer == mAnswer;
 }
+
+int TrueFalseQuestion::type() {
+	return TRUE_FALSE_QUESTION;
+}

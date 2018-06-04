@@ -25,6 +25,7 @@ public:
 	virtual bool evaluate() override;
 	const std::string printFullQuestion() override;
 
+	virtual int type() override;
 
 protected:
 	std::vector<std::pair<std::string, bool>> mChoices;

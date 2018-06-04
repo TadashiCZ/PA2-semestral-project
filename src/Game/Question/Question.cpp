@@ -3,6 +3,7 @@
 //
 
 #include "Question.hpp"
+#include "../../Constants.hpp"
 
 Question::Question() : mId( 0 ) {}
 
@@ -16,4 +17,8 @@ bool Question::isBranching() { return mIsBranching; }
 
 const std::string Question::printFullQuestion() {
 	return mQuestionText;
+}
+
+int Question::type() {
+	return ABSTRACT_QUESTION;
 }

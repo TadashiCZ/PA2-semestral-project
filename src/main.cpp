@@ -1,10 +1,10 @@
 #include <iostream>
 #include <vector>
-#include "UI/MainMenu.hpp"
+#include "UI/MainMenuScreen.hpp"
 #include "Game/Quiz.hpp"
-#include "IO/Importer.hpp"
-#include "IO/Exporter.hpp"
-#include "IO/DataHandler.hpp"
+#include "Database/Importer.hpp"
+#include "Database/Exporter.hpp"
+#include "Database/DataHandler.hpp"
 
 using namespace std;
 
@@ -19,7 +19,7 @@ int main() {
 
 	Exporter::exportToFile( "../examples/export.dat", DataHandler::getInstance().mQuizzes );
 
-	MainMenu::run();
+	MainMenuScreen(cout).run();
 
 
 	return 0;

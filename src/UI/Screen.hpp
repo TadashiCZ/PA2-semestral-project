@@ -6,8 +6,9 @@
 
 
 class Screen {
-
+public:
 	virtual ~Screen()= default;
+	virtual void run()=0;
 	virtual void show()=0;
 	virtual void interact()=0;
 };

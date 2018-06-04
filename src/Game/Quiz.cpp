@@ -52,11 +52,11 @@ string Quiz::exportQuizIntoFile() {
 	return output;
 }
 
-std::string Quiz::printTree(){
+std::string Quiz::printTree() {
 	string output;
 	output.append( "Tree:\n0,x\n" );
 	for ( size_t j = 0 ; j < mPages.size() ; ++j ) {
-		if ( mPages[j]->mBranches[0] != nullptr ) {
+		if ( mPages[j]->mBranches[0] ) {
 			for ( size_t i = 0 ; i < mPages.size() ; ++i ) {
 				if ( mPages[j]->mBranches[0].get() == mPages[i].get() ) {
 					output.append( to_string( i ) ).append( "," ).append( to_string( j ) ).append( "\n" );
@@ -64,11 +64,11 @@ std::string Quiz::printTree(){
 			}
 		}
 
-		if ( mPages[j]->mBranches[1] != nullptr ) {
+		if ( mPages[j]->mBranches[1] ) {
 			for ( size_t i = 0 ; i < mPages.size() ; ++i ) {
-				if ( mPages[j]->mBranches[1].get() == mPages[i].get() ) {
-					output.append( to_string( i ) ).append( "," ).append( to_string( j ) ).append( "\n" );
-				}
+					if ( mPages[j]->mBranches[1] == mPages[i] ) {
+						output.append( to_string( i ) ).append( "," ).append( to_string( j ) ).append( "\n" );
+					}
 			}
 		}
 	}
@@ -77,12 +77,23 @@ std::string Quiz::printTree(){
 
 string Quiz::printPageList() {
 	string output;
-	output.append(printTree()).append("\n");
-	for (size_t i = 0 ; i < mPages.size() ; ++i){
+	output.append( printTree() ).append( "\n" );
+	for ( size_t i = 0 ; i < mPages.size() ; ++i ) {
 
-		output.append(COLOR_BLUE).append( "Page with ID No. ").append( to_string( i + 1)).append( ": \n").append(COLOR_RESET);
-		output.append(mPages[i]->printQuestionList()).append("\n");
+		output.append( COLOR_BLUE ).append( "Page with ID No. " ).append( to_string( i + 1 ) ).append( ": \n" ).append(
+				COLOR_RESET );
+		output.append( mPages[i]->printQuestionList() ).append( "\n" );
 	}
 	return output;
+}
+
+bool Quiz::operator==(Quiz & quiz) {
+	for ( size_t i = 0 ; i < mPages.size() ; ++i ) {
+		if ( !( *mPages[i] == *quiz.mPages[i] ) ) {
+			return false;
+		}
+	}
+
+	return true;
 }
 

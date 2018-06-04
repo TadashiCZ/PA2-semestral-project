@@ -4,6 +4,7 @@
 
 #include <sstream>
 #include "Page.hpp"
+#include "../Constants.hpp"
 
 using namespace std;
 
@@ -76,8 +77,28 @@ string Page::exportPageIntoFile(int pageNumber) {
 string Page::printQuestionList() {
 	string output;
 	for ( size_t i = 0 ; i < mQuestions.size() ; ++i ) {
-		output.append(to_string(i+1)).append(") ").append(mQuestions[i]->printQuestion()).append("\n");
+		output.append( to_string( i + 1 ) ).append( ") " ).append( mQuestions[i]->printQuestion() ).append( "\n" );
 	}
 
 	return output;
+}
+
+bool Page::operator==(Page & page) {
+	for ( size_t i = 0 ; i < mQuestions.size() ; ++i ) {
+		if ( !( compareQuestionSharedPtr(mQuestions[i], page.mQuestions[i]) ) ) {
+			return false;
+		}
+	}
+
+	for ( int j = 0 ; j < 2 ; ++j ) {
+		if ( mBranches[j].get() != page.mBranches[j].get() ) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
+bool Page::compareQuestionSharedPtr(std::shared_ptr<Question> & left, std::shared_ptr<Question> & right) {
+	return !( ( left->printFullQuestion() != right->printFullQuestion()) || left->type() != right->type() );
 }

@@ -2,33 +2,42 @@
 // Created by Tadeáš Valenta on 31.5.18.
 //
 
-#include "MainMenu.hpp"
+#include "MainMenuScreen.hpp"
 #include "../Constants.hpp"
 #include "../Game/Game.hpp"
-#include "../IO/DataHandler.hpp"
+#include "../Database/DataHandler.hpp"
+#include "GameScreen.hpp"
+#include "ExitScreen.hpp"
+#include "AdderScreen.hpp"
 
 using namespace std;
 
-void MainMenu::run( ) {
+MainMenuScreen::MainMenuScreen(ostream & os) : mOs(os){}
 
-	MainMenu::welcomeUser();
+void MainMenuScreen::run(){
+
+	MainMenuScreen::welcomeUser();
 	bool looping = true;
 	bool showMenu = false;
-	MainMenu::show();
+	MainMenuScreen::show();
 	while ( looping ) {
-		if ( showMenu ) MainMenu::show();
-		switch ( MainMenu::promptMainMenu() ) {
+		if ( showMenu ) MainMenuScreen::show();
+		switch ( MainMenuScreen::promptMainMenu() ) {
 			case 1: // Play
 				showMenu = true;
-				Game( DataHandler::getInstance().mQuizzes ).play();
+				GameScreen(cout).run();
 				if ( !promptContinue() ) {
-					MainMenu::goodbye();
+					ExitScreen(cout).run();
 					return;
 				}
 				break;
 			case 2: // Add
 				showMenu = true;
-				//startAdd();
+				AdderScreen(cout).run();
+				if ( !promptContinue() ) {
+					ExitScreen(cout).run();
+					return;
+				}
 				break;
 			case 3: //Edit
 				showMenu = true;
@@ -37,10 +46,14 @@ void MainMenu::run( ) {
 			case 4: //Export
 				showMenu = true;
 				DataHandler::getInstance().runIO();
+				if ( !promptContinue() ) {
+					ExitScreen(cout).run();
+					return;
+				}
 				break;
 			case 5: //End
 				DataHandler::getInstance().exportQuizzes();
-				goodbye();
+				ExitScreen(cout).run();
 				return;
 			default: showMenu = false;
 				cout << "Wrong choice, try again." << endl;
@@ -49,7 +62,7 @@ void MainMenu::run( ) {
 	}
 }
 
-bool MainMenu::promptContinue() {
+bool MainMenuScreen::promptContinue() {
 	string dummy = "";
 	cout << COLOR_GREEN << "Do you want to continue?" << COLOR_RESET << endl;
 	while ( dummy != "yes" && dummy != "no" ) {
@@ -64,7 +77,7 @@ bool MainMenu::promptContinue() {
 	return true;
 }
 
-void MainMenu::show() {
+void MainMenuScreen::show() {
 	cout << COLOR_GREEN << "Choose your activity:\n" << COLOR_RESET <<
 	     "\ta) Play game\n"
 	     "\tb) Add quiz\n"
@@ -73,9 +86,9 @@ void MainMenu::show() {
 	     "\te) Exit game\n";
 }
 
-int MainMenu::promptMainMenu() {
+int MainMenuScreen::promptMainMenu() {
 	std::string input;
-	printf( "Choose, what you want to do by writing a single character.\n" );
+	cout << COLOR_RED << "Choose, what you want to do by writing a single character." << COLOR_RESET << endl;
 	std::cin >> input;
 	if ( input.size() > 1 ) {
 		return -1;
@@ -90,15 +103,15 @@ int MainMenu::promptMainMenu() {
 	}
 }
 
-void MainMenu::welcomeUser() {
-	printf( " \\ \\        / /  ____| |    / ____/ __ \\|  \\/  |  ____|\n"
+void MainMenuScreen::welcomeUser() {
+	cout << " \\ \\        / /  ____| |    / ____/ __ \\|  \\/  |  ____|\n"
 	        "  \\ \\  /\\  / /| |__  | |   | |   | |  | | \\  / | |__   \n"
 	        "   \\ \\/  \\/ / |  __| | |   | |   | |  | | |\\/| |  __|  \n"
 	        "    \\  /\\  /  | |____| |___| |___| |__| | |  | | |____ \n"
 	        "     \\/  \\/   |______|______\\_____\\____/|_|  |_|______|\n"
-	        "                                                       \n" );
+	        "                                                       \n";
 }
 
-void MainMenu::goodbye() {
-	cout << COLOR_CYAN << "Goodbye and thanks for playing." << COLOR_RESET << endl;
+void MainMenuScreen::interact() {
+
 }

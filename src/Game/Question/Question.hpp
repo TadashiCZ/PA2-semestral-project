@@ -32,6 +32,8 @@ public:
 
 	virtual bool evaluate()=0;
 
+	virtual int type();
+
 	void setBranching(bool branch);
 
 	bool isBranching();

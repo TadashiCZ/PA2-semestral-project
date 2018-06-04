@@ -51,6 +51,8 @@ namespace Importer {
 	 * @return 	true on success, false otherwise
 	 */
 	bool loadTree(std::ifstream & ifstream, Quiz & quiz, int pageCount);
+
+	bool checkQuizUniquennes(Quiz quiz);
 }
 
 

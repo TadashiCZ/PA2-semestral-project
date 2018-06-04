@@ -23,6 +23,7 @@ public:
 
 	virtual bool evaluate();
 
+	virtual int type() override;
 protected:
 	bool mAnswer;
 	const std::string mHowToAnswer = "Write \"True\" or \"False\".";

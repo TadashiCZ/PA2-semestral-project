@@ -55,6 +55,8 @@ public:
 
 	std::string printPageList();
 
+	bool operator==(Quiz & quiz);
+
 	std::string mName;
 	std::string mAuthor;
 	std::vector<std::shared_ptr<Page>> mPages;

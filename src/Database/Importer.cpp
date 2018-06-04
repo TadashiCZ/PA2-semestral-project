@@ -8,6 +8,7 @@
 #include "../Game/Question/MultiChoiceQuestion.hpp"
 #include "../Game/Question/TrueFalseQuestion.hpp"
 #include "../Game/Question/TextQuestion.hpp"
+#include "DataHandler.hpp"
 
 #define CHECK_READ_FILE if ( inputFile . fail()) {cout << "Read from file failed" << endl; return false;}
 
@@ -25,7 +26,13 @@ bool Importer::loadFromFile(string filename, vector<Quiz> & quizzes) {
 			cout << "ERROR: Wrong file format" << endl;
 			return false;
 		}
-		quizzes.push_back( quiz );
+		if (checkQuizUniquennes( quiz ) ){
+			cout << "Quiz (" << quiz.mName << ") read successfully." << endl;
+			quizzes.push_back( quiz );
+		} else {
+			cout << "Quiz is already there, can't add the same one." << endl;
+		}
+
 	}
 	if ( inputFile.eof() ) {
 		return true;
@@ -99,10 +106,10 @@ bool Importer::loadTree(ifstream & inputFile, Quiz & quiz, int pageCount) {
 
 	for ( int i = 1 ; i < pageCount ; ++i ) {
 		switch ( quiz.mPages[i]->mBranches.size() ) {
-			case 0: quiz.mPages[i]->mBranches.push_back( nullptr );
-				quiz.mPages[i]->mBranches.push_back( nullptr );
+			case 0: quiz.mPages[i]->mBranches.push_back( shared_ptr<Page>() );
+				quiz.mPages[i]->mBranches.push_back( shared_ptr<Page>() );
 				break;
-			case 1: quiz.mPages[i]->mBranches.push_back( nullptr );
+			case 1: quiz.mPages[i]->mBranches.push_back( shared_ptr<Page>() );
 				break;
 			default: break;
 		}
@@ -166,4 +173,11 @@ shared_ptr<Question> Importer::loadQuestion(ifstream & inputFile) {
 		cout << "Wrong question type: " << dummy << endl;
 		return shared_ptr<Question>();
 	}
+}
+
+bool Importer::checkQuizUniquennes(Quiz newQuiz) {
+	for (Quiz & quiz : DataHandler::getInstance().mQuizzes ){
+		if (quiz == newQuiz) return false;
+	}
+	return true;
 }

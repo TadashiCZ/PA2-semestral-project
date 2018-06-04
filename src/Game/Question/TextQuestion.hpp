@@ -31,6 +31,8 @@ public:
 	virtual bool evaluate();
 	const std::string printFullQuestion() override;
 
+	virtual int type() override;
+
 protected:
 	std::string mAnswer;
 	std::string mLowerCapsAnswer;

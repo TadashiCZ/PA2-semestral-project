@@ -50,7 +50,7 @@ void DataHandler::runIO() {
 }
 
 std::string DataHandler::promptFilename() {
-	std::cout << "Write complete filepath to file with quizzes you want to import." << std::endl;
+	std::cout << "Write relative filepath to file with quizzes you want to import." << std::endl;
 	std::string input;
 	while ( true ) {
 		std::cin >> input;

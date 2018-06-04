@@ -51,3 +51,7 @@ bool TextQuestion::evaluate() {
 
 }
 
+int TextQuestion::type() {
+	return TEXT_QUESTION;
+}
+
