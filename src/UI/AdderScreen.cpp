@@ -40,7 +40,11 @@ void AdderScreen::interact() {
 	mOs << COLOR_YELLOW << "Well nice to meet you " << quiz.mAuthor << "." << endl
 	    << "And now something little bit more complicated. Structure of the quiz. But don't worry, I'll help you." << COLOR_RESET
 	    << endl;
-	loadTreeInteractive( quiz );
+	int pageCount = loadTreeInteractive( quiz );
+	mOs << COLOR_YELLOW << "Now comes the hard part. Filling up the pages with great questions." << COLOR_RESET << endl;
+
+
+
 }
 
 int AdderScreen::yesNoInput() {
@@ -64,8 +68,9 @@ std::string AdderScreen::promptString() {
 	return dummy;
 }
 
-void AdderScreen::loadTreeInteractive(Quiz & quiz) {
-	string dummy; char c = ' ';
+int AdderScreen::loadTreeInteractive(Quiz & quiz) {
+	string dummy;
+	char c = ' ';
 	int num1 = 1, num2 = 100, pageCount = 0;
 	mOs << COLOR_YELLOW << "How many pages you quiz will have?" << COLOR_RESET << endl;
 
@@ -87,23 +92,24 @@ void AdderScreen::loadTreeInteractive(Quiz & quiz) {
 	}
 	if ( pageCount > 1 ) {
 		mOs << COLOR_YELLOW << "And now you will put first the page number, comma and then the parent of that page." << endl
-		    << "But make sure you input them from the lowest to the highest (0,1,2,..) and don't omit any. I will tell you when it's enough. :)"
+		    << "But make sure you input them from the lowest after 0 to the highest (1,2,3,...) and don't omit any. I will tell you when it's enough. :)"
 		    << COLOR_RESET << endl;
 	} else {
-		// todo loadPage
+		auto pt = make_shared<Page>();
+		quiz.mPages.emplace_back( pt );
+		return pageCount;
 	}
 	quiz.mPages.clear();
 	auto pt = make_shared<Page>();
 	quiz.mPages.emplace_back( pt );
 
 	for ( int i = 1 ; i < pageCount ; ++i ) {
-		while ( num1 != i || c != ',' || num2 >= i) {
+		while ( num1 != i || c != ',' || num2 >= i ) {
 			cin >> num1 >> c >> num2;
-			if ( num1 == i && c == ',' && num2 < i) {
+			if ( num1 == i && c == ',' && num2 < i ) {
 				mOs << COLOR_YELLOW << "Great! I now know about this relationship." << COLOR_RESET << endl;
 				break;
 			}
-			mOs << COLOR_RED << "num1: " << num1 << "/ num2: " << num2 << "/ char: " << c << endl;
 			mOs << COLOR_YELLOW << "Not like this. Try again." << COLOR_RESET << endl;
 		}
 		auto ptr = make_shared<Page>();
@@ -111,7 +117,7 @@ void AdderScreen::loadTreeInteractive(Quiz & quiz) {
 		quiz.mPages[num2]->mBranches.push_back( quiz.mPages[i] );
 	}
 
-		for ( int i = 1 ; i < pageCount ; ++i ) {
+	for ( int i = 1 ; i < pageCount ; ++i ) {
 		switch ( quiz.mPages[i]->mBranches.size() ) {
 			case 0: quiz.mPages[i]->mBranches.push_back( shared_ptr<Page>() );
 				quiz.mPages[i]->mBranches.push_back( shared_ptr<Page>() );
@@ -122,6 +128,9 @@ void AdderScreen::loadTreeInteractive(Quiz & quiz) {
 		}
 
 	}
-
+	mOs << COLOR_YELLOW
+	    << "Good job! Now I know everything about love life of these pages."
+	    << COLOR_RESET << endl;
+	return pageCount;
 }
 

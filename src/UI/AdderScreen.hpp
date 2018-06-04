@@ -21,7 +21,7 @@ private:
 	std::ostream & mOs;
 	int yesNoInput();
 	std::string promptString();
-	void loadTreeInteractive(Quiz & quiz);
+	int loadTreeInteractive(Quiz & quiz);
 };
 
 
