@@ -5,18 +5,16 @@
 #include "Question.hpp"
 #include "../../Constants.hpp"
 
-Question::Question() : mId( 0 ) {}
+using namespace std;
 
-Question::Question(const std::string & questionText) : mQuestionText( questionText ) {}
+Question::Question(const string & questionText) : mQuestionText( questionText ) {}
 
-const std::string Question::printQuestion() { return mQuestionText; }
+const string Question::printQuestion() { return mQuestionText; }
 
-void Question::setBranching(bool branch) { mIsBranching = branch; }
-
-bool Question::isBranching() { return mIsBranching; }
-
-const std::string Question::printFullQuestion() {
-	return mQuestionText;
+const string Question::printFullQuestion() {
+	string output;
+	output.append(COLOR_GREEN).append("Question: ").append(mQuestionText);
+	return output;
 }
 
 int Question::type() {

@@ -35,7 +35,14 @@ const std::string MultiChoiceQuestion::printFullQuestion() {
 std::string MultiChoiceQuestion::printCorrectAnswer() {
 	std::string output;
 	for ( std::pair<std::string, bool> choice : mChoices ) {
-		output.append( choice.first ).append( ": " ).append( BoolToStringNumber( choice.second ) ).append( "\n" );
+		if ( choice.second == true ) {
+			output.append( COLOR_GREEN ).append( choice.first ).append( ": " ).append(
+					BoolToStringNumber( choice.second ) ).append( "\n" ).append( COLOR_RESET );
+		} else {
+			output.append( COLOR_RED ).append( choice.first ).append( ": " ).append( BoolToStringNumber( choice.second ) ).append(
+					"\n" ).append( COLOR_RESET );
+		}
+
 	}
 	return output;
 }
@@ -68,9 +75,6 @@ bool MultiChoiceQuestion::evaluate() {
 	}
 	std::transform( answer.begin(), answer.end(), answer.begin(), ::tolower );
 	return answer == mLowerCapsAnswer;
-
-
-	return true;
 }
 
 int MultiChoiceQuestion::type() {

@@ -7,7 +7,9 @@
 
 #include <sstream>
 #include "Page.hpp"
-
+/**
+ * Holds all data for quiz
+ */
 class Quiz {
 public:
 
@@ -32,14 +34,6 @@ public:
 	Quiz(const Quiz & quiz);
 
 	/**
-	 * Interacts with the user, plays the quiz
-	 * @param 	score int to place the result score
-	 * @param 	scorePossible int to place the possible score
-	 * @return 	true if player successful, false otherwise
-	 */
-	bool play(int & score, int & scorePossible);
-
-	/**
 	 * Creates string with quiz info to be put into list of quizzes
 	 * @return	string with the quiz info
 	 */
@@ -51,8 +45,16 @@ public:
 	 */
 	std::string exportQuizIntoFile();
 
+	/**
+	 * Creates string with tree relationships of this quiz
+	 * @return realationships separated by newline
+	 */
 	std::string printTree();
 
+	/**
+	 * Creates string with list of pages (and their questions) in this quiz
+	 * @return list of pages with appropriate list of questions in CLI format
+	 */
 	std::string printPageList();
 
 	bool operator==(Quiz & quiz);

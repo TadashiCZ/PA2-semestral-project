@@ -22,19 +22,6 @@ Quiz::Quiz(const Quiz & quiz) {
 	}
 }
 
-bool Quiz::play(int & score, int & scorePossible) {
-	cout << endl << "You are playing quiz " << mName << " from " << mAuthor << "." << endl;
-	Page * nextPage = mPages[0].get();
-	do {
-		nextPage = nextPage->play( score, scorePossible );
-	} while ( nullptr != nextPage );
-
-	cout << "You finished the quiz with score " << score << " from " << scorePossible << " possible." << endl
-	     << endl;
-
-	return true;
-}
-
 string Quiz::printQuizListInfo() {
 	string output;
 	output.append( mName ).append( " (by " ).append( mAuthor ).append( ")" );
@@ -63,7 +50,7 @@ std::string Quiz::printTree() {
 				}
 			}
 		}
-
+		// todo invalid read
 		if ( mPages[j]->mBranches[1] ) {
 			for ( size_t i = 0 ; i < mPages.size() ; ++i ) {
 					if ( mPages[j]->mBranches[1] == mPages[i] ) {

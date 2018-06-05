@@ -9,8 +9,16 @@
 #include <algorithm>
 #include "Question.hpp"
 
+/**
+ * Question with true or false answer.
+ */
 class TrueFalseQuestion : public Question {
 public:
+	/**
+	 * Default constructor with arguments
+	 * @param questionText question to be asked
+	 * @param answer answer in bool format
+	 */
 	TrueFalseQuestion(const std::string & questionText, bool answer);
 
 	virtual const std::string printFullQuestion();

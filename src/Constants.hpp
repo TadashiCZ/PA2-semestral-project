@@ -19,5 +19,6 @@
 #define COLOR_WHITE     "\x1B[37m"
 #define COLOR_RESET     "\033[0m"
 
-/** file folder */
-#define EXAMPLE_FOLDER ./examples
+/** Files */
+#define DEFAULT_DATA_FILE "../examples/quizzes.dat"
+#define DEFAULT_EXPORT_FILE "../examples/export.dat"

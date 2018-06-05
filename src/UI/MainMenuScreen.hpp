@@ -10,15 +10,23 @@
 #include "../Game/Quiz.hpp"
 #include "../Database/DataHandler.hpp"
 
+/**
+ * Screen to hold main menu which user will see first in the app
+ */
 class MainMenuScreen : public Screen {
 public:
+	/**
+	 * Creates screen, output will be streamed into given stream
+	 * @param os
+	 */
 	MainMenuScreen(std::ostream & os);
 
 	virtual ~MainMenuScreen()=default;
 
-	void welcomeUser();
-
 	virtual void run();
+
+private:
+	void welcomeUser();
 
 	virtual void show();
 
@@ -27,8 +35,6 @@ public:
 	int promptMainMenu();
 
 	bool promptContinue();
-
-	void goodbye();
 
 private:
 	std::ostream & mOs;

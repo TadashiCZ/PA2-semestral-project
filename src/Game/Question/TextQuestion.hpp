@@ -10,7 +10,7 @@
 #include "Question.hpp"
 
 /**
- * Class representing question with text answer, derived from Question class.
+ * Question with text answer.
  */
 class TextQuestion : public Question {
 public:
@@ -22,6 +22,10 @@ public:
 	 */
 	TextQuestion(const std::string & questionText, const std::string & answer);
 
+	/**
+	 * CLI formatted list of correct answers (by true/false and color)
+	 * @return colorized string
+	 */
 	virtual std::string printCorrectAnswer();
 
 	virtual std::string printHint();
@@ -29,7 +33,8 @@ public:
 	virtual std::string exportIntoFileFormat();
 
 	virtual bool evaluate();
-	const std::string printFullQuestion() override;
+
+	virtual const std::string printFullQuestion() override;
 
 	virtual int type() override;
 

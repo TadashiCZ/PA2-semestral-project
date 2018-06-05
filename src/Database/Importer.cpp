@@ -26,7 +26,7 @@ bool Importer::loadFromFile(string filename, vector<Quiz> & quizzes) {
 			cout << "ERROR: Wrong file format" << endl;
 			return false;
 		}
-		if (checkQuizUniquennes( quiz ) ){
+		if ( checkQuizUniquennes( quiz ) ) {
 			cout << "Quiz (" << quiz.mName << ") read successfully." << endl;
 			quizzes.push_back( quiz );
 		} else {
@@ -111,8 +111,7 @@ bool Importer::loadTree(ifstream & inputFile, Quiz & quiz, int pageCount) {
 				break;
 			case 1: quiz.mPages[i]->mBranches.push_back( shared_ptr<Page>() );
 				break;
-			default:
-				quiz.mPages[i]->isBranching = true;
+			default: quiz.mPages[i]->isBranching = true;
 				break;
 		}
 
@@ -178,8 +177,8 @@ shared_ptr<Question> Importer::loadQuestion(ifstream & inputFile) {
 }
 
 bool Importer::checkQuizUniquennes(Quiz newQuiz) {
-	for (Quiz & quiz : DataHandler::getInstance().mQuizzes ){
-		if (quiz == newQuiz) return false;
+	for ( Quiz & quiz : DataHandler::getInstance().mQuizzes ) {
+		if ( quiz == newQuiz ) return false;
 	}
 	return true;
 }

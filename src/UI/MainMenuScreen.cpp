@@ -8,7 +8,7 @@
 #include "../Database/DataHandler.hpp"
 #include "GameScreen.hpp"
 #include "ExitScreen.hpp"
-#include "AdderScreen.hpp"
+#include "CreatorScreen.hpp"
 
 using namespace std;
 
@@ -33,7 +33,7 @@ void MainMenuScreen::run(){
 				break;
 			case 2: // Add
 				showMenu = true;
-				AdderScreen(cout).run();
+				CreatorScreen(cout).run();
 				if ( !promptContinue() ) {
 					ExitScreen(cout).run();
 					return;

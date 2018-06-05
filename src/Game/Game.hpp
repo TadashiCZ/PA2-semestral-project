@@ -25,6 +25,9 @@ public:
 	void play(std::ostream & os);
 
 protected:
+	/**
+	 * Quiz that shall be played
+	 */
 	Quiz mQuiz;
 
 };

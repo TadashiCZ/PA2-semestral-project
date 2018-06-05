@@ -10,6 +10,9 @@
 #include <memory>
 #include "Question/Question.hpp"
 
+/**
+ *	Holds all the data for one page, interacts with the user for gameplay of itself
+ */
 class Page {
 public:
 	/**
@@ -52,6 +55,10 @@ public:
 	 */
 	std::string exportPageIntoFile(int pageNumber);
 
+	/**
+	 * creates a string with list of questions of this page
+	 * @return
+	 */
 	std::string printQuestionList();
 
 	bool operator==(Page & page);

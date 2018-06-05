@@ -3,7 +3,7 @@
 */
 #include <algorithm>
 #include <unistd.h>
-#include "AdderScreen.hpp"
+#include "CreatorScreen.hpp"
 #include "../Constants.hpp"
 #include "../Game/Question/TrueFalseQuestion.hpp"
 #include "../Game/Question/TextQuestion.hpp"
@@ -16,19 +16,19 @@ void lowerTheString(string & input) {
 	std::transform( input.begin(), input.end(), input.begin(), ::tolower );
 }
 
-AdderScreen::AdderScreen(std::ostream & os) : mOs( os ) {}
+CreatorScreen::CreatorScreen(std::ostream & os) : mOs( os ) {}
 
-void AdderScreen::run() {
+void CreatorScreen::run() {
 	show();
 	interact();
 
 }
 
-void AdderScreen::show() {
+void CreatorScreen::show() {
 	mOs << COLOR_BLUE << "QUIZ ADDER 2000" << COLOR_RESET << endl;
 }
 
-void AdderScreen::interact() {
+void CreatorScreen::interact() {
 	mOs << COLOR_YELLOW << "So you would like to create a quiz? (yes/no)" << COLOR_RESET << endl;
 	while ( true ) {
 		int num = yesNoInput();
@@ -58,14 +58,36 @@ void AdderScreen::interact() {
 	for ( int i = 0 ; i < pageCount ; ++i ) {
 		loadPageQuestionsInteractive( quiz.mPages[i], i );
 	}
-	DataHandler::getInstance().mQuizzes.push_back( quiz );
 
-	mOs << COLOR_YELLOW << "Okay. That's it. You'll find your quiz in the list now." << COLOR_RESET << endl;
+	quiz.printPageList();
+
+	mOs << COLOR_YELLOW << "This is your quiz. Veeery pretty." << COLOR_RESET << endl;
+
+
+	mOs << COLOR_YELLOW << "Do you want to add it or... " << COLOR_RED << "DESTROY IT?" << COLOR_YELLOW << "(Write add/destroy)"<< COLOR_RESET << endl;
+	string dummy;
+	while (true){
+			cin >> dummy;
+			lowerTheString(dummy);
+			if (dummy == "add"){
+				DataHandler::getInstance().mQuizzes.push_back( quiz );
+				mOs << COLOR_YELLOW << "Okay. That's it. You'll find your quiz in the list now." << COLOR_RESET << endl;
+				break;
+			} else if (dummy == "destroy"){
+				mOs << COLOR_YELLOW << "Your wish is my command. Destroying." << COLOR_RESET << endl;
+				break;
+			} else {
+				mOs << COLOR_YELLOW << "Nope, not like this. Try again. Add or destroy." << COLOR_RESET << endl;
+			}
+	}
+
+
+
 	mOs << COLOR_YELLOW << "Psst. Did you know it is easier to write the quize in the text file and than import it?"
 	    << COLOR_RESET << endl;
 }
 
-int AdderScreen::yesNoInput() {
+int CreatorScreen::yesNoInput() {
 	string dummy;
 	cin >> dummy;
 	lowerTheString( dummy );
@@ -78,7 +100,7 @@ int AdderScreen::yesNoInput() {
 	}
 }
 
-std::string AdderScreen::promptString() {
+std::string CreatorScreen::promptString() {
 	std::string dummy = "";
 	while ( dummy.empty() ) {
 		cin >> dummy;
@@ -86,7 +108,7 @@ std::string AdderScreen::promptString() {
 	return dummy;
 }
 
-int AdderScreen::loadTreeInteractive(Quiz & quiz) {
+int CreatorScreen::loadTreeInteractive(Quiz & quiz) {
 	string dummy;
 	char c = ' ';
 	int num1 = 1, num2 = 100, pageCount = 0;
@@ -177,7 +199,7 @@ int AdderScreen::loadTreeInteractive(Quiz & quiz) {
 	return pageCount;
 }
 
-void AdderScreen::loadPageQuestionsInteractive(std::shared_ptr<Page> & page, int pageID) {
+void CreatorScreen::loadPageQuestionsInteractive(std::shared_ptr<Page> & page, int pageID) {
 	int questionCount = 0;
 
 	mOs << COLOR_YELLOW << "You are now going to fill page with ID " << pageID << " with questions." << COLOR_RESET << endl;
@@ -205,16 +227,16 @@ void AdderScreen::loadPageQuestionsInteractive(std::shared_ptr<Page> & page, int
 
 }
 
-std::shared_ptr<Question> AdderScreen::loadQuestionInteractive() {
+std::shared_ptr<Question> CreatorScreen::loadQuestionInteractive() {
 	switch ( typeOfQuestion() ) {
 		case TRUE_FALSE_QUESTION: return loadTrueFalseQuestion();
 		case TEXT_QUESTION: return loadTextQuestion();
 		case MULTI_CHOICE_QUESTION: return loadMultiChoiceQuestion();
 	}
-
+	return shared_ptr<Question>(nullptr);
 }
 
-int AdderScreen::typeOfQuestion() {
+int CreatorScreen::typeOfQuestion() {
 	int input = 0;
 	mOs << COLOR_YELLOW << "What type the question should be?\n"
 	    << "    1) True/False Question\n"
@@ -231,7 +253,7 @@ int AdderScreen::typeOfQuestion() {
 	return input;
 }
 
-std::shared_ptr<Question> AdderScreen::loadTrueFalseQuestion() {
+std::shared_ptr<Question> CreatorScreen::loadTrueFalseQuestion() {
 	std::string question, dummy;
 	bool answer;
 	char questionChar[250];
@@ -272,7 +294,7 @@ std::shared_ptr<Question> AdderScreen::loadTrueFalseQuestion() {
 	return make_shared<TrueFalseQuestion>( TrueFalseQuestion( question, answer ) );
 }
 
-std::shared_ptr<Question> AdderScreen::loadTextQuestion() {
+std::shared_ptr<Question> CreatorScreen::loadTextQuestion() {
 	std::string question, answer;
 	char questionChar[250];
 	char answerChar[50];
@@ -303,7 +325,7 @@ std::shared_ptr<Question> AdderScreen::loadTextQuestion() {
 	return make_shared<TextQuestion>( TextQuestion( question, answer ) );
 }
 
-std::shared_ptr<Question> AdderScreen::loadMultiChoiceQuestion() {
+std::shared_ptr<Question> CreatorScreen::loadMultiChoiceQuestion() {
 	std::string question, dummy1, dummy2;
 	char questionChar[250];
 	mOs << COLOR_YELLOW

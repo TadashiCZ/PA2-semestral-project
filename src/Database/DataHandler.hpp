@@ -8,28 +8,59 @@
 
 #include "../Game/Quiz.hpp"
 
+/**
+ * Singleton class to hold and IO app data.
+ */
 class DataHandler {
 public:
+	/**
+	 * Member holding the quizzes loaded in the game
+	 */
 	std::vector<Quiz> mQuizzes;
 
+	/**
+	 * Getter of static instance (creates new one if first call
+	 * @return the only living instance of Data Handler
+	 */
 	static DataHandler & getInstance();
 
-	int IOMenu();
-
-	std::string static promptFilename();
-
-	bool importQuizzes();
-
-	bool exportQuizzes();
-
+	/**
+	 * Shows Export/Import menu to the user
+	 */
 	void runIO();
+
+	/**
+	 * Interacts with user to export quizzes tofile
+	 * @return true on success, false otherwise
+	 */
+	bool exportQuizzes();
 
 	DataHandler(DataHandler const &) = delete;
 	void operator=(DataHandler const &) = delete;
 
-
 private:
-	DataHandler() {}
+	/**
+	 * Prints IO menu
+	 * @return 1 for import, 2 for export, -1 for exit the whole app
+	 */
+	int IOMenu();
+
+	/**
+	 * Prompts filepath and returns it
+	 * @return
+	 */
+	std::string static promptFilename();
+
+	/**
+	 * Interacts with user to import quizzes from file
+	 * @return true on success, false otherwise
+	 */
+	bool importQuizzes();
+
+	/**
+	 * Default constructor
+	 */
+	DataHandler() = default;
 
 };
 

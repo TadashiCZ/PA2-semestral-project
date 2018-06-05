@@ -5,23 +5,28 @@
 #include "Database/Importer.hpp"
 #include "Database/Exporter.hpp"
 #include "Database/DataHandler.hpp"
+#include "Constants.hpp"
+
 
 using namespace std;
 
 
+void loadExampleData();
+
+
 int main() {
 
-	if ( Importer::loadFromFile( "../examples/import.dat", DataHandler::getInstance().mQuizzes ) ) {
+	loadExampleData();
+	MainMenuScreen(cout).run();
+
+	return 0;
+}
+
+void loadExampleData() {
+	if ( Importer::loadFromFile( DEFAULT_DATA_FILE, DataHandler::getInstance().mQuizzes ) ) {
 		cout << "Sample data read successfully." << endl;
 	} else {
 		cout << "Failed to read sample data." << endl;
 	}
-
-	Exporter::exportToFile( "../examples/export.dat", DataHandler::getInstance().mQuizzes );
-
-	MainMenuScreen(cout).run();
-
-
-	return 0;
 }
 

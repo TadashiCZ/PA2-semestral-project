@@ -9,6 +9,9 @@
 #include <iostream>
 #include "../Game/Quiz.hpp"
 
+/**
+ * Functions to export quizzes into file
+ */
 namespace Exporter {
 	/**
 	 * Function to export given quizzes into file
