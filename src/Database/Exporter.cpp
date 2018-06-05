@@ -13,7 +13,7 @@
 using namespace std;
 
 bool Exporter::exportToFile(std::string filename, std::vector<Quiz> & quizzes) {
-	if (filename.empty()){
+	if ( filename.empty() ) {
 		filename = DEFAULT_EXPORT_FILE;
 	}
 	ofstream outputFile( filename );

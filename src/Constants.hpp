@@ -20,5 +20,5 @@
 #define COLOR_RESET     "\033[0m"
 
 /** Files */
-#define DEFAULT_DATA_FILE "../examples/quizzes.dat"
-#define DEFAULT_EXPORT_FILE "../examples/export.dat"
+#define DEFAULT_DATA_FILE "./examples/quizzes.dat"
+#define DEFAULT_EXPORT_FILE "./examples/export.dat"

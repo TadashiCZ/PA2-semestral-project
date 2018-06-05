@@ -1,21 +1,20 @@
+.PHONY: all run compile doc clean check
 .DEFAULT_GOAL := all
 
-#promene pro kompilator
-CXX=g++
-CXXFLAGS=-std=c++11 -Wall -pedantic -Wno-long-long -O0 -ggdb
-SOURCES=$(wildcard src/*.cpp )
-EXECUTABLE=valentad
-MEMCHECK=valgrind
-MEMFLAGS=--leak-check=full
+#variables
+CXX?=g++
+CXXFLAGS?=-std=c++14 -Wall -pedantic -Wno-long-long -O0 -ggdb
+SOURCES?=$(wildcard src/*.cpp src/*/*.cpp src/*/*/*.cpp)
+EXECUTABLE?=valentad
+MEMCHECK?=valgrind
+MEMFLAGS?=--leak-check=full
 
-# $< značí první parametr závislosti (v našem případě vždy .cpp soubor)
-# $@ značí cíl pravidla (tedy část před dvojtečkou)
-
-%.o: %.cpp
+%.o: %.cpp,%.hpp
 	@$(CXX) $(CXXFLAGS) -c -o $@ -c $<
+	@$(CXX) $(CXXFLAGS) -MM -MT $*.o $*.cpp > $*.d
 
 
-all: clean compile
+all: clean doc compile
 
 run: compile
 	./$(EXECUTABLE)
@@ -24,13 +23,17 @@ compile: $(SOURCES:.cpp=.o)
 	@$(CXX) $(CXXFLAGS) $(SOURCES:.cpp=.o) -o $(EXECUTABLE)
 
 doc:
-	doxygen Doxyfile
+	@doxygen Doxyfile
 
 clean:
-	@rm -f -- $(wildcard src/*.o) $(wildcard src/*.d)
+	@rm -f -- $(wildcard src/*.o src/*/*.o src/*/*/*.o) $(wildcard src/*.d src/*/*.d src/*/*/*.d)
 	@rm -f $(EXECUTABLE)
 	@rm -rf doc/
 
-check: CXXFLAGS =-std=c++14 -Wall -pedantic -Wno-long-long -g -O2
+check: CXXFLAGS =-std=c++14 -Wall -pedantic -Wno-long-long -g
 check: clean compile
-	$(MEMCHECK) ./$(EXECUTABLE) $(MEMFLAGS)	 	
+	$(MEMCHECK) ./$(EXECUTABLE) $(MEMFLAGS)
+
+
+
+-include $(SOURCES:.cpp=.d)

@@ -24,9 +24,14 @@ void MainMenuScreen::run(){
 		if ( showMenu ) MainMenuScreen::show();
 		switch ( MainMenuScreen::promptMainMenu() ) {
 			case 1: // Play
+				if ( DataHandler::getInstance().mQuizzes.size() == 0){
+					cout << "There's no quiz to be played. Please create one first." << endl;
+					break;
+				}
 				showMenu = true;
 				GameScreen(cout).run();
 				if ( !promptContinue() ) {
+					DataHandler::getInstance().saveQuizData();
 					ExitScreen(cout).run();
 					return;
 				}
@@ -35,6 +40,7 @@ void MainMenuScreen::run(){
 				showMenu = true;
 				CreatorScreen(cout).run();
 				if ( !promptContinue() ) {
+					DataHandler::getInstance().saveQuizData();
 					ExitScreen(cout).run();
 					return;
 				}
@@ -43,6 +49,7 @@ void MainMenuScreen::run(){
 				showMenu = true;
 				DataHandler::getInstance().runIO();
 				if ( !promptContinue() ) {
+					DataHandler::getInstance().saveQuizData();
 					ExitScreen(cout).run();
 					return;
 				}

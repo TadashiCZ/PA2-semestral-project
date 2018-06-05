@@ -10,7 +10,7 @@
 using namespace std;
 
 int DataHandler::IOMenu() {
-	cout << COLOR_YELLOW<< "Do you want to import or export quizzes? Write it. (Or write \"exit\" if you want to go back.)"
+	cout << COLOR_YELLOW << "Do you want to import or export quizzes? Write it. (Or write \"exit\" if you want to go back.)"
 	     << COLOR_RESET << endl;
 	while ( true ) {
 		string dummy;
@@ -62,6 +62,7 @@ bool DataHandler::exportQuizzes() {
 				cout << COLOR_RED << "Export failed." << COLOR_RESET << endl;
 				return false;
 			}
+			return true;
 		}
 	}
 

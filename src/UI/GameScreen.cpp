@@ -41,8 +41,7 @@ void GameScreen::showQuizListPrompt(const unsigned long size) {
 		cin.clear();
 		cin >> dummy;
 		if ( dummy == "exit" ) {
-			DataHandler::getInstance().saveQuizData();
-			ExitScreen(cout).run();
+			return;
 		}
 		input = atoi( dummy.c_str() );
 		if ( input > 0 && input <= size ) {
