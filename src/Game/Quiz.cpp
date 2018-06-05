@@ -50,7 +50,6 @@ std::string Quiz::printTree() {
 				}
 			}
 		}
-		// todo invalid read
 		if ( mPages[j]->mBranches[1] ) {
 			for ( size_t i = 0 ; i < mPages.size() ; ++i ) {
 					if ( mPages[j]->mBranches[1] == mPages[i] ) {

@@ -48,7 +48,7 @@ void MainMenuScreen::run(){
 				}
 				break;
 			case 4: //End
-				DataHandler::getInstance().exportQuizzes();
+				DataHandler::getInstance().saveQuizData();
 				ExitScreen(cout).run();
 				return;
 			default: showMenu = false;

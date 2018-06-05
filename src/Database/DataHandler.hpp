@@ -35,6 +35,12 @@ public:
 	 */
 	bool exportQuizzes();
 
+	/**
+	 * Used to export quizzes when closing the quiz
+	 * @return true on succes, false otherwise
+	 */
+	bool saveQuizData();
+
 	DataHandler(DataHandler const &) = delete;
 	void operator=(DataHandler const &) = delete;
 
@@ -62,6 +68,8 @@ private:
 	 */
 	DataHandler() = default;
 
+	int addQuizForExportInteractive(std::vector<Quiz> & forExport);
+	void showQuizList();
 };
 
 
