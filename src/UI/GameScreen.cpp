@@ -6,13 +6,14 @@
 #include "../Database/DataHandler.hpp"
 #include "../Game/Game.hpp"
 #include "ExitScreen.hpp"
+#include "../Constants.hpp"
 
 using namespace std;
 
 GameScreen::GameScreen(ostream & os) : mOs( os ) {}
 
 void GameScreen::show() {
-	//todo GameScreen::show
+	mOs << COLOR_BLUE << "PLAY GAME" << COLOR_RESET << endl;
 }
 
 void GameScreen::interact(){

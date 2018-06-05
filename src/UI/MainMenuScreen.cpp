@@ -74,6 +74,7 @@ bool MainMenuScreen::promptContinue() {
 }
 
 void MainMenuScreen::show() {
+	mOs << COLOR_BLUE << "MAIN MENU" << COLOR_RESET << endl;
 	cout << COLOR_GREEN << "Choose your activity:\n" << COLOR_RESET <<
 	     "\ta) Play game\n"
 	     "\tb) Add quiz\n"

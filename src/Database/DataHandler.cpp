@@ -4,6 +4,8 @@
 
 #include "DataHandler.hpp"
 #include "Importer.hpp"
+#include "Exporter.hpp"
+#include "../Constants.hpp"
 #include <fstream>
 
 int DataHandler::IOMenu() {
@@ -26,7 +28,7 @@ int DataHandler::IOMenu() {
 }
 
 bool DataHandler::exportQuizzes() {
-	// todo export chosen quizzes - last job?
+	Exporter::exportToFile(DEFAULT_EXPORT_FILE, DataHandler::getInstance().mQuizzes);
 	return true;
 }
 
