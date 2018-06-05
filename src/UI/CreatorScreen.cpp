@@ -102,8 +102,11 @@ int CreatorScreen::yesNoInput() {
 
 std::string CreatorScreen::promptString() {
 	std::string dummy = "";
+	char input[250];
+	cin.ignore();
 	while ( dummy.empty() ) {
-		cin >> dummy;
+		cin.getline(input, 249);
+		dummy = input;
 	}
 	return dummy;
 }
