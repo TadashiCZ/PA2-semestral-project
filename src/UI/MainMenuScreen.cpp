@@ -39,11 +39,7 @@ void MainMenuScreen::run(){
 					return;
 				}
 				break;
-			case 3: //Edit
-				showMenu = true;
-				//startEdit();
-				break;
-			case 4: //Export
+			case 3: //Export
 				showMenu = true;
 				DataHandler::getInstance().runIO();
 				if ( !promptContinue() ) {
@@ -51,7 +47,7 @@ void MainMenuScreen::run(){
 					return;
 				}
 				break;
-			case 5: //End
+			case 4: //End
 				DataHandler::getInstance().exportQuizzes();
 				ExitScreen(cout).run();
 				return;
@@ -81,9 +77,8 @@ void MainMenuScreen::show() {
 	cout << COLOR_GREEN << "Choose your activity:\n" << COLOR_RESET <<
 	     "\ta) Play game\n"
 	     "\tb) Add quiz\n"
-	     "\tc) Edit quiz\n"
-	     "\td) Export/Import quiz\n"
-	     "\te) Exit game\n";
+	     "\tc) Export/Import quiz\n"
+	     "\td) Exit game\n";
 }
 
 int MainMenuScreen::promptMainMenu() {

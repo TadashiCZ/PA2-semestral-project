@@ -16,8 +16,6 @@ public:
 
 	int IOMenu();
 
-	bool static checkInputFilename(std::string & input);
-
 	std::string static promptFilename();
 
 	bool importQuizzes();
@@ -31,8 +29,6 @@ public:
 
 
 private:
-	DataHandler(std::vector<Quiz> & quizzes);
-
 	DataHandler() {}
 
 };

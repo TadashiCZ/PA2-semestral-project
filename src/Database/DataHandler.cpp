@@ -6,8 +6,6 @@
 #include "Importer.hpp"
 #include <fstream>
 
-DataHandler::DataHandler(std::vector<Quiz> & quizzes) : mQuizzes( quizzes ) {}
-
 int DataHandler::IOMenu() {
 	std::cout << "Do you want to import or export quizzes? Write it. (Or write \"exit\" if you want to go back.)"
 	          << std::endl;
@@ -27,14 +25,8 @@ int DataHandler::IOMenu() {
 	}
 }
 
-bool DataHandler::checkInputFilename(std::string & input) {
-	//todo checkInputFilename
-	return true;
-}
-
 bool DataHandler::exportQuizzes() {
-
-
+	// todo export chosen quizzes - last job?
 	return true;
 }
 
@@ -54,7 +46,7 @@ std::string DataHandler::promptFilename() {
 	std::string input;
 	while ( true ) {
 		std::cin >> input;
-		if ( !input.empty() && checkInputFilename( input ) ) {
+		if ( !input.empty() ) {
 			return input;
 		} else {
 			std::cout << "Wrong input, try again." << std::endl;

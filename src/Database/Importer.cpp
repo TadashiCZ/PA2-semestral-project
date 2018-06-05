@@ -111,7 +111,9 @@ bool Importer::loadTree(ifstream & inputFile, Quiz & quiz, int pageCount) {
 				break;
 			case 1: quiz.mPages[i]->mBranches.push_back( shared_ptr<Page>() );
 				break;
-			default: break;
+			default:
+				quiz.mPages[i]->isBranching = true;
+				break;
 		}
 
 	}

@@ -22,6 +22,12 @@ private:
 	int yesNoInput();
 	std::string promptString();
 	int loadTreeInteractive(Quiz & quiz);
+	void loadPageQuestionsInteractive(std::shared_ptr<Page> & shared_ptr, int pageID);
+	std::shared_ptr<Question> loadQuestionInteractive();
+	int typeOfQuestion();
+	std::shared_ptr<Question> loadTrueFalseQuestion();
+	std::shared_ptr<Question> loadTextQuestion();
+	std::shared_ptr<Question> loadMultiChoiceQuestion();
 };
 
 

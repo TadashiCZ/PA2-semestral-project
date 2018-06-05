@@ -36,7 +36,7 @@ Page * Page::play(int & score, int & scorePossible) {
 			score++;
 			scorePossible++;
 			cout << "Correct!" << endl << endl;
-			if ( this->isBranching && *it == mQuestions.back() ) {
+			if ( isBranching && *it == mQuestions.back() ) {
 				cout << "Current score: " << score << "/" << scorePossible << endl;
 				cout << "End of page. Press Enter to continue..." << endl;
 				cin.get();
@@ -46,7 +46,7 @@ Page * Page::play(int & score, int & scorePossible) {
 		} else {
 			scorePossible++;
 			cout << "Wrong, good luck with the next one." << endl << endl;
-			if ( this->isBranching && *it == mQuestions.back() ) {
+			if ( isBranching && *it == mQuestions.back() ) {
 				cout << "Current score: " << score << "/" << scorePossible << endl;
 				cout << "End of page. Press Enter to continue..." << endl;
 				cin.get();
