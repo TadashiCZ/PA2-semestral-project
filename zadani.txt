@@ -2,15 +2,15 @@ Kvízy
 
 Vytvořte program, který umožní vytvářet kvízy a testovat znalosti.
 
-Implementujte následující funkcionality:
-1. alespoň 3 různé druhy otázek
-2. alespoň 3 různé druhy odpovědí na otázky
-3. implementujte části (stránky) kvízu (na části je více otázek, kvíz má více částí)
-4. implementujte přechod mezi částmi sekvenčně a v závislosti na odpovědi
-5. uživatelské rozhraní pro tvorbu a vyplnění (a ohodnocení) kvízu
-6. export a import kvízu (a více kvízů)
+3 typy otázek - textové, pravda/lež, multi choice
+kvíz rozdělen na stránky, které obsahují samotné otázky
+kvíz je možný přecházet sekvenčně, nebo v závislosti na odpovědi na poslední otázku
+hra obsahuje veselé uživatelské rozhraní, které umožňuje kvíz vytvořit
+Hra po dokončení kvízu řekne hráči, jak v něm byl úspěšný
+Kvízy se dají hrát
+Export a Import kvízu je umožněň z/do přesně definovaného formátu, který je vidět v ukázce
+Aplikace si při ukončení uloží kvízy, které obsahuje do souboru a pokusí se je načíst při dalším spuštění
 
-Použití polymorfismu (doporučené)
-druhy otázek: textová otázka, výběr jednoho, výběr více možností, seřazení možností, ...
-druhy odpovědí: textová odpověď (jedna možnost), více správných textových odpovědí, vypočtená hodnota, ...
-různé formáty: vykreslení do konzole, textový (tisknutelný - bez importu, tisknutelný s výsledky - bez importu, s možností importu zpět), binární, ...
+Použití polymorfismu
+druhy otázek: textová otázka, pravda/lež, výběr více možností
+obrazovky: Menu, obrazovka hry, exit screen
