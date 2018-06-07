@@ -104,7 +104,7 @@ bool Importer::loadTree(ifstream & inputFile, Quiz & quiz, int pageCount) {
 
 	}
 
-	for ( int i = 1 ; i < pageCount ; ++i ) {
+	for ( int i = 0 ; i < pageCount ; ++i ) {
 		switch ( quiz.mPages[i]->mBranches.size() ) {
 			case 0: quiz.mPages[i]->mBranches.push_back( shared_ptr<Page>() );
 				quiz.mPages[i]->mBranches.push_back( shared_ptr<Page>() );
